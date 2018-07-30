@@ -23,8 +23,8 @@ end
 function StartScene:onEnter()
 	if require("src.cocos.framework.device").isWindows() then
 		--windows直接登陆
-		-- self:enterNextScene()
-		self:examineLaunch()
+		self:enterNextScene()
+		-- self:examineLaunch()
 	else
 		--检测启动
 		self:examineLaunch()

@@ -1,5 +1,5 @@
 --[[
-*	   断线重连 scene
+*	断线重连 scene
 ]]
 local ReloginScene = class("ReloginScene",require("src.base.extend.CCSceneExtend"),IEventListener)
 
