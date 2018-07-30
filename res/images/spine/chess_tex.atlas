@@ -1,0 +1,34 @@
+
+chess_tex.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+beijing
+  rotate: false
+  xy: 2, 71
+  size: 270, 397
+  orig: 270, 397
+  offset: 0, 0
+  index: -1
+dizhu
+  rotate: false
+  xy: 274, 180
+  size: 229, 288
+  orig: 229, 288
+  offset: 0, 0
+  index: -1
+nongming
+  rotate: true
+  xy: 274, 12
+  size: 166, 173
+  orig: 166, 173
+  offset: 0, 0
+  index: -1
+qipaiyule
+  rotate: false
+  xy: 2, 2
+  size: 245, 67
+  orig: 245, 67
+  offset: 0, 0
+  index: -1

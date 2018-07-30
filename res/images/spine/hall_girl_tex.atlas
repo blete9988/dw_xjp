@@ -1,0 +1,83 @@
+
+hall_girl_tex.png
+size: 0,0
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg
+  rotate: false
+  xy: 242 ,780
+  size: 126 ,132
+  orig: 126 ,132
+  offset: 0,0
+  index: -1
+arm_Right
+  rotate: false
+  xy: 1 ,488
+  size: 239 ,410
+  orig: 239 ,410
+  offset: 0,0
+  index: -1
+body
+  rotate: false
+  xy: 1 ,1
+  size: 398 ,485
+  orig: 398 ,485
+  offset: 0,0
+  index: -1
+arm_leftUpper
+  rotate: false
+  xy: 401 ,1
+  size: 56 ,204
+  orig: 56 ,204
+  offset: 0,0
+  index: -1
+hair_01
+  rotate: false
+  xy: 242 ,488
+  size: 227 ,290
+  orig: 227 ,290
+  offset: 0,0
+  index: -1
+face_OpenEyes
+  rotate: false
+  xy: 456 ,780
+  size: 90 ,138
+  orig: 90 ,138
+  offset: 0,0
+  index: -1
+face_CloseEyes
+  rotate: false
+  xy: 548 ,780
+  size: 90 ,138
+  orig: 90 ,138
+  offset: 0,0
+  index: -1
+hair_02
+  rotate: false
+  xy: 101 ,900
+  size: 37 ,111
+  orig: 37 ,111
+  offset: 0,0
+  index: -1
+hair_03
+  rotate: false
+  xy: 1 ,900
+  size: 98 ,94
+  orig: 98 ,94
+  offset: 0,0
+  index: -1
+arm_leftLower
+  rotate: false
+  xy: 370 ,780
+  size: 84 ,189
+  orig: 84 ,189
+  offset: 0,0
+  index: -1
+hand_left
+  rotate: false
+  xy: 401 ,207
+  size: 85 ,125
+  orig: 85 ,125
+  offset: 0,0
+  index: -1

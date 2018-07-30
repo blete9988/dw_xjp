@@ -1,0 +1,7 @@
+require("src.base.core.ex_string")
+require("src.base.core.ex_table")
+require("src.base.core.ex_math")
+require("src.base.core.ex_io")
+require("src.base.core.ex_func")
+require("src.base.core.ex_class")
+require("src.base.core.ex_os")
