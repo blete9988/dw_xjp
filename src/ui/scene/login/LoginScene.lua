@@ -408,6 +408,7 @@ local initLoginView = function(self)
 	weChatBtn:addTouchEventListener(function(t, e)
 		if e ~= ccui.TouchEventType.ended then return end
 		local weChat = require("src.platform.WeChatSDK")
+		weChat.init()
 		weChat.auth()
 
 	end)

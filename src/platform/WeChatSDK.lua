@@ -13,7 +13,10 @@ local doLogin = function(loginType, username, password)
 end
 
 function WeChatSDK.init(wechatSettings)
-	-- body
+	local device = require('src.cocos.framework.device')
+	if device.isIOS() then
+		require("src.cocos.cocos2d.luaoc").callStaticMethod("WechatSDK", "init", {appid='wx69363b336120f9e0'})
+	end
 end
 
 local function onGetOpenId(code)
@@ -23,6 +26,7 @@ local function onGetOpenId(code)
 				['code'] = code
 			}, function(result, data)
 
+				dump(data)
 				if data == nil then
 					display.showMsg("注册失败")
 					return
@@ -53,7 +57,22 @@ function WeChatSDK.auth(callback)
 
 	local device = require('src.cocos.framework.device')
 	if device.isIOS() then 
+		local luaoc = require "src.cocos.cocos2d.luaoc"
 
+		local ok = luaoc.callStaticMethod("WechatSDK","auth",{callback=function(result)
+			local resp = require("src.cocos.cocos2d.json"):decode(result)
+			dump(resp)
+			if resp == nil or resp.result ~= "0" then
+				display.showMsg("登录失败")
+				return
+			end
+
+			onBack(resp.msg)
+		end})
+
+		if not ok then
+			display.showMsg("微信登陆")	
+		end
 	elseif device.isAndroid() then 
 		local luaj = require "src.cocos.cocos2d.luaj" --引入luaj
 
