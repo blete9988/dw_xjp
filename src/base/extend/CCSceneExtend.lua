@@ -34,7 +34,7 @@ function CCSceneExtend:ctor()
     	self:nativeAddChild(layer)
     	self.m_defaultUILyer[v.name] = layer
     end
-	--require("src.base.log.logUI").showdebug(self)
+	require("src.base.log.logUI").showdebug(self)
 end
 --@override
 function CCSceneExtend:m_nodeEventHandler(event)
