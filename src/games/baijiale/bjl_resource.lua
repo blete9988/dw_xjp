@@ -26,6 +26,7 @@ resource.sounds={
 	{url="game/baijiale/sounds/bjl_cheer_0.mp3"},
 	{url="game/baijiale/sounds/bjl_cheer_1.mp3"},
 	{url="game/baijiale/sounds/bjl_cheer_2.mp3"},
+	{url="game/baijiale/sounds/bjl_bg.mp3"},
 }
 resource.animations={
 	{name="bjl_clock_ring_5",begnum=1,endnum=40,photoname="clock_ring_",Format=".png",delay=1/8},

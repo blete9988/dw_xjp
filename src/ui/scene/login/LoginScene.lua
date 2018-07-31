@@ -417,19 +417,19 @@ local initLoginView = function(self)
 	weChatBtn:setPosition(cc.p(D_SIZE.hw - 40, D_SIZE.hh - weChatBtn:getContentSize().width - 100))
 	node:addChild(weChatBtn)
 
-	local alipayBtn = display.newButton('res/images/login/dl_zfb.png','res/images/login/dl_zfb.png','res/images/login/dl_zfb.png', 0)
-	alipayBtn:setTouchEnabled(true)
-	alipayBtn:addTouchEventListener(function(t, e)
-		if e ~= ccui.TouchEventType.ended then return end
-		local alipay = require("src.platform.AlipaySDK")
-		alipay.init()
-		alipay.auth()
-		-- display.showMsg("敬请期待")
-	end)
-	alipayBtn:setAnchorPoint(cc.p(0,0.5))
-	-- alipayBtn:addChild(Coord.ingap(alipayBtn, display.newImage("#res/images/login/ui_772_dl_zhdl.png"), "CC", 0, "CC", 0))
-	alipayBtn:setPosition(cc.p(D_SIZE.hw + 40, D_SIZE.hh - alipayBtn:getContentSize().width - 100))
-	node:addChild(alipayBtn)
+	-- local alipayBtn = display.newButton('res/images/login/dl_zfb.png','res/images/login/dl_zfb.png','res/images/login/dl_zfb.png', 0)
+	-- alipayBtn:setTouchEnabled(true)
+	-- alipayBtn:addTouchEventListener(function(t, e)
+	-- 	if e ~= ccui.TouchEventType.ended then return end
+	-- 	local alipay = require("src.platform.AlipaySDK")
+	-- 	alipay.init()
+	-- 	alipay.auth()
+	-- 	-- display.showMsg("敬请期待")
+	-- end)
+	-- alipayBtn:setAnchorPoint(cc.p(0,0.5))
+	-- -- alipayBtn:addChild(Coord.ingap(alipayBtn, display.newImage("#res/images/login/ui_772_dl_zhdl.png"), "CC", 0, "CC", 0))
+	-- alipayBtn:setPosition(cc.p(D_SIZE.hw + 40, D_SIZE.hh - alipayBtn:getContentSize().width - 100))
+	-- node:addChild(alipayBtn)
 
 
 

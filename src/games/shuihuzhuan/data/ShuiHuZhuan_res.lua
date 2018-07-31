@@ -67,7 +67,8 @@ resource.sounds={
 	{url="game/shuihuzhuan/sound/shz_turn_line_2.mp3",loadtype=1},
 	{url="game/shuihuzhuan/sound/shz_turn_start.mp3",loadtype=1},
 	{url="game/shuihuzhuan/sound/shz_turn_win.mp3",loadtype=1},
-	{url="game/shuihuzhuan/sound/shz_turn_compare_bt.mp3",loadtype=1}
+	{url="game/shuihuzhuan/sound/shz_turn_compare_bt.mp3",loadtype=1},
+	{url="game/shuihuzhuan/sound/shz_bg2.mp3",loadtype=0}
 }
 --动作资源管理器
 resource.animations={

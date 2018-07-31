@@ -51,6 +51,9 @@ function FeiLongZaiTianScene:ctor(room)
 	local quitebtn = require("src.ui.QuitButton").new()
 	self:addChild(Coord.ingap(self,quitebtn,"LL",0,"TT",0),109)
 	require("src.ui.item.ScreenScrollMsg").show(self,cc.p(D_SIZE.hw,D_SIZE.top(40)),110)
+
+	SoundsManager.playMusic("flzt_bg",true)
+	
 end
 
 function FeiLongZaiTianScene:handlerEvent(event,arg)

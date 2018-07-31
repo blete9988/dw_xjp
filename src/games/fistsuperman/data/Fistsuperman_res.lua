@@ -43,7 +43,9 @@ resource.sounds={
 	{url="game/fistsuperman/sound/FS_Addx.mp3",loadtype=1},
 	{url="game/fistsuperman/sound/FS_Click.mp3",loadtype=1},
 	{url="game/fistsuperman/sound/FS_FreeSpinsResult.mp3",loadtype=1},
-	{url="game/fistsuperman/sound/FS_BonusSingle.mp3",loadtype=1}
+	{url="game/fistsuperman/sound/FS_BonusSingle.mp3",loadtype=1},
+	{url="game/fistsuperman/sound/yqcr_bg.mp3",loadtype=0}
+
 }
 --动作资源管理器
 resource.animations={

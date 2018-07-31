@@ -44,6 +44,9 @@ function Bjl_Scene:ctor(room)
 	
 	self.bjl_gameMgr:initgame()
 
+
+	SoundsManager.playMusic("bjl_bg",true)
+
 end
 --初始化顶部面板
 function Bjl_Scene:m_initTopView()

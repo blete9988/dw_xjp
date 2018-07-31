@@ -50,6 +50,7 @@ resource.sounds={
 	{url="game/feiqingzoushou/sound/fqzs_start_wager.mp3",loadtype=1},
 	{url="game/feiqingzoushou/sound/fqzs_end_wager.mp3",loadtype=1},
 	{url="game/feiqingzoushou/sound/fqzs_score.mp3",loadtype=1},
+	{url="game/feiqingzoushou/sound/b_kn.mp3",loadtype=1},
 }
 --动作资源管理器
 resource.animations={

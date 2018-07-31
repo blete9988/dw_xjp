@@ -61,7 +61,8 @@ resource.sounds={
 	{url="game/baodaren/sound/bdr_qiaoluo.mp3",loadtype=0},
 	{url="game/baodaren/sound/bdr_Scoring01.mp3",loadtype=0},
 	{url="game/baodaren/sound/bdr_Scoring02.mp3",loadtype=0},
-	{url="game/baodaren/sound/bdr_turnOver.mp3",loadtype=0}
+	{url="game/baodaren/sound/bdr_turnOver.mp3",loadtype=0},
+	{url="game/baodaren/sound/bdr_bg.mp3",loadtype=0}
 }
 --动作资源管理器
 resource.animations={
