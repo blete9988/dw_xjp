@@ -21,6 +21,14 @@ end
 function RoomData:getPic()
 	return string.format("game/%s/icon/icon_room_%s.png",self.game.key,self.index)
 end
+
+
+--获取jackpot
+function RoomData:getJackPot()
+	return string.format("game/%s/icon/ui_ccjj_dt_jackpot.png",self.game.key)
+end
+
+
 --进入检测
 function RoomData:testEntry()
 	if not display.checkGold(self.goldLimit) then

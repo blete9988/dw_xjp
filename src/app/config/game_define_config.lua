@@ -138,7 +138,8 @@ local _config = {
 			namepic = "p_ui_1108.png",
 			icon = "p_ui_1208.png",
 			path = "src.games.baodaren.BaoDaRenScene",
-			resourcecfg = "src.games.baodaren.data.BaoDaRen_res"
+			resourcecfg = "src.games.baodaren.data.BaoDaRen_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
 		},
 	[202] = 
 		{
@@ -152,7 +153,9 @@ local _config = {
 			namepic = "p_ui_1109.png",
 			icon = "p_ui_1209.png",
 			path = "src.games.shuihuzhuan.ShuiHuZhuanScene",
-			resourcecfg = "src.games.shuihuzhuan.data.ShuiHuZhuan_res"
+			resourcecfg = "src.games.shuihuzhuan.data.ShuiHuZhuan_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
+
 		},
 	[203] = 
 		{
@@ -194,7 +197,9 @@ local _config = {
 			namepic = "p_ui_1112.png",
 			icon = "p_ui_1212.png",
 			path = "src.games.firecracker.FirecrackerScene",
-			resourcecfg = "src.games.firecracker.data.Firecracker_res"
+			resourcecfg = "src.games.firecracker.data.Firecracker_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
+
 		},
 	[206] = 
 		{
@@ -208,7 +213,9 @@ local _config = {
 			namepic = "p_ui_1113.png",
 			icon = "p_ui_1213.png",
 			path = "src.games.fistsuperman.FistSuperManScene",
-			resourcecfg = "src.games.fistsuperman.data.Fistsuperman_res"
+			resourcecfg = "src.games.fistsuperman.data.Fistsuperman_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
+
 		},
 	[207] = 
 		{
@@ -222,7 +229,9 @@ local _config = {
 			namepic = "p_ui_1115.png",
 			icon = "p_ui_1215.png",
 			path = "src.games.feilongzaitian.FeiLongZaiTianScene",
-			resourcecfg = "src.games.feilongzaitian.data.FeiLongZaiTian_res"
+			resourcecfg = "src.games.feilongzaitian.data.FeiLongZaiTian_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
+
 		},
 	[208] = 
 		{
@@ -236,7 +245,9 @@ local _config = {
 			namepic = "p_ui_1116.png",
 			icon = "p_ui_1216.png",
 			path = "src.games.shuiguolaba.ShuiGuoLaBaScene",
-			resourcecfg = "src.games.shuiguolaba.data.ShuiGuoLaBa_res"
+			resourcecfg = "src.games.shuiguolaba.data.ShuiGuoLaBa_res",
+			jackpot = "ui_ccjj_dt_jackpot.png"
+			
 		},
 	[209] = 
 		{
