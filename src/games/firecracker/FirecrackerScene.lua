@@ -241,9 +241,13 @@ end
 function FirecrackerScene:playEffect()
 	local winDatas = self.content_data.windatas
 	--优先级大奖
-	if #self.content_data.bonus_cloums > 1 then
+	-- if #self.content_data.bonus_cloums > 1 then
+	-- 	self:playBonusEffect(self.content_data.bonus_cloums)
+	-- end
+	if self.content_data.bonus_count > 2 then
 		self:playBonusEffect(self.content_data.bonus_cloums)
 	end
+	
 	local soundName = nil
 	for i=1,#winDatas do
 		local result_data = winDatas[i]

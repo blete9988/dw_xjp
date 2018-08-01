@@ -16,6 +16,7 @@ function FirecrackerContentData:ctor()
 	self.isbig = false
 	self.isFull = false
 	self.totalFreeWinMoney = 0
+	self.bonus_count = 0 --铜板出现个数
 end
 
 function FirecrackerContentData:simulateGameData(datas)
@@ -156,11 +157,19 @@ function FirecrackerContentData:simulateGameData(datas)
 end
 
 function FirecrackerContentData:initBonusCloums()
+	self.bonus_count  = 0
 	for x = 1,COLUMN_COUNT do
 		local bounus_y = 0
 		for y = 1,LINE_COUNT do
-			if self.resultdata[x][y] == 13 and bounus_y == 0 then
+			-- if self.resultdata[x][y] == 13 and bounus_y == 0 then
+			-- 	bounus_y = y
+			-- end
+			if self.resultdata[x][y] == 13 then
 				bounus_y = y
+			end
+
+			if(self.resultdata[x][y] == 13)then
+				self.bonus_count = self.bonus_count  + 1
 			end
 			print("xy-------------------------------------",x,y,self.resultdata[x][y])
 		end
