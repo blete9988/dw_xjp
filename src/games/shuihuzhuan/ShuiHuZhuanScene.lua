@@ -23,6 +23,9 @@ function ShuiHuZhuanScene:ctor(room)
 	local quitebtn = require("src.ui.QuitButton").new()
 	self:addChild(Coord.ingap(self,quitebtn,"LL",0,"TT",0),109)
 	require("src.ui.item.ScreenScrollMsg").show(self,cc.p(D_SIZE.hw,D_SIZE.top(140)),110)
+
+	SoundsManager.playMusic("shz_bg2",true)
+	
 end
 local LIST_POSITION = {
 	cc.p(14,0),

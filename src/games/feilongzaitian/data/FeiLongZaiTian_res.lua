@@ -47,7 +47,8 @@ resource.sounds={
 	{url="game/feilongzaitian/sound/flzt_maybeBlow.mp3",loadtype=0},
 	{url="game/feilongzaitian/sound/flzt_scoringEnd.mp3",loadtype=0},
 	{url="game/feilongzaitian/sound/flzt_turnOver.mp3",loadtype=0},
-	{url="game/feilongzaitian/sound/flzt_free.mp3",loadtype=0}
+	{url="game/feilongzaitian/sound/flzt_free.mp3",loadtype=0},
+	{url="game/feilongzaitian/sound/flzt_bg.mp3",loadtype=0}
 }
 --动作资源管理器
 resource.animations={
