@@ -27,6 +27,10 @@ end
 function RoomData:getJackPot()
 	return string.format("game/%s/icon/ui_ccjj_dt_jackpot.png",self.game.key)
 end
+--获得游戏名称
+function RoomData:getGameKey()
+	return self.game.key
+end
 
 
 --进入检测

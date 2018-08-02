@@ -29,31 +29,39 @@ function RoomItem:ctor(room)
 	end
 
 	local jackpot = display.newDynamicImage(room:getJackPot())
-	if(jackpot)then
-		jackpot:setScale(0.5)
-		self:addChild(Coord.ingap(self,jackpot,"LL",-50,"BB",110))
-		local init_num = 1000000 * math.random(1,100)
-		local  jack_num = cc.Label:createWithCharMap(display.getTexture("res/fonts/main_font_nmb_1.png"),20,26,string.byte("0"))
-		jack_num:setAnchorPoint( cc.p(0,0.5) )
-		jack_num:setScale(0.85)
-		jack_num:setString(init_num)
-		
-		self:addChild(Coord.ingap(self,jack_num,"LL",110,"BB",120))
-		local jz_num = 88888
-		jack_num:runAction(cc.RepeatForever:create(cc.Sequence:create(
-			{
-				cc.DelayTime:create(0.03),
-				cc.CallFunc:create(function(target) 
-					init_num = init_num + jz_num
-					if(init_num >= 100000000)then
-						init_num = 1000000
-					end
-					jack_num:setString(init_num)
-				end)
-			}
-		)))
+	if(room:getGameKey() == "baodaren" or 
+		room:getGameKey() == "feilongzaitian" or 
+		room:getGameKey() == "firecracker" or 
+		room:getGameKey() == "fistsuperman" or 
+		room:getGameKey() == "shuiguolaba" or 
+		room:getGameKey() == "shuihuzhuan" )then
+		if(jackpot)then
+			jackpot:setScale(0.5)
+			self:addChild(Coord.ingap(self,jackpot,"LL",-50,"BB",110))
+			local init_num = 1000000 * math.random(1,100)
+			local  jack_num = cc.Label:createWithCharMap(display.getTexture("res/fonts/main_font_nmb_1.png"),20,26,string.byte("0"))
+			jack_num:setAnchorPoint( cc.p(0,0.5) )
+			jack_num:setScale(0.85)
+			jack_num:setString(init_num)
+			
+			self:addChild(Coord.ingap(self,jack_num,"LL",110,"BB",120))
+			local jz_num = 88888
+			jack_num:runAction(cc.RepeatForever:create(cc.Sequence:create(
+				{
+					cc.DelayTime:create(0.03),
+					cc.CallFunc:create(function(target) 
+						init_num = init_num + jz_num
+						if(init_num >= 100000000)then
+							init_num = 1000000
+						end
+						jack_num:setString(init_num)
+					end)
+				}
+			)))
 
+		end		
 	end
+	
 	
 	self:addTouchEventListener(function(t,e) 
 		if e == ccui.TouchEventType.began then 
