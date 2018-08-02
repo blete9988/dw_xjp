@@ -87,11 +87,10 @@ function WeChatSDK.auth(callback)
 	    --当失败时，第一个值为 false，第二个值是错误代码  
 	    local ok,ret= luaj.callStaticMethod(className,"auth",args,sigs)  
 
-	    display.showMsg(ok)
 	    if not ok then  
-			display.showMsg("微信登陆")	
+			-- display.showMsg("微信登陆")	
 	    else
-
+	    	-- display.showMsg("登录失败")	
 	    end  
 	else
 		display.showMsg("平台错误")
