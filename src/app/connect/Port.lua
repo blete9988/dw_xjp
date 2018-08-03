@@ -26,7 +26,9 @@ port.PORT_JBACK_TBNN				= 4002		--通比牛牛推送端口
 port.PORT_HHDZ						= 1300		--红黑大战端口
 port.PORT_JBACK_HHDZ				= 3006		--红黑大战推送端口
 port.PORT_QZNN						= 1210		--抢庄牛牛端口
+port.PORT_SANGONG					= 1210		--三公端口
 port.PORT_JBACK_QZNN				= 4003		--抢庄牛牛推送端口
+port.PORT_JBACK_SANGONG				= 4003		--三公推送端口
 port.PORT_JINSHAYINSHA				= 1202		--金鲨银鲨
 port.PORT_JBACK_JINSHAYINSHA		= 3005		--金鲨银鲨推送
 

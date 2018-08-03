@@ -112,7 +112,7 @@ function JinShaYinShaUIPanel:ctor(room)
 	self.main_layout:addChild(bottom_layout,1)
 	Coord.ingap(self.main_layout,bottom_layout,"CC",0,"BB",0)
 	self.bottom_layout = bottom_layout
-	local zx_name_label = display.newText("blank",24)
+	local zx_name_label = display.newText(Player.name,24)
 	zx_name_label:setAnchorPoint(cc.p(0,0.5))
 	Coord.ingap(self.bottom_layout,zx_name_label,"LL",5,"BB",50)
 	self.bottom_layout:addChild(zx_name_label)
