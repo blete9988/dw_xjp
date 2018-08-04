@@ -6,6 +6,8 @@ local PokerGroupItem = class("PokerGroupItem",require("src.base.extend.CCLayerEx
 	return display.newLayout(cc.size(350,200))
 end)
 
+local poker_count = 3
+
 function PokerGroupItem:ctor()
 	self:super("ctor")
 	self:setAnchorPoint( cc.p(0.5,0.5) )
@@ -17,7 +19,7 @@ function PokerGroupItem:ctor()
 	
 	local pos = cc.p(72,100)
 	local item
-	for i = 1,5 do
+	for i = 1,poker_count do
 		item = require("src.games.sangong.ui.PokerItem").new()
 		item:setPosition(pos)
 		self:addChild(item)

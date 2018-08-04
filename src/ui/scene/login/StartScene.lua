@@ -54,7 +54,7 @@ end
 function StartScene:examineLaunch()
 	self.tips:setString(display.trans("##14"))
 	-- local url = "http://127.0.0.1:8080/src.zip"
-	local url = "http://220.128.128.40:8360/game/res/version"
+	local url = require("src.app.config.server.server_config").apihost.."res/version"
 	local versionMgr = require("src.base.tools.versionMgr")
 	
 	versionMgr.versionVerify(url,function(status,data) 

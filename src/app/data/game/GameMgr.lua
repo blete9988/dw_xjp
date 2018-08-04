@@ -64,6 +64,7 @@ function GameMgr:downloadResrouce(data)
 	
 	self.on_downloadGame = data
 	-- data.url = "http://220.128.128.40:8001/hotupdate/hall_0_0_0.zip"
+	mlog(data.sid,"=============-----")
 	require("src.base.http.HttpRequest").postJSON(require("src.app.config.server.server_config").apihost..'res/game', {
 		['sid'] = data.sid
 		}, function(result, retgamedata)
