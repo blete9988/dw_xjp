@@ -11,6 +11,7 @@ function PokerGroup:ctor()
 end
 --获取牌型对应的图片
 function PokerGroup:getTypePic()
+	mlog("获取牌型对应的图片")
 	if self.groupTypeValue then
 		return string.format("ui_qznn_result_%s%s.png",self.groupType,self.groupTypeValue)
 	else
@@ -47,21 +48,27 @@ end
 function PokerGroup:bytesRead(data)
 	self.pokers = {}
 	self.groupTypeValue = nil
-	
+	local proker_count = 3
 	local sid
-	for i = 1,5 do
+	for i = 1,proker_count do
 		sid = data:readUnsignedShort()
+		mlog("发牌SID:",sid)
 		self.pokers[i] = require("src.games.sangong.data.PokerData").new(sid)
 	end
 	--组合的值
 	self.gruopValue = data:readUnsignedByte()
 	--牌型
 	self.groupType = data:readByte()
+
+	mlog("组合的值:",self.gruopValue)
+	mlog("牌型：",self.groupType)
 	
-	if self.groupType == 4 then
-		--有牛
-		self.groupTypeValue = data:readByte()
-	end
+-- 	大三公，小三公，混三公，点牌
+-- 对应4，3，2，1
+	-- if self.groupType == 4 then
+	-- 	--有牛
+	-- 	self.groupTypeValue = data:readByte()
+	-- end
 	
 	return self
 end

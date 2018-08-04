@@ -21,7 +21,7 @@ function Sangong_JbackPort.extend(data)
 			--收到结果
 			gamemgr:resultBytesRead(data)
 		elseif tp == 4 then
-			--发牌
+			
 			gamemgr:beganBytesRead(data)
 		elseif tp == 6 then
 			--有玩家退出

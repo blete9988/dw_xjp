@@ -119,16 +119,18 @@ function DesktopLayout:beganDeal()
 	local countdown = gameMgr.openStamp - ServerTimer.time
 	local pokergroup = gameMgr:getMineInfo().pokerGroup
 	local index = 0
+	local poker_count = 3
 	self.m_pokerGroups[1]:setData(pokergroup)
 	self:runAction(cc.Sequence:create({
 		cc.Repeat:create(cc.Sequence:create({
 			cc.CallFunc:create(function(t) 
 				if not t then return end
 				index = index + 1 
+
 				self:m_sendCard(index)
 			end),
 			cc.DelayTime:create(1),
-		}),5),
+		}),poker_count),
 		cc.CallFunc:create(function(t) 
 			if not t then return end
 			for i = 1,#self.m_playerItems do
@@ -144,6 +146,7 @@ end
 *	@param pokerIndex 第几张牌
 ]]
 function DesktopLayout:m_sendCard(pokerIndex)
+	mlog("发牌第几张：",pokerIndex)
 	local index = require("src.games.sangong.data.Sangong_GameMgr").getInstance():getMaster().clientIndex
 	local len = 0
 	local flycard

@@ -130,7 +130,7 @@ function Sangong_GameMgr:beganGetMasterBytesRead(data)
 		v:setReadyStatus(ST.TYPE_GAMESANGONG_NOT_READY)
 	end
 	self.cdStamp = data:readInt()
-	
+	mlog("开始抢庄返回：",self.cdStamp)
 	CommandCenter:sendEvent(ST.COMMAND_GAMESANGONG_BEGAN_GET_MASTER)
 end
 --抢庄倍数推送
@@ -141,6 +141,7 @@ function Sangong_GameMgr:masterTimesBytesRead(data)
 		id = data:readInt()
 		index = data:readByte()
 		value = data:readByte()
+		mlog("抢庄返回：",id,index,value)
 		local player = self:getPlayerByIndex(index)
 		if player and player.id == id then
 			player:setMasterTimesValue(value)
@@ -156,6 +157,7 @@ function Sangong_GameMgr:beganAddTimesBytesRead(data)
 	local id = data:readInt()
 	local index = data:readByte()
 	local value = data:readByte()
+	mlog("加倍返回：",id,index,value)
 	for k,player in pairs(self.players) do
 		if player.index ~= index then
 			player:clearMasterTimesValue()
@@ -186,7 +188,7 @@ function Sangong_GameMgr:beganBytesRead(data)
 	
 	self.openStamp = data:readInt()
 	self:getMineInfo():pokerBytesRead(data)
-	
+	mlog("发牌：返回时间",self.openStamp)
 	CommandCenter:sendEvent(ST.COOMAND_GAMESANGONG_BEGAN)
 end
 --结果序列化
@@ -252,9 +254,11 @@ end
 --玩家摊牌状态改变
 function Sangong_GameMgr:playerShowdown(data)
 	local len = data:readByte()
+	mlog("摊牌len:",len)
 	local index
 	for i = 1,len do
 		index = data:readByte()
+		mlog("摊牌：index:",index)
 		for k,v in pairs(self.players) do
 			if v.index == index then
 				v:updateShowdownStatus(data)

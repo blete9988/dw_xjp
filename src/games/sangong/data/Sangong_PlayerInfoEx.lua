@@ -7,7 +7,7 @@ local Sangong_PlayerInfoEx = class("Sangong_PlayerInfoEx",require("src.app.data.
 
 function Sangong_PlayerInfoEx:ctor()
 	self:super("ctor")
-	self.pokerGroup = require("src.games.qiangzhuangniuniu.data.PokerGroup").new()
+	self.pokerGroup = require("src.games.sangong.data.PokerGroup").new()
 	self.index = 1
 	self.resultGold = 0
 	--抢庄倍数
