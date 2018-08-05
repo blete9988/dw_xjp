@@ -13,9 +13,9 @@ end
 function PokerGroup:getTypePic()
 	mlog("获取牌型对应的图片")
 	if self.groupTypeValue then
-		return string.format("ui_qznn_result_%s%s.png",self.groupType,self.groupTypeValue)
+		return string.format("sangong_type_0%s.png",self.groupTypeValue)
 	else
-		return string.format("ui_qznn_result_%s.png",self.groupType)
+		return string.format("sangong_type_%s.png",self.groupType)
 	end
 end
 function PokerGroup:getTypeSound()
@@ -38,8 +38,9 @@ function PokerGroup:getPokers()
 end
 --获取牌组合的结构数组
 function PokerGroup:getGroupSplit()
+	local proker_count = 3
 	local splits = {}
-	for i = 1,5 do
+	for i = 1,proker_count do
 		splits[i] = math.band(self.gruopValue,math.pow(2,(i - 1)))
 	end
 	return splits
@@ -65,10 +66,11 @@ function PokerGroup:bytesRead(data)
 	
 -- 	大三公，小三公，混三公，点牌
 -- 对应4，3，2，1
-	-- if self.groupType == 4 then
-	-- 	--有牛
-	-- 	self.groupTypeValue = data:readByte()
-	-- end
+	if self.groupType == 1 then
+		--有牛
+		self.groupTypeValue = data:readByte()
+		mlog("点数：",self.groupTypeValue)
+	end
 	
 	return self
 end

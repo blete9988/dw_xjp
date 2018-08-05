@@ -3,6 +3,7 @@ resource.plists={
 	{imgurl = "game/sangong/sangong_desktop_background.jpg",size = 1360*765},
 	{url="game/sangong/qznn_poker.plist",imgurl = "game/sangong/qznn_poker.png",size = 2043*728},
 	{url="game/sangong/qznn_public.plist",imgurl = "game/sangong/qznn_public.png",size = 1995*261},
+	{url="game/sangong/sangong_d.plist",imgurl = "game/sangong/sangong_d.png",size = 128*964},
 	{imgurl = "game/sangong/sangong_number_1.png",size = 240*34},
 	{imgurl = "game/sangong/sangong_number_2.png",size = 264*32},
 	{imgurl = "game/sangong/sangong_number_3.png",size = 264*32},

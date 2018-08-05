@@ -34,7 +34,7 @@ function Sangong_RuleWindows:ctor()
 		
 	local temply = display.newLayout(cc.size(1050,1108))
 	local rulepic = display.newDynamicImage("game/sangong/sangong_rulepic_1.png")
-	rulepic:setScale(1.3)
+	rulepic:setScale(1.1)
 	temply:addChild(Coord.ingap(temply,rulepic,"CC",0,"CC",0,true))
 	
 	listview:pushBackCustomItem(temply)
