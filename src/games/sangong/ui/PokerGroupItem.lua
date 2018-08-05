@@ -65,6 +65,7 @@ function PokerGroupItem:initPoker(pokergroup)
 end
 --获取扑克的世界坐标
 function PokerGroupItem:getPokerWorldPos(index)
+	
 	local p = self:convertToWorldSpace(cc.p(self.m_pokerItems[index]:getPosition()))
 	return p
 end
@@ -98,32 +99,34 @@ function PokerGroupItem:splitPoker()
 	
 	local pokerItems = self.m_pokerItems
 	local lesslen = 0
-	for i = 1,5 do
+
+	local proker_count = 3
+	for i = 1,proker_count do
 		if groups[i] == 0 then
 			lesslen = lesslen + 1
 		end
 	end
 	if lesslen <= 1 then
 		--5:0 ,4:1组合，全部向下移动
-		for i = 1,5 do
-			if groups[i] > 0 then
-				pokerItems[i]:setPositionY(pokerItems[i]:getPositionY() - 30)
-			end
-		end
+		-- for i = 1,proker_count do
+		-- 	if groups[i] > 0 then
+		-- 		pokerItems[i]:setPositionY(pokerItems[i]:getPositionY() - 30)
+		-- 	end
+		-- end
 	else
 		--3:2 组合
 		if self.m_data.groupType == 3 then
 			--没牛横向移动
-			for i = 4,5 do
-				pokerItems[i]:setPositionX(pokerItems[i]:getPositionX() + 25)
-			end
+			-- for i = 4,5 do
+			-- 	pokerItems[i]:setPositionX(pokerItems[i]:getPositionX() + 25)
+			-- end
 		else
 			--有牛向下移动
-			for i = 1,5 do
-				if groups[i] == 0 then
-					pokerItems[i]:setPositionY(pokerItems[i]:getPositionY() - 30)
-				end
-			end
+			-- for i = 1,5 do
+			-- 	if groups[i] == 0 then
+			-- 		pokerItems[i]:setPositionY(pokerItems[i]:getPositionY() - 30)
+			-- 	end
+			-- end
 		end
 	end
 end

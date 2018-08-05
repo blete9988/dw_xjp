@@ -22,6 +22,7 @@ function DesktopLayout:ctor()
 	local item
 	local playerItems = {}
 	local pokerGroups = {}
+	local proker_count = 3
 	for i = 1,5 do
 		item = require("src.games.sangong.ui.PokerGroupItem").new()
 		if i > 1 then
