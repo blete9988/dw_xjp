@@ -13,19 +13,19 @@ end
 function PokerGroup:getTypePic()
 	mlog("获取牌型对应的图片")
 	if self.groupTypeValue then
-		return string.format("sangong_type_0%s.png",self.groupTypeValue)
+		return string.format("sangong_type_5%s.png",self.groupTypeValue)
 	else
 		return string.format("sangong_type_%s.png",self.groupType)
 	end
 end
 function PokerGroup:getTypeSound()
-	if self.groupType == 3 then
-		return "qznn_pokertype_3"
-	elseif self.groupType ~= 4 then
-		return "qznn_pokertype_5"
-	else
-		return "qznn_pokertype_4" .. self.groupTypeValue
-	end
+	-- if self.groupType == 3 then
+	-- 	return "qznn_pokertype_3"
+	-- elseif self.groupType ~= 4 then
+	-- 	return "qznn_pokertype_5"
+	-- else
+	-- 	return "qznn_pokertype_4" .. self.groupTypeValue
+	-- end
 end
 --牌是否大于等于牛牛大
 function PokerGroup:isLargeNiuNiu()

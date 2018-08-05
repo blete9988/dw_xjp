@@ -48,6 +48,7 @@ end
 --初始化牌
 function PokerGroupItem:initPoker(pokergroup)
 	if pokergroup then
+		mlog("显示牌型。。。")
 		self.m_data = pokergroup
 		local pokers = pokergroup:getPokers()
 		for i = 1,#self.m_pokerItems do
@@ -81,7 +82,8 @@ end
 function PokerGroupItem:showdown(data)
 	self.m_data = data
 	--牌未发完，服务器推送机器人开牌，容错处理
-	if self.index < 5 then
+	local poker_count = 3
+	if self.index < poker_count then
 		self.isshowdown = true
 		return
 	end
@@ -132,6 +134,7 @@ function PokerGroupItem:splitPoker()
 end
 --显示牌型
 function PokerGroupItem:showGroupType()
+	mlog("显示牌型。。。")
 	self.m_typePic:setVisible(true)
 	local scale = self.m_typePic:getScale()
 	self.m_typePic:loadTexture(self.m_data:getTypePic(),1)
