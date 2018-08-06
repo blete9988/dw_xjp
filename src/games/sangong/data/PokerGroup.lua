@@ -19,13 +19,15 @@ function PokerGroup:getTypePic()
 	end
 end
 function PokerGroup:getTypeSound()
-	-- if self.groupType == 3 then
-	-- 	return "qznn_pokertype_3"
-	-- elseif self.groupType ~= 4 then
-	-- 	return "qznn_pokertype_5"
-	-- else
-	-- 	return "qznn_pokertype_4" .. self.groupTypeValue
-	-- end
+	if self.groupType == 3 then
+		return "qznn_pokertype_3"
+	elseif self.groupType == 4 then
+		return "qznn_pokertype_4"
+	elseif self.groupType == 2 then
+		return "qznn_pokertype_2"
+	else
+		return "qznn_pokertype_5" .. self.groupTypeValue
+	end
 end
 --牌是否大于等于牛牛大
 function PokerGroup:isLargeNiuNiu()
