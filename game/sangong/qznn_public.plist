@@ -6,919 +6,808 @@
         <dict>
             <key>qznn_btn_times_0.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{88,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1410},{88,37}}</string>
-                <key>textureRotated</key>
+                <key>frame</key>
+                <string>{{225,773},{86,37}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{86,37}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_btn_times_1.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{72,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{157,1706},{72,37}}</string>
-                <key>textureRotated</key>
+                <key>frame</key>
+                <string>{{313,796},{86,37}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{86,37}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_btn_times_10.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{193,433},{88,37}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{88,37}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1449},{88,37}}</string>
-                <key>textureRotated</key>
+            </dict>
+            <key>qznn_btn_times_111.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{159,628},{70,37}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{9,0},{70,37}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_btn_times_15.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{338,718},{88,37}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{88,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1488},{88,37}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{88,37}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_btn_times_2.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{401,805},{72,37}}</string>
+                <key>offset</key>
                 <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{74,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{180,1667},{74,37}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,0},{72,37}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_btn_times_20.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{338,757},{88,37}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{88,37}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{1,1672},{88,37}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_btn_times_4.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{313,835},{72,37}}</string>
+                <key>offset</key>
                 <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{74,37}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,0},{72,37}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{79,1701},{74,37}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_btn_times_5.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,842},{72,37}}</string>
+                <key>offset</key>
                 <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{74,37}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,0},{72,37}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{118,1701},{74,37}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_panel_1001.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{159,667},{36,35}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{38,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{38,37}</string>
-                <key>textureRect</key>
-                <string>{{217,1240},{38,37}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{36,35}}</string>
+                <key>sourceSize</key>
+                <string>{38,37}</string>
             </dict>
             <key>qznn_panel_1002.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,435},{172,42}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{172,42}</string>
-                <key>spriteSourceSize</key>
-                <string>{172,42}</string>
-                <key>textureRect</key>
-                <string>{{1,335},{172,42}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{172,42}}</string>
+                <key>sourceSize</key>
+                <string>{172,42}</string>
             </dict>
             <key>qznn_panel_1003.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{128,741},{95,94}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{95,94}</string>
-                <key>spriteSourceSize</key>
-                <string>{95,94}</string>
-                <key>textureRect</key>
-                <string>{{100,1314},{95,94}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{95,94}}</string>
+                <key>sourceSize</key>
+                <string>{95,94}</string>
             </dict>
             <key>qznn_panel_1004.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,101},{230,49}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{230,49}</string>
-                <key>spriteSourceSize</key>
-                <string>{230,49}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{230,49}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{230,49}}</string>
+                <key>sourceSize</key>
+                <string>{230,49}</string>
             </dict>
             <key>qznn_times_0.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{225,812},{86,37}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{86,37}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{40,1672},{88,37}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_times_1.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{128,704},{96,35}}</string>
+                <key>offset</key>
                 <string>{-2,0}</string>
-                <key>spriteSize</key>
-                <string>{98,35}</string>
-                <key>spriteSourceSize</key>
-                <string>{104,35}</string>
-                <key>textureRect</key>
-                <string>{{105,1277},{98,35}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,0},{96,35}}</string>
+                <key>sourceSize</key>
+                <string>{104,35}</string>
             </dict>
             <key>qznn_times_10.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{128,626},{76,29}}</string>
+                <key>offset</key>
                 <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{78,31}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,5},{76,29}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1602},{78,31}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_times_15.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{480,652},{76,29}}</string>
+                <key>offset</key>
                 <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{78,31}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,5},{76,29}}</string>
+                <key>sourceSize</key>
                 <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1635},{78,31}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_times_2.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{197,152},{100,35}}</string>
+                <key>offset</key>
                 <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{102,35}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{100,35}}</string>
+                <key>sourceSize</key>
                 <string>{104,35}</string>
-                <key>textureRect</key>
-                <string>{{113,1240},{102,35}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_times_20.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{114,837},{76,29}}</string>
+                <key>offset</key>
                 <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{78,31}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{100,1668},{78,31}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,5},{76,29}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_times_4.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{197,254},{100,35}}</string>
+                <key>offset</key>
                 <string>{-1,0}</string>
-                <key>spriteSize</key>
-                <string>{102,35}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{1,0},{100,35}}</string>
+                <key>sourceSize</key>
                 <string>{104,35}</string>
-                <key>textureRect</key>
-                <string>{{1,1272},{102,35}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_times_5.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{169,523},{60,29}}</string>
+                <key>offset</key>
                 <string>{-7,-1}</string>
-                <key>spriteSize</key>
-                <string>{62,31}</string>
-                <key>spriteSourceSize</key>
-                <string>{88,37}</string>
-                <key>textureRect</key>
-                <string>{{190,1415},{62,31}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,5},{60,29}}</string>
+                <key>sourceSize</key>
+                <string>{88,37}</string>
             </dict>
             <key>qznn_ui_1001.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,152},{193,94}}</string>
+                <key>offset</key>
                 <string>{1,-3}</string>
-                <key>spriteSize</key>
-                <string>{193,94}</string>
-                <key>spriteSourceSize</key>
-                <string>{195,100}</string>
-                <key>textureRect</key>
-                <string>{{1,52},{193,94}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,6},{193,94}}</string>
+                <key>sourceSize</key>
+                <string>{195,100}</string>
             </dict>
             <key>qznn_ui_1002.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,248},{193,94}}</string>
+                <key>offset</key>
                 <string>{1,-3}</string>
-                <key>spriteSize</key>
-                <string>{193,94}</string>
-                <key>spriteSourceSize</key>
-                <string>{195,100}</string>
-                <key>textureRect</key>
-                <string>{{1,148},{193,94}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,6},{193,94}}</string>
+                <key>sourceSize</key>
+                <string>{195,100}</string>
             </dict>
             <key>qznn_ui_1003.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{357,652},{121,31}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{121,31}</string>
-                <key>spriteSourceSize</key>
-                <string>{121,31}</string>
-                <key>textureRect</key>
-                <string>{{127,1174},{121,31}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{121,31}}</string>
+                <key>sourceSize</key>
+                <string>{121,31}</string>
             </dict>
             <key>qznn_ui_1004.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{357,685},{121,31}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{121,31}</string>
-                <key>spriteSourceSize</key>
-                <string>{121,31}</string>
-                <key>textureRect</key>
-                <string>{{127,1207},{121,31}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{121,31}}</string>
+                <key>sourceSize</key>
+                <string>{121,31}</string>
             </dict>
             <key>qznn_ui_1005.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,479},{165,65}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{167,67}</string>
-                <key>spriteSourceSize</key>
-                <string>{189,89}</string>
-                <key>textureRect</key>
-                <string>{{1,379},{167,67}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{12,12},{165,65}}</string>
+                <key>sourceSize</key>
+                <string>{189,89}</string>
             </dict>
             <key>qznn_ui_1006.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,344},{189,89}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{189,89}</string>
-                <key>spriteSourceSize</key>
-                <string>{189,89}</string>
-                <key>textureRect</key>
-                <string>{{1,244},{189,89}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{189,89}}</string>
+                <key>sourceSize</key>
+                <string>{189,89}</string>
             </dict>
             <key>qznn_ui_1007.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{226,709},{110,62}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{110,62}}</string>
+                <key>sourceSize</key>
                 <string>{110,62}</string>
-                <key>spriteSourceSize</key>
-                <string>{110,62}</string>
-                <key>textureRect</key>
-                <string>{{192,334},{110,62}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1008.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,778},{110,62}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{110,62}</string>
-                <key>spriteSourceSize</key>
-                <string>{110,62}</string>
-                <key>textureRect</key>
-                <string>{{1,1208},{110,62}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{110,62}}</string>
+                <key>sourceSize</key>
+                <string>{110,62}</string>
             </dict>
             <key>qznn_ui_1009.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{365,2},{139,57}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{139,57}}</string>
+                <key>sourceSize</key>
                 <string>{139,57}</string>
-                <key>spriteSourceSize</key>
-                <string>{139,57}</string>
-                <key>textureRect</key>
-                <string>{{196,52},{139,57}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1010.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{365,61},{139,57}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{139,57}}</string>
+                <key>sourceSize</key>
                 <string>{139,57}</string>
-                <key>spriteSourceSize</key>
-                <string>{139,57}</string>
-                <key>textureRect</key>
-                <string>{{196,193},{139,57}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1012.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{193,356},{75,39}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{75,39}}</string>
+                <key>sourceSize</key>
                 <string>{75,39}</string>
-                <key>spriteSourceSize</key>
-                <string>{75,39}</string>
-                <key>textureRect</key>
-                <string>{{180,1552},{75,39}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_ui_1020.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,959},{40,46}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,46}}</string>
+                <key>sourceSize</key>
                 <string>{40,46}</string>
-                <key>spriteSourceSize</key>
-                <string>{40,46}</string>
-                <key>textureRect</key>
-                <string>{{197,1373},{40,46}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1021.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{44,959},{40,46}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{40,46}}</string>
+                <key>sourceSize</key>
                 <string>{40,46}</string>
-                <key>spriteSourceSize</key>
-                <string>{40,46}</string>
-                <key>textureRect</key>
-                <string>{{190,1510},{40,46}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1022.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,2},{361,97}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{361,97}}</string>
+                <key>sourceSize</key>
                 <string>{361,97}</string>
-                <key>spriteSourceSize</key>
-                <string>{361,97}</string>
-                <key>textureRect</key>
-                <string>{{1,1309},{361,97}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1023.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{428,730},{73,78}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{73,78}</string>
-                <key>spriteSourceSize</key>
-                <string>{73,78}</string>
-                <key>textureRect</key>
-                <string>{{100,1527},{73,78}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{73,78}}</string>
+                <key>sourceSize</key>
+                <string>{73,78}</string>
             </dict>
             <key>qznn_ui_1024.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{46,911},{41,40}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{41,40}}</string>
+                <key>sourceSize</key>
                 <string>{41,40}</string>
-                <key>spriteSourceSize</key>
-                <string>{41,40}</string>
-                <key>textureRect</key>
-                <string>{{127,600},{41,40}}</string>
-                <key>textureRotated</key>
-                <false/>
             </dict>
             <key>qznn_ui_1025.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,911},{42,46}}</string>
+                <key>offset</key>
                 <string>{0,-1}</string>
-                <key>spriteSize</key>
-                <string>{44,48}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{14,13},{42,46}}</string>
+                <key>sourceSize</key>
                 <string>{70,70}</string>
-                <key>textureRect</key>
-                <string>{{205,1279},{44,48}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1026.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{252,851},{46,46}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{46,46}</string>
-                <key>spriteSourceSize</key>
-                <string>{46,46}</string>
-                <key>textureRect</key>
-                <string>{{197,1325},{46,46}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{46,46}}</string>
+                <key>sourceSize</key>
+                <string>{46,46}</string>
             </dict>
             <key>qznn_ui_1026_effect_01.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{192,851},{58,58}}</string>
+                <key>offset</key>
                 <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{60,60}</string>
-                <key>spriteSourceSize</key>
-                <string>{70,70}</string>
-                <key>textureRect</key>
-                <string>{{190,1448},{60,60}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{5,7},{58,58}}</string>
+                <key>sourceSize</key>
+                <string>{70,70}</string>
             </dict>
             <key>qznn_ui_1026_effect_02.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,546},{155,78}}</string>
+                <key>offset</key>
                 <string>{-2,2}</string>
-                <key>spriteSize</key>
-                <string>{157,80}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,3},{155,78}}</string>
+                <key>sourceSize</key>
                 <string>{163,88}</string>
-                <key>textureRect</key>
-                <string>{{170,446},{157,80}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1026_effect_03.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{159,554},{70,72}}</string>
+                <key>offset</key>
                 <string>{-2,3}</string>
-                <key>spriteSize</key>
-                <string>{72,74}</string>
-                <key>spriteSourceSize</key>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,4},{70,72}}</string>
+                <key>sourceSize</key>
                 <string>{86,86}</string>
-                <key>textureRect</key>
-                <string>{{180,1593},{72,74}}</string>
-                <key>textureRotated</key>
-                <true/>
             </dict>
             <key>qznn_ui_1027.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{197,667},{32,32}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{32,32}</string>
-                <key>spriteSourceSize</key>
-                <string>{32,32}</string>
-                <key>textureRect</key>
-                <string>{{170,605},{32,32}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
             </dict>
             <key>qznn_ui_1028.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{475,805},{32,32}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{32,32}</string>
-                <key>spriteSourceSize</key>
-                <string>{32,32}</string>
-                <key>textureRect</key>
-                <string>{{204,605},{32,32}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{32,32}}</string>
+                <key>sourceSize</key>
+                <string>{32,32}</string>
             </dict>
             <key>qznn_ui_1029.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{360,120},{136,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{136,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{136,74}</string>
-                <key>textureRect</key>
-                <string>{{1,448},{136,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{136,74}}</string>
+                <key>sourceSize</key>
+                <string>{136,74}</string>
             </dict>
             <key>qznn_ui_1030.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{360,196},{136,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{136,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{136,74}</string>
-                <key>textureRect</key>
-                <string>{{1,524},{136,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{136,74}}</string>
+                <key>sourceSize</key>
+                <string>{136,74}</string>
             </dict>
             <key>ui_qznn_result_3.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{234,101},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,600},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_41.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{234,177},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,642},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_42.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{234,253},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,676},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_43.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{360,272},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,718},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_44.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{234,329},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,752},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_45.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{360,348},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,794},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_46.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{234,405},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,828},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_47.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{360,424},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,870},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_48.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{232,481},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,904},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_49.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{358,500},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,946},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_5.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{231,557},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,980},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_6.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{357,576},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,1022},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_7.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,626},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,1056},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_8.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{2,702},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{127,1098},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
             <key>ui_qznn_result_9.png</key>
             <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
+                <key>frame</key>
+                <string>{{231,633},{124,74}}</string>
+                <key>offset</key>
                 <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{124,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{124,74}</string>
-                <key>textureRect</key>
-                <string>{{1,1132},{124,74}}</string>
-                <key>textureRotated</key>
+                <key>rotated</key>
                 <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,74}}</string>
+                <key>sourceSize</key>
+                <string>{124,74}</string>
             </dict>
         </dict>
         <key>metadata</key>
         <dict>
             <key>format</key>
-            <integer>3</integer>
-            <key>pixelFormat</key>
-            <string>RGBA8888</string>
-            <key>premultiplyAlpha</key>
-            <false/>
+            <integer>2</integer>
             <key>realTextureFileName</key>
             <string>qznn_public.png</string>
             <key>size</key>
-            <string>{256,1776}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:080b2d435a8559874d581d7d1e2e299d:bbb228aaf6711ed56f369d1ff072a8dd:d1e8e288241728f1339cc12c6d128230$</string>
+            <string>$TexturePacker:SmartUpdate:aacbc7db4ac8a48d22d4fbf84951bb04:e4d50823fb17d08f60c7bcdfd04c08dc:d1e8e288241728f1339cc12c6d128230$</string>
             <key>textureFileName</key>
             <string>qznn_public.png</string>
         </dict>

@@ -210,7 +210,7 @@ function DesktopLayout:showTimesOperateBtn(ismaster)
 	local mineInfo = require("src.games.sangong.data.Sangong_GameMgr").getInstance():getMineInfo()
 	local selfIsMaster = false
 	if ismaster then
-		config = {0,1,2,4}
+		config = {0,1}
 	else
 		selfIsMaster = mineInfo.masterTimesValue > 0
 		config = {5,10,15,20}
@@ -285,7 +285,11 @@ function DesktopLayout:showTimesOperateBtn(ismaster)
 		if i == 1 then
 			btnLayout:addChild(Coord.ingap(btnLayout,btn,"LL",10,"CC",0))
 		else
-			btnLayout:addChild(Coord.outgap(temp,btn,"RL",25,"CC",0))
+			if ismaster then
+				btnLayout:addChild(Coord.outgap(temp,btn,"RL",25*15,"CC",0))
+			else
+				btnLayout:addChild(Coord.outgap(temp,btn,"RL",25,"CC",0))
+			end
 		end
 		
 		btn:setPressedActionEnabled(true)
@@ -399,6 +403,7 @@ function DesktopLayout:playGoldChangeAnim(winner,loster)
 		goldicon = display.newSprite("qznn_ui_1024.png")
 		goldicon:setOpacity(0)
 		goldicon:setPosition(startPos)
+		goldicon:setScale(1.5)
 		goldicon:runAction(cc.Sequence:create({
 			cc.DelayTime:create((i - 1)*0.06),
 			cc.FadeIn:create(0.2),
