@@ -150,6 +150,12 @@ local language_sc = {
 	[7015] = "<span name='qznn_number_3.png' width='24' height='32' startchar='0' path='game/qiangzhuangniuniu/'>:#1</span> <img src='qznn_ui_1028.png' imgtype='1'>",
 	[7016] = "等待其他玩家加倍",
 	
+	[7017] = "<span name='sangong_number_2.png' width='24' height='32' startchar='0' path='game/sangong/'>:#1</span>",
+	[7018] = "<span name='sangong_number_2.png' width='24' height='32' startchar='0' path='game/sangong/'>:#1</span> <img src='qznn_ui_1027.png' imgtype='1'>",
+	[7019] = "<span name='sangong_number_3.png' width='24' height='32' startchar='0' path='game/sangong/'>:#1</span>",
+	[7020] = "<span name='sangong_number_3.png' width='24' height='32' startchar='0' path='game/sangong/'>:#1</span> <img src='qznn_ui_1028.png' imgtype='1'>",
+
+
 	[11001] = "<span name='fcpy_number_6.png' path='game/haochepiaoyi/' width='58' height='82' startchar='0'>#1</span><img src='fcpy_icon_51.png' imgtype='1'>",
 	[11002] = "<span name='fqzs_number_2.png' path='game/feiqingzoushou/' width='58' height='82' startchar='0'>#1</span><img src='fqzs-font-13.png' imgtype='1'>",
 	

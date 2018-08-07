@@ -150,9 +150,9 @@ function Sangong_PlayerItem:showResult()
 	local goldTxt = display.newRichText()
 	if value > 0 then
 		if math.abs(value) > 999999 then
-			goldTxt:setString(display.trans("7013",str))
+			goldTxt:setString(display.trans("7018",str))
 		else
-			goldTxt:setString(display.trans("7012",str))
+			goldTxt:setString(display.trans("7017",str))
 		end
 		local anim = display.newParticle("game/sangong/particle/star01.plist")
 		anim:setPosition(cc.p(65,40))
@@ -167,9 +167,9 @@ function Sangong_PlayerItem:showResult()
 		}))
 	else
 		if math.abs(value) > 999999 then
-			goldTxt:setString(display.trans("7015",str))
+			goldTxt:setString(display.trans("7020",str))
 		else
-			goldTxt:setString(display.trans("7014",str))
+			goldTxt:setString(display.trans("7019",str))
 		end
 	end
 	goldTxt:setOpacity(0)
