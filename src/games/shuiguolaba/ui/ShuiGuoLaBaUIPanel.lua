@@ -120,21 +120,27 @@ function ShuiGuoLaBaUIPanel:ctor()
 			self:playGame()
 		end)
     self.start_btn = start_btn
+    --比倍
+    local bibei_bg = display.newImage("b_bg.png")
+    bibei_bg:setPosition(cc.p(1240,45))
+    bibei_bg:setScale(2)
+    self.main_layout:addChild(bibei_bg)
+    -- local bibei_num = display.newImage("b_0.png")
+    local bibei_num = display.newSprite()
+    bibei_bg:addChild(bibei_num)
+    bibei_num:setAnchorPoint(0.5,0.5)
+    bibei_num:setPosition(27,31)
 
+    bibei_bg:setVisible(false)
+    self.bibei_num = bibei_num
+    self.bibei_bg = bibei_bg
     --0 :是大 1是小
     local function gambleRequest(type)
 	    ConnectMgr.connect("src.games.shuiguolaba.content.ShuiGuoLaBaGambleConnect",type,function(result)
 			if result ~= false  then
 				self:overState()
-				self:setBeiBiState(result.winMoney > 0)
-				self:updateGold()
-				self:updateDeFen(result.winMoney)
-				if result.winMoney > 0 then
-					SoundsManager.playSound("sglb_dx_win")
-					self:effectDefen()
-				else
-					SoundsManager.playSound("sglb_dx_lose")
-				end
+				self:setBeiBiState(false)
+				self:bigSamll(result)
 			end
 		end)
     end
@@ -145,7 +151,7 @@ function ShuiGuoLaBaUIPanel:ctor()
     self.main_layout:addChild(big_btn)
     big_btn:addTouchEventListener(function(sender,eventype)
 		if eventype ~= ccui.TouchEventType.ended then return end
-			gambleRequest(0)
+			gambleRequest(1)
 		end)
     big_btn:setDisable(true)
     self.big_btn = big_btn
@@ -155,7 +161,7 @@ function ShuiGuoLaBaUIPanel:ctor()
     self.main_layout:addChild(samll_btn)
     samll_btn:addTouchEventListener(function(sender,eventype)
 		if eventype ~= ccui.TouchEventType.ended then return end
-			gambleRequest(1)
+			gambleRequest(0)
 		end)
     samll_btn:setDisable(true)
     self.samll_btn = samll_btn
@@ -195,6 +201,67 @@ function ShuiGuoLaBaUIPanel:ctor()
 		self:runAction()
 		self:runFree()
 	end,0.01)
+end
+
+--比大小
+function ShuiGuoLaBaUIPanel:bigSamll(result)
+		self.start_btn:setVisible(false)
+		self.start_btn:setTouchEnabled(false)
+		self.bibei_bg:setVisible(true)
+		local index = 0
+		local act1 = cc.DelayTime:create(0.12)
+		local act2 = cc.CallFunc:create(function ()
+			index = index + 1
+			if(index == 15)then
+				local gamble = result.gamble
+				mlog(gamble,"返回大小！")
+				local rand_min = 0
+				local rand_max = 0
+				if(tonumber(gamble) == 1)then
+					rand_min = 5
+					rand_max = 9
+				else
+					rand_min = 0
+					rand_max = 4
+				end
+				local ran_num = math.random(rand_min,rand_max)
+				mlog(ran_num,"ran_num")
+				self.bibei_num:setSpriteFrame(string.format("b_%d.png",ran_num))
+
+				self:updateGold()
+				self:updateDeFen(result.winMoney)
+				if result.winMoney > 0 then
+					SoundsManager.playSound("sglb_dx_win")
+					self:effectDefen()
+				else
+					SoundsManager.playSound("sglb_dx_lose")
+				end
+				return
+			elseif(index > 15)then
+				if(index >= 40)then
+					self.start_btn:setVisible(true)
+					self.start_btn:setTouchEnabled(true)
+					self.bibei_bg:setVisible(false)				
+					self.bibei_bg:stopAllActions()
+				end
+				return	 
+			end
+			self.bibei_num:setSpriteFrame(string.format("b_%d.png",math.random(0,9)))
+		end)
+
+		local act3 = cc.Sequence:create({act1,act2})
+		local act4 = cc.RepeatForever:create(act3)
+		self.bibei_bg:runAction(act4)		
+
+		SoundsManager.playSound("bibei")
+				-- self:updateGold()
+				-- self:updateDeFen(result.winMoney)
+				-- if result.winMoney > 0 then
+				-- 	SoundsManager.playSound("sglb_dx_win")
+				-- 	self:effectDefen()
+				-- else
+				-- 	SoundsManager.playSound("sglb_dx_lose")
+				-- end	
 end
 
 function ShuiGuoLaBaUIPanel:runAction()
@@ -759,6 +826,7 @@ function ShuiGuoLaBaUIPanel:effectDefen()
 end
 
 function ShuiGuoLaBaUIPanel:updateYaFen()
+	mlog("updateYaFen....")
 	self.yafen_label:setString(self.dataController:getBetAllMoney())
 end
 function ShuiGuoLaBaUIPanel:updateDeFen(value)

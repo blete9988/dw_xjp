@@ -8,6 +8,7 @@ resource.plists={
 	{url="game/shuiguolaba/sglb_ui.plist",imgurl = "game/shuiguolaba/sglb_ui.png",size = 1536*505},
 	{url="game/shuiguolaba/sglb_action_1.plist",imgurl = "game/shuiguolaba/sglb_action_1.png",size = 1935*976},
 	{url="game/shuiguolaba/sglb_action_2.plist",imgurl = "game/shuiguolaba/sglb_action_2.png",size = 1908*1837},
+	{url="game/shuiguolaba/bibei.plist",imgurl = "game/shuiguolaba/bibei.png",size = 295*64},
 	{url="game/shuiguolaba/sglb_ui.plist",imgurl = "game/shuiguolaba/sglb_ui.png",size = 1536*505},
 	{imgurl = "game/shuiguolaba/sglb_bg.png",size = 1360*765},
 	{imgurl = "game/shuiguolaba/sglb_rule_bg.png",size = 962*644},
@@ -51,7 +52,9 @@ resource.sounds={
 	{url="game/shuiguolaba/sound/Game05_area_5.mp3",loadtype=0},
 	{url="game/shuiguolaba/sound/Game05_area_6.mp3",loadtype=0},
 	{url="game/shuiguolaba/sound/Game05_area_7.mp3",loadtype=0},
-	{url="game/shuiguolaba/sound/Game05_area_8.mp3",loadtype=0}
+	{url="game/shuiguolaba/sound/Game05_area_8.mp3",loadtype=0},
+	{url="game/shuiguolaba/sound/bibei.mp3",loadtype=0}
+	
 }
 --动作资源管理器
 resource.animations={

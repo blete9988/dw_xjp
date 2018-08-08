@@ -26,6 +26,8 @@ function ShuiGuoLaBaGambleConnect:readData(data)
 		local playMoney = data:readLong()	--玩家金币
 		Player.setGold(playMoney)
 		print("BaGamble winMoney--------------------------",winMoney)
+		mlog(gamble,"返回大小！")
+		mlog(winMoney,"输赢")
 		local result_data = {}
 		result_data.gamble = gamble
 		result_data.winMoney = winMoney
