@@ -126,19 +126,34 @@ local _config = {
 			path = "src.games.qiangzhuangniuniu.ui.Qznn_Scene",
 			resourcecfg = "src.games.qiangzhuangniuniu.qznn_resource"
 		},
+
+	-- [110] = 
+	-- 	{
+	-- 		sid = 110,
+	-- 		name = "三公",
+	-- 		key = "sangong",
+	-- 		group = 1,
+	-- 		order = 0,
+	-- 		background = "p_ui_bg_pink.png",
+	-- 		namepanel = "p_ui_namebg_purple.png",
+	-- 		namepic = "p_ui_1133.png",
+	-- 		icon = "p_ui_1233.png",
+	-- 		path = "src.games.sangong.ui.SanGong_Scene",
+	-- 		resourcecfg = "src.games.sangong.sangong_resource"
+	-- 	},
 	[110] = 
 		{
 			sid = 110,
-			name = "三公",
-			key = "sangong",
+			name = "李逵劈鱼",
+			key = "likuibuyu",
 			group = 1,
 			order = 0,
-			background = "p_ui_bg_pink.png",
+			background = "p_ui_bg_purple.png",
 			namepanel = "p_ui_namebg_purple.png",
-			namepic = "p_ui_1133.png",
-			icon = "p_ui_1233.png",
-			path = "src.games.sangong.ui.SanGong_Scene",
-			resourcecfg = "src.games.sangong.sangong_resource"
+			namepic = "p_ui_1120.png",
+			icon = "p_ui_1220.png",
+			path = "src.games.likuibuyu.Likui_Scene",
+			resourcecfg = "src.games.likuibuyu.data.likubuyu_resource"
 		},
 	[201] = 
 		{
@@ -309,15 +324,15 @@ local _config = {
 		{
 			sid = 303,
 			name = "李逵劈鱼",
-			key = "lkpy",
+			key = "likuibuyu",
 			group = 3,
 			order = 0,
 			background = "p_ui_bg_purple.png",
 			namepanel = "p_ui_namebg_purple.png",
 			namepic = "p_ui_1120.png",
 			icon = "p_ui_1220.png",
-			path = "src.games.catchFish.lkpy.LKPYScene",
-			resourcecfg = "src.games.catchFish.lkpy.configs.ResConfigs"
+			path = "src.games.likuibuyu.Likui_Scene",
+			resourcecfg = "src.games.likuibuyu.likubuyu_resource"
 		},
 	[304] = 
 		{
