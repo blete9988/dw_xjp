@@ -14,6 +14,7 @@ resource.plists={
 	{url="game/likuibuyu/bomb.plist",imgurl = "game/likuibuyu/bomb.png",size = 2048*2048},
 	{url="game/likuibuyu/boom_darts.plist",imgurl = "game/likuibuyu/boom_darts.png",size = 4096*2048},
 	{url="game/likuibuyu/bullet_guns_coins.plist",imgurl = "game/likuibuyu/bullet_guns_coins.png",size = 512*512},
+	{url="game/likuibuyu/whater.plist",imgurl = "game/likuibuyu/whater.png",size = 2048*2048},
 	{imgurl = "game/likuibuyu/lockNum.png",size = 160*22},
 	{imgurl = "game/likuibuyu/mutipleNum.png",size = 140*17},
 	{imgurl = "game/likuibuyu/num_award.png",size = 210*21},
