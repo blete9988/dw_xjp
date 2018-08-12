@@ -8,9 +8,11 @@ local TAG_ENUM =
   Tag_Fish = 200
 }
 
+local module_pre = "src.games.likuibuyu"    
 local scheduler = cc.Director:getInstance():getScheduler()
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
-
+local g_var = ExternalFun.req_var
+local cmd = module_pre..".content.CMD_LKGame"
 function Lkby_Scene:ctor(room)
 	self:super("ctor")
 	self.room = room
@@ -70,7 +72,7 @@ function Lkby_Scene:ctor(room)
   ExternalFun.registerTouchEvent(self,true)
 
   --注册通知
-  -- self:addEvent()
+  self:addEvent()
 
 	require("src.ui.item.TalkControl").show(room,self)
 	local quitebtn = require("src.ui.QuitButton").new()
@@ -78,15 +80,50 @@ function Lkby_Scene:ctor(room)
 
 end
 
+
+function Lkby_Scene:addEvent()
+
+
+   --通知监听
+  local function eventListener(event)
+
+
+    --初始化界面
+    -- self._gameView:initView()
+
+     --添加炮台层
+    self.m_cannonLayer = g_var(CannonLayer):create(self)
+    self._gameView:addChild(self.m_cannonLayer, 6)
+
+    --查询本桌其他用户
+    -- self._gameFrame:QueryUserInfo( self.m_nTableID,yl.INVALID_CHAIR)
+
+
+       --播放背景音乐
+    -- AudioEngine.playMusic(cc.FileUtils:getInstance():fullPathForFilename(g_var(cmd).Music_Back_1),true)
+
+    -- if not GlobalUserItem.bVoiceAble then
+        
+    --     AudioEngine.setMusicVolume(0)
+    --     AudioEngine.pauseMusic() -- 暂停音乐
+    -- end
+
+  end
+
+  local listener = cc.EventListenerCustom:create(g_var(cmd).Event_LoadingFinish, eventListener)
+  cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)
+
+end
+
 function Lkby_Scene:onEnter( )
 	
-  print("onEnter of Lkby_Scene")
+  mlog("onEnter of Lkby_Scene")
 
 end
 
 function Lkby_Scene:onEnterTransitionFinish(  )
  
-  print("onEnterTransitionFinish of Lkby_Scene")
+  mlog("onEnterTransitionFinish of Lkby_Scene")
 
   --AudioEngine.playMusic(g_var(cmd).Music_Back_1,true)
 
@@ -148,48 +185,48 @@ end
 
 function Lkby_Scene:createSecoundSchedule() 
 
-  local function setSecondTips() --提示
+	local function setSecondTips() --提示
 
-    if nil == self._gameView:getChildByTag(10000) then 
+		if nil == self._gameView:getChildByTag(10000) then 
 
-      local tipBG = cc.Sprite:create("game/likuibbuyu/secondTip.png")
-      tipBG:setPosition(667, 630)
-      tipBG:setTag(10000)
-      self._gameView:addChild(tipBG,100)
+		  local tipBG = cc.Sprite:create("game/likuibuyu/secondTip.png")
+		  tipBG:setPosition(680, 382.5)
+		  tipBG:setTag(10000)
+		  self._gameView:addChild(tipBG,100)
 
 
-      local watch = cc.Sprite:createWithSpriteFrameName("watch_0.png")
-      watch:setPosition(60, 45)
-      tipBG:addChild(watch)
+		  local watch = cc.Sprite:createWithSpriteFrameName("watch_0.png")
+		  watch:setPosition(60, 45)
+		  tipBG:addChild(watch)
 
-      local animation = cc.AnimationCache:getInstance():getAnimation("watchAnim")
-      if nil ~= animation then
-         watch:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
-      end
+		  local animation = cc.AnimationCache:getInstance():getAnimation("watchAnim")
+		  if nil ~= animation then
+		     watch:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+		  end
 
-	--排名文本
-	-- local labeltxt = display.newText(index,26,Color.danrubaise)
-	-- layout:addChild(Coord.ingap(layout,labeltxt,"LL",20,"CC",0))
-      local time = display.newText(string.format("%d秒",self.m_nSecondCount), 26,Color.danrubaise)
-      time:setTextColor(cc.YELLOW)
-      time:setAnchorPoint(0.0,0.5)
-      time:setPosition(117, 55)
-      time:setTag(1)
-      tipBG:addChild(time)
+		--排名文本
+		-- local labeltxt = display.newText(index,26,Color.danrubaise)
+		-- layout:addChild(Coord.ingap(layout,labeltxt,"LL",20,"CC",0))
+		  local time = display.newText(string.format("%d秒",self.m_nSecondCount), 26,Color.danrubaise)
+		  time:setTextColor(cc.YELLOW)
+		  time:setAnchorPoint(0.0,0.5)
+		  time:setPosition(117, 55)
+		  time:setTag(1)
+		  tipBG:addChild(time)
 
-      local buttomTip = display.newText("60秒未开炮,即将退出游戏", 20,Color.danrubaise)
-      buttomTip:setAnchorPoint(0.0,0.5)
-      buttomTip:setPosition(117, 30)
-      tipBG:addChild(buttomTip)
+		  local buttomTip = display.newText("60秒未开炮,即将退出游戏", 20,Color.danrubaise)
+		  buttomTip:setAnchorPoint(0.0,0.5)
+		  buttomTip:setPosition(117, 30)
+		  tipBG:addChild(buttomTip)
 
-    else
+		else
 
-         local tipBG = self._gameView:getChildByTag(10000)
-         local time = tipBG:getChildByTag(1)
-         time:setString(string.format("%d秒",self.m_nSecondCount))      
-    end
+		     local tipBG = self._gameView:getChildByTag(10000)
+		     local time = tipBG:getChildByTag(1)
+		     time:setString(string.format("%d秒",self.m_nSecondCount))      
+		end
 
-  end
+	end
 
   local function removeTip()
 
@@ -223,6 +260,11 @@ function Lkby_Scene:createSecoundSchedule()
     self.m_secondCountSchedule = scheduler:scheduleScriptFunc(update, 1.0, false)
   end
 
+end
+
+function  Lkby_Scene:onKeyBack()
+	self:onCleanup()
+    return true
 end
 
 --创建定时器
@@ -390,6 +432,35 @@ function Lkby_Scene:Quit()
 	display.enterScene("src.ui.scene.MainScene")
 end
 
+function Lkby_Scene:onExit()
+
+  mlog("Lkby_Scene onExit()....")
+
+  --移除碰撞监听
+	cc.Director:getInstance():getEventDispatcher():removeEventListener(self.contactListener)
+
+  cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(g_var(cmd).Event_LoadingFinish)
+ 
+  --释放游戏所有定时器
+  self:unSchedule()
+
+end
+
+function Lkby_Scene:unSchedule( )
+
+--游戏定时器
+	if nil ~= self.m_scheduleUpdate then
+		scheduler:unscheduleScriptEntry(self.m_scheduleUpdate)
+		self.m_scheduleUpdate = nil
+	end
+
+  --60秒倒计时定时器
+  if nil ~= self.m_secondCountSchedule then 
+      scheduler:unscheduleScriptEntry(self.m_secondCountSchedule)
+      self.m_secondCountSchedule = nil
+  end
+end
+
 --@override
 function Lkby_Scene:onCleanup()
 	mlog("关闭面板。。。。。")
@@ -398,6 +469,7 @@ function Lkby_Scene:onCleanup()
 	SoundsManager.stopAllMusic()
 	-- require("src.games.qiangzhuangniuniu.data.Qznn_GameMgr").getInstance():destory(self.noNeedClearRes)
 	self:Quit()
+
 end
 
 return Lkby_Scene

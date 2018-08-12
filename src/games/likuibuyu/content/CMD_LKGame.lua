@@ -7,9 +7,9 @@ local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
 local cmd  = {}
 
 --游戏版本
-cmd.VERSION  			= appdf.VersionValue(6,7,0,1)
+-- cmd.VERSION  			= appdf.VersionValue(6,7,0,1)
 --游戏标识
-cmd.KIND_ID				= 510
+cmd.KIND_ID				= 303
 --游戏人数
 cmd.GAME_PLAYER   		= 6
 --房间名长度
@@ -21,44 +21,44 @@ cmd.Event_LoadingFish  = "Event_LoadingFinish"
 cmd.Event_FishCreate   = "Event_FishCreate"
 
 
---音效
-cmd.Small_0  = "sound_res/small_0.wav"
-cmd.Small_1  = "sound_res/small_1.wav"
-cmd.Small_2  = "sound_res/small_2.wav"
-cmd.Small_3  = "sound_res/small_3.wav"
-cmd.Small_4  = "sound_res/small_4.wav"
-cmd.Small_5  = "sound_res/small_5.wav"
-cmd.Big_7    = "sound_res/big_7.wav"
-cmd.Big_8    = "sound_res/big_8.wav"
-cmd.Big_9    = "sound_res/big_9.wav"
-cmd.Big_10   = "sound_res/big_10.wav"
-cmd.Big_11   = "sound_res/big_11.wav"
-cmd.Big_12   = "sound_res/big_12.wav"
-cmd.Big_13   = "sound_res/big_13.wav"
-cmd.Big_14   = "sound_res/big_14.wav"
-cmd.Big_15   = "sound_res/big_15.wav"
-cmd.Big_16   = "sound_res/big_16.wav"
-cmd.Beauty_0 = "sound_res/beauty_0.wav"
-cmd.Beauty_1 = "sound_res/beauty_1.wav"
-cmd.Beauty_2 = "sound_res/beauty_2.wav"
-cmd.Beauty_3 = "sound_res/beauty_3.wav"
+-- --音效
+-- cmd.Small_0  = "sound_res/small_0.wav"
+-- cmd.Small_1  = "sound_res/small_1.wav"
+-- cmd.Small_2  = "sound_res/small_2.wav"
+-- cmd.Small_3  = "sound_res/small_3.wav"
+-- cmd.Small_4  = "sound_res/small_4.wav"
+-- cmd.Small_5  = "sound_res/small_5.wav"
+-- cmd.Big_7    = "sound_res/big_7.wav"
+-- cmd.Big_8    = "sound_res/big_8.wav"
+-- cmd.Big_9    = "sound_res/big_9.wav"
+-- cmd.Big_10   = "sound_res/big_10.wav"
+-- cmd.Big_11   = "sound_res/big_11.wav"
+-- cmd.Big_12   = "sound_res/big_12.wav"
+-- cmd.Big_13   = "sound_res/big_13.wav"
+-- cmd.Big_14   = "sound_res/big_14.wav"
+-- cmd.Big_15   = "sound_res/big_15.wav"
+-- cmd.Big_16   = "sound_res/big_16.wav"
+-- cmd.Beauty_0 = "sound_res/beauty_0.wav"
+-- cmd.Beauty_1 = "sound_res/beauty_1.wav"
+-- cmd.Beauty_2 = "sound_res/beauty_2.wav"
+-- cmd.Beauty_3 = "sound_res/beauty_3.wav"
 
-cmd.Load_Back      = "sound_res/LOAD_BACK.mp3"
-cmd.Music_Back_1   = "sound_res/MUSIC_BACK_01.mp3"
-cmd.Music_Back_2   = "sound_res/MUSIC_BACK_02.mp3"
-cmd.Music_Back_3   = "sound_res/MUSIC_BACK_03.mp3"
-cmd.Change_Scene   = "sound_res/CHANGE_SCENE.wav"
-cmd.CoinAnimation  = "sound_res/CoinAnimation.wav"
-cmd.Coinfly        = "sound_res/coinfly"
-cmd.Fish_Special   = "sound_res/fish_special.wav"
-cmd.Special_Shoot  = "sound_res/special_shoot.wav"
-cmd.Combo          = "sound_res/combo.wav"
-cmd.Shell_8        = "sound_res/SHELL_8.wav"
-cmd.Small_Begin    = "sound_res/SMALL_BEGIN.wav"
-cmd.SmashFail      = "sound_res/SmashFail.wav"
+-- cmd.Load_Back      = "sound_res/LOAD_BACK.mp3"
+-- cmd.Music_Back_1   = "sound_res/MUSIC_BACK_01.mp3"
+-- cmd.Music_Back_2   = "sound_res/MUSIC_BACK_02.mp3"
+-- cmd.Music_Back_3   = "sound_res/MUSIC_BACK_03.mp3"
+-- cmd.Change_Scene   = "sound_res/CHANGE_SCENE.wav"
+-- cmd.CoinAnimation  = "sound_res/CoinAnimation.wav"
+-- cmd.Coinfly        = "sound_res/coinfly"
+-- cmd.Fish_Special   = "sound_res/fish_special.wav"
+-- cmd.Special_Shoot  = "sound_res/special_shoot.wav"
+-- cmd.Combo          = "sound_res/combo.wav"
+-- cmd.Shell_8        = "sound_res/SHELL_8.wav"
+-- cmd.Small_Begin    = "sound_res/SMALL_BEGIN.wav"
+-- cmd.SmashFail      = "sound_res/SmashFail.wav"
 
-cmd.CoinLightMove  = "sound_res/CoinLightMove.wav"
-cmd.Prop_armour_piercing = "sound_res/PROP_ARMOUR_PIERCING.wav"
+-- cmd.CoinLightMove  = "sound_res/CoinLightMove.wav"
+-- cmd.Prop_armour_piercing = "sound_res/PROP_ARMOUR_PIERCING.wav"
 
 
 --鱼索引
