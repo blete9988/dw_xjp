@@ -148,7 +148,7 @@ function MainView:m_initOperateLayout()
 		--签到
 		-- {icon = "p_btn_1002.png",name = display.trans("##2001"),windowname = "src.ui.window.DailySignWindows"},
 		--消息
-		{icon = "p_btn_1003.png",name = display.trans("##2002"),windowname = "src.ui.window.NoticeWindows"},
+		-- {icon = "p_btn_1003.png",name = display.trans("##2002"),windowname = "src.ui.window.NoticeWindows"},
 		--返利
 		{icon = "p_btn_1004.png",name = display.trans("##2003"),windowname = "src.ui.window.AwardWindows"},
 		--银行
