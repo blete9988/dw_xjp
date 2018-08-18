@@ -19,6 +19,8 @@ function LikuibuyuFireConnect:writeData(data)
 end
 
 function LikuibuyuFireConnect:readData(data)
+	mlog("李逵捕鱼停留鱼120收到数据返回！")
+
 	-- local result = data:readUnsignedByte()
 	-- if result ~= 0 then
 	-- 	self:showTips(result)

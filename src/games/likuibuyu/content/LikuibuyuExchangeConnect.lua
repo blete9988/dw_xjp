@@ -19,6 +19,8 @@ function LikuibuyuExchangeConnect:writeData(data)
 end
 
 function LikuibuyuExchangeConnect:readData(data)
+	mlog("李逵捕鱼切换场景收到数据返回！")
+
 	-- local result = data:readUnsignedByte()
 	-- if result ~= 0 then
 	-- 	self:showTips(result)

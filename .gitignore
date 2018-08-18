@@ -1,8 +1,14 @@
 
 client.exe
+<<<<<<< HEAD
 client.exe - 快捷方式.lnk
 client.ilk
 client.pdb
+=======
+client.ilk
+client.pdb
+game/.DS_Store
+>>>>>>> 048872db0008814786cb5775c064ba6eeb0316e7
 glew32.dll
 iconv.dll
 libcocos2d.dll
@@ -21,5 +27,8 @@ sqlite3.dll
 ucrtbase.dll
 ucrtbased.dll
 vcruntime140d.dll
+<<<<<<< HEAD
 win32最新.zip
+=======
+>>>>>>> 048872db0008814786cb5775c064ba6eeb0316e7
 zlib1.dll

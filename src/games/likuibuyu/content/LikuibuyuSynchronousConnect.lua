@@ -19,6 +19,8 @@ function LikuibuyuSynchronousConnect:writeData(data)
 end
 
 function LikuibuyuSynchronousConnect:readData(data)
+	mlog("李逵捕鱼同步信息101收到数据返回！")
+
 	-- local result = data:readUnsignedByte()
 	-- if result ~= 0 then
 	-- 	self:showTips(result)

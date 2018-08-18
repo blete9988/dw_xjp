@@ -19,6 +19,7 @@ function LikuibuyuFishCreateConnect:writeData(data)
 end
 
 function LikuibuyuFishCreateConnect:readData(data)
+	mlog("李逵捕鱼创建鱼收到数据返回！")
 	-- local result = data:readUnsignedByte()
 	-- if result ~= 0 then
 	-- 	self:showTips(result)

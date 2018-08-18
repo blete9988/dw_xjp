@@ -85,7 +85,7 @@ end
 
 function Lkby_Scene:addEvent()
 
-	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port. ,require("src.games.likuibuyu.connect.LikuibuyuCreateConnect").extend())
+	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU ,require("src.games.likuibuyu.connect.Likuibuyu_Port").extend())
 
    --通知监听
   -- local function eventListener(event)
