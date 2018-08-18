@@ -74,6 +74,8 @@ function Lkby_Scene:ctor(room)
   --注册通知
   self:addEvent()
 
+
+
 	require("src.ui.item.TalkControl").show(room,self)
 	local quitebtn = require("src.ui.QuitButton").new()
 	self:addChild(Coord.ingap(self,quitebtn,"LL",0,"TT",0),109)
@@ -83,35 +85,36 @@ end
 
 function Lkby_Scene:addEvent()
 
+	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port. ,require("src.games.likuibuyu.connect.LikuibuyuCreateConnect").extend())
 
    --通知监听
-  local function eventListener(event)
+  -- local function eventListener(event)
 
 
-    --初始化界面
-    -- self._gameView:initView()
+  --   --初始化界面
+  --   -- self._gameView:initView()
 
-     --添加炮台层
-    self.m_cannonLayer = g_var(CannonLayer):create(self)
-    self._gameView:addChild(self.m_cannonLayer, 6)
+  --    --添加炮台层
+  --   self.m_cannonLayer = g_var(CannonLayer):create(self)
+  --   self._gameView:addChild(self.m_cannonLayer, 6)
 
-    --查询本桌其他用户
-    -- self._gameFrame:QueryUserInfo( self.m_nTableID,yl.INVALID_CHAIR)
+  --   --查询本桌其他用户
+  --   -- self._gameFrame:QueryUserInfo( self.m_nTableID,yl.INVALID_CHAIR)
 
 
-       --播放背景音乐
-    -- AudioEngine.playMusic(cc.FileUtils:getInstance():fullPathForFilename(g_var(cmd).Music_Back_1),true)
+  --      --播放背景音乐
+  --   -- AudioEngine.playMusic(cc.FileUtils:getInstance():fullPathForFilename(g_var(cmd).Music_Back_1),true)
 
-    -- if not GlobalUserItem.bVoiceAble then
+  --   -- if not GlobalUserItem.bVoiceAble then
         
-    --     AudioEngine.setMusicVolume(0)
-    --     AudioEngine.pauseMusic() -- 暂停音乐
-    -- end
+  --   --     AudioEngine.setMusicVolume(0)
+  --   --     AudioEngine.pauseMusic() -- 暂停音乐
+  --   -- end
 
-  end
+  -- end
 
-  local listener = cc.EventListenerCustom:create(g_var(cmd).Event_LoadingFinish, eventListener)
-  cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)
+  -- local listener = cc.EventListenerCustom:create(g_var(cmd).Event_LoadingFinish, eventListener)
+  -- cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)
 
 end
 
@@ -439,8 +442,11 @@ function Lkby_Scene:onExit()
   --移除碰撞监听
 	cc.Director:getInstance():getEventDispatcher():removeEventListener(self.contactListener)
 
-  cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(g_var(cmd).Event_LoadingFinish)
- 
+  -- cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(g_var(cmd).Event_LoadingFinish)
+
+ 		--移除推送端口
+	ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU)
+	
   --释放游戏所有定时器
   self:unSchedule()
 
