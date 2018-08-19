@@ -36,7 +36,7 @@ function Bullet:ctor(angle,chairId,score,mutipleIndex,CannonType,cannon)
 
    self.m_cannon = cannon
    self._dataModule = self.m_cannon._dataModel
-   self._gameFrame  = self.m_cannon.frameEngine
+   -- self._gameFrame  = self.m_cannon.frameEngine
 
    self.m_speed = self._dataModule.m_secene.nBulletVelocity/1000*25	--子弹速度
    self.m_nScore = score --子弹分数
@@ -175,18 +175,18 @@ function Bullet:normalUpdate( dt )
 	local movedir = cc.p(self.m_moveDir.x*movedis,self.m_moveDir.y*movedis)  
 	local pos = cc.p(self:getPositionX()+movedir.x,self:getPositionY()+movedir.y)
 	self:setPosition(pos.x,pos.y)
-	local rect = cc.rect(0,0,yl.WIDTH,yl.HEIGHT)
+	local rect = cc.rect(0,0,D_SIZE.width,D_SIZE.height)
 	pos = cc.p(self:getPositionX(),self:getPositionY())
 
 	if not cc.rectContainsPoint(rect,pos) then
 		
-		if pos.x<0 or pos.x>yl.WIDTH then
+		if pos.x<0 or pos.x>D_SIZE.width then
 			local angle = self:getRotation()
 			self:setRotation(-angle)
 			if pos.x<0 then
 			   pos.x = 0
 			else
-				pos.x = yl.WIDTH
+				pos.x = D_SIZE.width
 			end
 		else
 			local angle = self:getRotation()
@@ -194,7 +194,7 @@ function Bullet:normalUpdate( dt )
 			if pos.y<0 then
 				pos.y = 0
 			else
-				pos.y = yl.HEIGHT
+				pos.y = D_SIZE.height
 			end
 		end
 
@@ -218,7 +218,7 @@ function Bullet:followFish(dt)
 		return
 	end
 	
-	local rect = cc.rect(0,0,yl.WIDTH,yl.HEIGHT)
+	local rect = cc.rect(0,0,D_SIZE.width,D_SIZE.height)
 	if not cc.rectContainsPoint(rect, cc.p(fish:getPositionX(), fish:getPositionY())) then
 		self.m_fishIndex = g_var(cmd).INT_MAX
 		self:initPhysicsBody()
@@ -228,7 +228,7 @@ function Bullet:followFish(dt)
 
 	local fishPos = cc.p(fish:getPositionX(),fish:getPositionY())
 	if self._dataModule.m_reversal then
-		fishPos = cc.p(yl.WIDTH - fishPos.x , yl.HEIGHT - fishPos.y)
+		fishPos = cc.p(D_SIZE.width - fishPos.x , D_SIZE.height - fishPos.y)
 	end
 
 	local angle = self._dataModule:getAngleByTwoPoint(fishPos, cc.p(self:getPositionX(),self:getPositionY()))
@@ -404,21 +404,29 @@ function Bullet:sendCathcFish( rect )
 		request[i] = fish.m_data.nFishKey
 	end
 
-	local cmddata = CCmd_Data:create(24)
-   	cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_CATCH_FISH);
-    cmddata:pushint(self.m_index)
-    for i=1,5 do
-    	cmddata:pushint(request[i])
-    end
+	-- local cmddata = CCmd_Data:create(24)
+ --   	cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_CATCH_FISH);
+ --    cmddata:pushint(self.m_index)
+ --    for i=1,5 do
+ --    	cmddata:pushint(request[i])
+ --    end
 
-     if not  self._gameFrame then
-    	return
-    end
+ --     if not  self._gameFrame then
+ --    	return
+ --    end
 
-    --发送失败
-	if not self._gameFrame:sendSocketData(cmddata) then
-		self._gameFrame._callBack(-1,"发送捕鱼信息失败")
-	end
+ --    --发送失败
+	-- if not self._gameFrame:sendSocketData(cmddata) then
+	-- 	self._gameFrame._callBack(-1,"发送捕鱼信息失败")
+	-- end
+
+	--下注请求
+	ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_CatchConnect" , self.m_index,request,function(result) 
+		if result ~= 0 then 
+			display.showMsg("发送捕鱼信息失败")
+			return 
+		end
+	end)
 
 end
 

@@ -311,7 +311,7 @@ end
 function ExternalFun.loadRootCSB( csbFile, parent )
 	local rootlayer = ccui.Layout:create()
 		:setContentSize(1335,750) --这个是资源设计尺寸
-		:setScale(yl.WIDTH / 1335);
+		:setScale(D_SIZE.width / 1335);
 	if nil ~= parent then
 		parent:addChild(rootlayer);
 	end

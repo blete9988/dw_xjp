@@ -81,7 +81,7 @@ function Fish:schedulerUpdate()
 		self:setConvertPoint(point)
 
 
-		if cc.rectContainsPoint( cc.rect(0,0,yl.WIDTH, yl.HEIGHT), point ) then
+		if cc.rectContainsPoint( cc.rect(0,0,D_SIZE.width, D_SIZE.height), point ) then
 			if self.m_data.nFishType ~= g_var(cmd).FishType.FishType_YuanBao then
 				self._dataModel._bFishInView = true
 				self._dataModel.m_InViewTag[self.m_data.nFishKey] = 1
@@ -521,8 +521,8 @@ function  Fish:setConvertPoint( point )
 	 local WIN32_W = 1280
 	 local WIN32_H = 800
 
-	 local scalex = yl.WIDTH/WIN32_W
-	 local scaley = yl.HEIGHT/WIN32_H
+	 local scalex = D_SIZE.width/WIN32_W
+	 local scaley = D_SIZE.height/WIN32_H
 
 	 local pos = cc.p(point.x*scalex,(WIN32_H-point.y)*scaley) 
 	 self:setPosition(pos)

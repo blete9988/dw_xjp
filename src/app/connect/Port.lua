@@ -41,7 +41,8 @@ port.PORT_FEILONGZAITIAN			= 1206		--飞龙在天
 port.PORT_SHUIHUZHUAN				= 1207		--水浒传
 port.PORT_ZHAOCHAIBIANPAO			= 1218		--招财鞭炮
 port.PORT_SHUIGUOLABA				= 1219		--水果拉吧
-port.PORT_LIKUIBUYU				    = 3008   	--李逵捕鱼
+port.PORT_JBACK_LIKUIBUYU			= 3008   	--李逵捕鱼
+port.PORT_LIKUIBUYU				    = 1221   	--李逵捕鱼
 Gbv.Port = {}
 setmetatable(Port,{
 	__index = function(t,k) 

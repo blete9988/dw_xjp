@@ -37,6 +37,7 @@ function Lkby_Scene:ctor(room)
 
 	self._dataModel = require("src.games.likuibuyu.content.GameFrame").getInstance()
 	self._dataModel:setRoom(room)
+	self._dataModel.m_secene.curscene = self
 		--设置场景引力
     self:getPhysicsWorld():setGravity(cc.p(0,-100))
 
@@ -85,10 +86,47 @@ function Lkby_Scene:ctor(room)
 end
 
 
+-- 场景信息
+
+function Lkby_Scene:onEventGameScene(dataBuffer)
+
+  print("场景数据")
+
+   if self.m_bScene then
+      self:dismissPopWait()
+      return
+    end
+
+    self.m_bScene = true
+  	local systime = currentTime()
+    self._dataModel.m_enterTime = systime
+
+    self._dataModel.m_secene = ExternalFun.read_netdata(g_var(cmd).GameScene,dataBuffer)
+
+    if self._dataModel.m_secene.cbBackIndex ~= 0 then
+     	  self._gameView:updteBackGround(self._dataModel.m_secene.cbBackIndex)
+    end
+
+    self._gameView:updateMultiple(self._dataModel.m_secene.nMultipleValue[1][1])
+
+    self:setUserMultiple(multiple)
+      
+    self:dismissPopWait()
+end
+
+--关闭等待
+function Lkby_Scene:dismissPopWait()
+    if self._scene and self._scene.dismissPopWait then
+        self._scene:dismissPopWait()
+    end
+end
+
 function Lkby_Scene:addEvent()
 
-	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU ,require("src.games.likuibuyu.content.Likuibuyu_Port").extend())
+	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_JBACK_LIKUIBUYU ,require("src.games.likuibuyu.content.Likuibuyu_Port").extend())
 
+		--初始化房间数据
+	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_EntryRoomConnect")
 
      --添加炮台层
     self.m_cannonLayer = g_var(CannonLayer).new(self)
@@ -106,7 +144,7 @@ function Lkby_Scene:addEvent()
   --   self._gameView:addChild(self.m_cannonLayer, 6)
 
   --   --查询本桌其他用户
-  --   -- self._gameFrame:QueryUserInfo( self.m_nTableID,yl.INVALID_CHAIR)
+  --   -- self._gameFrame:QueryUserInfo( self.m_nTableID,D_SIZE.INVALID_CHAIR)
 
 
   --      --播放背景音乐
@@ -123,6 +161,19 @@ function Lkby_Scene:addEvent()
   -- local listener = cc.EventListenerCustom:create(g_var(cmd).Event_LoadingFinish, eventListener)
   -- cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)
 
+end
+
+
+--60开炮倒计时
+function Lkby_Scene:setSecondCount(dt)
+     self.m_nSecondCount = dt
+
+     if dt == 60 then
+       local tipBG = self._gameView:getChildByTag(10000)
+       if nil ~= tipBG then
+          tipBG:removeFromParent()
+       end
+     end
 end
 
 function Lkby_Scene:onEnter( )
@@ -191,6 +242,361 @@ function Lkby_Scene:addContact()
     self.contactListener:registerScriptHandler(onContactBegin, cc.Handler.EVENT_PHYSICS_CONTACT_BEGIN)
     dispatcher:addEventListenerWithSceneGraphPriority(self.contactListener, self)
 
+end
+
+
+function Lkby_Scene:onSubSupply(databuffer )
+  
+  if not self.m_cannonLayer then
+    return
+  end
+
+  local supply =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Supply,databuffer)
+
+  local cannonPos = supply.wChairID
+  if self._dataModel.m_reversal then 
+       cannonPos = 5 - cannonPos
+  end
+
+  local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
+  if not  cannon then
+     return
+  end
+  cannon:ShowSupply(supply)
+
+  local tipStr = nil
+
+   local cannonPos = supply.wChairID
+   if self._dataModel.m_reversal then 
+     cannonPos = 5 - cannonPos
+   end
+
+   local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
+   local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
+   -- local userItem = self._gameFrame._UserList[userid]
+   local userItem = {}
+   userItem.szNickName = " xxx测试"
+ 
+
+  if supply.nSupplyType == g_var(cmd).SupplyType.EST_Laser then
+     if supply.wChairID == self.m_nChairID then
+       tipStr = self.m_pUserItem.szNickName.."击中补给箱打出了激光！秒杀利器！赶快使用！"
+    else
+       tipStr = userItem.szNickName .." 击中补给箱打出了激光！秒杀利器!"
+    end
+
+  elseif supply.nSupplyType == g_var(cmd).SupplyType.EST_Laser then
+    
+      tipStr = userItem.szNickName.." 击中补给箱打出了加速！所有子弹速度翻倍！"
+  elseif supply.nSupplyType == g_var(cmd).SupplyType.EST_Null then
+   
+      tipStr = "很遗憾！补给箱里面什么都没有！"
+
+      self._dataModel:playEffect(g_var(cmd).SmashFail)
+
+  end
+
+  if nil ~= tipStr then 
+    self._gameView:Showtips(tipStr)
+  end
+
+end
+
+function Lkby_Scene:onSubMultiple( databuffer )
+
+    local mutiple = ExternalFun.read_netdata(g_var(cmd).CMD_S_Multiple,databuffer)
+    local cannonPos = mutiple.wChairID
+    if self._dataModel.m_reversal then 
+         cannonPos = 5 - cannonPos
+    end
+ 
+   if nil ~= self.m_cannonLayer then
+      local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
+
+      if nil == cannon then
+        return
+      end
+
+      cannon:setMultiple(mutiple.nMultipleIndex)
+   end
+ 
+    self._dataModel.m_secene.nMultipleIndex[1][mutiple.wChairID + 1] = mutiple.nMultipleIndex
+
+    if mutiple.wChairID == self.m_nChairID then 
+      self._gameView:updateMultiple(self._dataModel.m_secene.nMultipleValue[1][mutiple.nMultipleIndex+1])
+    end
+
+end
+
+
+function Lkby_Scene:onSubSupplyTip(databuffer)
+
+    if not self.m_cannonLayer then
+      return
+    end
+   
+     local tip = ExternalFun.read_netdata(g_var(cmd).CMD_S_SupplyTip,databuffer)
+
+     local tipStr = ""
+     if tip.wChairID == self.m_nChairID then
+       tipStr = "获得一个补给箱！击中可能获得大量奖励哟！赶快击杀！"
+      else
+         local cannonPos = tip.wChairID
+         if self._dataModel.m_reversal then 
+           cannonPos = 5 - cannonPos
+         end
+
+         local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
+         local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
+         -- local userItem = self._gameFrame._UserList[userid]
+         local userItem = {}
+         userItem.szNickName = "xxx测试"
+         if not userItem then
+            return
+         end
+         tipStr = userItem.szNickName .." 获得了一个补给箱！羡慕吧，继续努力，你也可能得到！"
+     end
+
+     self._gameView:Showtips(tipStr)
+end
+
+
+--同步时间
+function Lkby_Scene:onSubSynchronous( databuffer )
+	  print("同步时间")
+    self.m_bSynchronous = true
+	  local synchronous = ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinish,databuffer)
+	  if 0 ~= synchronous.nOffSetTime then
+       print("同步时间1")
+	  	 local offtime = synchronous.nOffSetTime
+	  	 self._dataModel.m_enterTime = self._dataModel.m_enterTime - offtime
+	  end
+
+end
+
+function Lkby_Scene:onSubStayFish( databuffer )
+
+  local stay = ExternalFun.read_netdata(g_var(cmd).CMD_S_StayFish,databuffer)
+
+  local fish = self._dataModel.m_fishList[stay.nFishKey]
+  if nil ~= fish then
+      fish:Stay(stay.nStayTime)
+  end
+
+  
+end
+
+
+function Lkby_Scene:onSubFire(databuffer)
+  
+  if not self.m_cannonLayer  then
+    return
+  end
+
+  local fire =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Fire,databuffer)
+  if fire.wChairID == self.m_nChairID then
+    return
+  end
+ 
+ local cannonPos = fire.wChairID
+ if self._dataModel.m_reversal then 
+   cannonPos = 5 - cannonPos
+ end
+
+ local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
+ if nil ~= cannon then
+    cannon:othershoot(fire)
+ end
+end
+
+
+--切换场景
+function Lkby_Scene:onSubExchangeScene( dataBuffer )
+
+    print("场景切换")
+
+    self._dataModel:playEffect(g_var(cmd).Change_Scene)
+    local systime = currentTime()
+    self._dataModel.m_enterTime = systime
+
+    self._dataModel._exchangeSceneing = true
+
+    local exchangeScene = ExternalFun.read_netdata(g_var(cmd).CMD_S_ChangeSecene,dataBuffer)
+    self._gameView:updteBackGround(exchangeScene.cbBackIndex)
+
+    local callfunc = cc.CallFunc:create(function()
+        self._dataModel._exchangeSceneing = false
+    end)
+
+    self:runAction(cc.Sequence:create(cc.DelayTime:create(8.0),callfunc))
+
+end
+
+
+--创建鱼
+function Lkby_Scene:onSubFishCreate( dataBuffer )
+  	 print("鱼创建")
+
+    local fishNum = math.floor(dataBuffer:getlen()/577)
+    if fishNum >= 1 then
+    	for i=1,fishNum do
+       
+    	  local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishCreate,dataBuffer)
+    
+         local function dealproducttime ()
+            local entertime = self._dataModel.m_enterTime
+            local productTime = entertime + FishCreate.unCreateTime
+            return productTime 
+         end
+
+         FishCreate.nProductTime = dealproducttime()
+
+         table.insert(self._dataModel.m_fishCreateList, FishCreate)
+
+         if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn or FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong or FishCreate.nFishType == g_var(cmd).FishType.FishType_LiKui then
+            local tips 
+
+            if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn then
+                tips = "双头企鹅"
+            elseif FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong then
+                tips = "金龙"
+            else
+                tips = "李逵"
+            end
+
+            tips = tips.."即将出现,请玩家做好准备!!!"
+
+            self._gameView:Showtips(tips)
+         end
+    	end
+    end
+end
+
+
+function Lkby_Scene:onSubFishCatch( databuffer )
+  
+  --print("捕捉鱼...........................................")
+
+    if not self.m_cannonLayer  then
+      return
+    end
+
+    local catchNum = math.floor(databuffer:getlen()/18)
+
+    if catchNum >= 1 then
+        for i=1,catchNum do
+           local catchData = ExternalFun.read_netdata(g_var(cmd).CMD_S_CatchFish,databuffer)
+           local fish = self._dataModel.m_fishList[catchData.nFishIndex]
+
+           if nil ~= fish then
+
+             if fish.m_data.nFishType == g_var(cmd).FishType.FishType_ShuiHuZhuan then
+                
+                if #self._dataModel.m_fishCreateList > 0 then
+
+                  for k,v in pairs(self._dataModel.m_fishCreateList) do
+                    local fishdata = v
+                    fishdata.nProductTime = fishdata.nProductTime + 5000
+                  end
+
+                end
+                
+                 if #self._dataModel.m_waitList > 0 then
+
+                    for k,v in pairs(self._dataModel.m_waitList) do
+                      local fishdata = v
+                      fishdata.nProductTime = fishdata.nProductTime + 5000
+                    end
+
+                 end
+             end
+
+             if fish.m_data.nFishType == g_var(cmd).FishType.FishType_BaoXiang then
+                local nFishKey = fish.m_data.nFishKey
+                fish:removeFromParent()
+                self._dataModel.m_fishList[nFishKey] = nil
+
+                return
+  
+             end
+
+             local random = math.random(5)
+             local smallSound = string.format("sound_res/samll_%d.wav", random)  
+             local bigSound = string.format("sound_res/big_%d.wav", fish.m_data.nFishType)
+
+             if fish.m_data.nFishType <  g_var(cmd).FISH_KING_MAX then
+                self._dataModel:playEffect(smallSound)
+             else
+                self._dataModel:playEffect(bigSound)
+             end
+
+             local fishPos = cc.p(fish:getPositionX(),fish:getPositionY())
+  
+             if self._dataModel.m_reversal then 
+               fishPos = cc.p(D_SIZE.width-fishPos.x,D_SIZE.height-fishPos.y)
+             end
+  
+  
+             if fish.m_data.nFishType > g_var(cmd).FishType.FishType_JianYu then
+               self._dataModel:playEffect(g_var(cmd).CoinLightMove)
+               local praticle = cc.ParticleSystemQuad:create("game_res/particles_test2.plist")
+               praticle:setPosition(fishPos)
+               praticle:setPositionType(cc.POSITION_TYPE_GROUPED)
+               self:addChild(praticle,3)
+             end
+
+             local fishtype = fish.m_data.nFishType
+
+             --鱼死亡处理
+             fish:deadDeal()
+
+             --金币动画
+             local call = cc.CallFunc:create(function(  )
+               self._gameView:ShowCoin(catchData.lScoreCount, catchData.wChairID, fishPos, fishtype)
+             end)
+
+             self:runAction(cc.Sequence:create(cc.DelayTime:create(1.0),call))
+
+             --获取炮台视图位置
+             local cannonPos = catchData.wChairID
+             if self._dataModel.m_reversal then 
+                cannonPos = 5 - cannonPos
+             end
+
+             if catchData.wChairID == self.m_nChairID then   --自己
+
+                 GlobalUserItem.lUserScore = GlobalUserItem.lUserScore + catchData.lScoreCount
+         
+                  --更新用户分数
+                  self.m_cannonLayer:updateUserScore( GlobalUserItem.lUserScore,cannonPos+1 )
+
+                  --捕获鱼收获
+                  self._dataModel.m_getFishScore = self._dataModel.m_getFishScore + catchData.lScoreCount
+                
+                  --捕鱼数量
+                  if fishtype <= 21 then 
+                    self.m_catchFishCount[fishtype+1] = self.m_catchFishCount[fishtype+1] + 1
+                  end
+              else    --其他玩家
+                
+                  --获取用户
+                  local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
+
+                  for k,v in pairs(self.m_cannonLayer._userList) do
+                    local item = v
+                    if item.dwUserID == userid  then
+                        item.lScore = item.lScore + catchData.lScoreCount
+
+                        --更新用户分数
+                         self.m_cannonLayer:updateUserScore( item.lScore,cannonPos+1 )
+
+                        break
+                    end
+                  end
+             end
+           end
+        end
+      end
 end
 
 function Lkby_Scene:createSecoundSchedule() 
@@ -380,7 +786,7 @@ function Lkby_Scene:onCreateSchedule()
 	              return
 	           end
 
-	           local rect = cc.rect(0,0,yl.WIDTH,yl.HEIGHT)
+	           local rect = cc.rect(0,0,D_SIZE.width,D_SIZE.height)
 	           local pos = cc.p(fish:getPositionX(),fish:getPositionY()) 
 	          
 	           if  not cc.rectContainsPoint(rect,pos) then

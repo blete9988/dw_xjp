@@ -25,6 +25,8 @@ function GameFrame:ctor()
  	self._bFishInView	    = false
  	self.m_InViewTag = {}
  	self._exchangeSceneing	= false
+ 	
+ 	self.nBulletCoolingTime = 1  --零时加的！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 
  	self.m_getFishScore = 0     --捕鱼收获
  	
@@ -51,11 +53,23 @@ function GameFrame:ctor()
 
     self:initTrigonomentirc()
 
+  
+
 end
+
+--设置房间数据
+function GameFrame:initGameBytesRead(data)
+
+end
+
 
 --设置房间数据
 function GameFrame:setRoom(room)
 	self.room = room
+end
+
+function GameFrame:getRoom()
+	return self.room
 end
 --解析刚体数据 plist
 function GameFrame:readyBodyPlist( param )
@@ -148,8 +162,8 @@ function GameFrame:convertCoordinateSystem( point,type,bconvert )
 
  local WIN32_W = 1280
  local WIN32_H = 800
- local scalex = yl.WIDTH/WIN32_W
- local scaley = yl.HEIGHT/WIN32_H
+ local scalex = D_SIZE.width/WIN32_W
+ local scaley = D_SIZE.height/WIN32_H
 
  local point1 = point 
  if type ==0 then
@@ -162,11 +176,11 @@ function GameFrame:convertCoordinateSystem( point,type,bconvert )
  elseif type == 1 then
  	
     point1.x = point.x*scalex
-    point1.y = yl.HEIGHT - point.y*scaley
+    point1.y = D_SIZE.height - point.y*scaley
 
     if bconvert then
-    	point1.x = yl.WIDTH - point1.x
-    	point1.y = yl.HEIGHT - point1.y
+    	point1.x = D_SIZE.width - point1.x
+    	point1.y = D_SIZE.height - point1.y
     end
 
  else
@@ -253,7 +267,7 @@ function GameFrame:selectMaxFish( )
 	local fishlist = {}
 	local fishtype = 0
 
-	local rect = cc.rect(0,0,yl.WIDTH,yl.HEIGHT)
+	local rect = cc.rect(0,0,D_SIZE.width,D_SIZE.height)
 
 
 	for k,v in pairs(self.m_fishList) do
@@ -273,7 +287,7 @@ function GameFrame:selectMaxFish( )
 		end
 	end
 
-	local mid = cc.p(yl.WIDTH/2,yl.HEIGHT/2)
+	local mid = cc.p(D_SIZE.width/2,D_SIZE.height/2)
 	local distant = 1000
 	local fishIndex = 2147483647
 	for i=1,#fishlist do

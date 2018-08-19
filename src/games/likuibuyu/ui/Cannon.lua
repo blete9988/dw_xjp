@@ -54,7 +54,7 @@ function Cannon:ctor(viewParent)
 	self.parent = viewParent
 
 	self._dataModel = self.parent._dataModel
-	self.frameEngine = self.parent._gameFrame 
+	-- self.frameEngine = self.parent._gameFrame 
 
 
     self.m_pUserItem = {
@@ -386,12 +386,20 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 	if isSelf then
 
 		self.parent.parent:setSecondCount(60)
-		local cmddata = CCmd_Data:create(16)
 
-   		cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_FIRE)
-    	cmddata:pushint(self._dataModel.m_secene.nMultipleIndex[1][self.m_ChairID+1])
-  		cmddata:pushint(bullet0.m_fishIndex)
-  		cmddata:pushint(self.m_index)
+		local condata = {}
+
+		-- local cmddata = CCmd_Data:create(16)
+
+  --  		cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_FIRE)
+  --   	cmddata:pushint(self._dataModel.m_secene.nMultipleIndex[1][self.m_ChairID+1])
+  -- 		cmddata:pushint(bullet0.m_fishIndex)
+  -- 		cmddata:pushint(self.m_index)
+
+
+  		condata.int1 = self._dataModel.m_secene.nMultipleIndex[1][self.m_ChairID+1]
+  		condata.int2 = bullet0.m_fishIndex
+  		condata.int3 = self.m_index
 
   		local pos = cc.p(movedir.x * 25 , movedir.y * 25)
   		pos = cc.p(self.m_cannonPoint.x + pos.x , self.m_cannonPoint.y + pos.y)
@@ -399,13 +407,26 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 
   		self._dataModel:playEffect(g_var(cmd).Shell_8)
 
-  		cmddata:pushshort(pos.x)
-  		cmddata:pushshort(pos.y)
+  		-- cmddata:pushshort(pos.x)
+  		-- cmddata:pushshort(pos.y)
+
+  		condata.short1 = pos.x
+  		condata.short2 = pos.y
 
    		 --发送失败
-		if not  self.frameEngine or not self.frameEngine:sendSocketData(cmddata) then
-			self.frameEngine._callBack(-1,"发送开火息失败")
+		-- if not  self.frameEngine or not self.frameEngine:sendSocketData(cmddata) then
+		-- 	self.frameEngine._callBack(-1,"发送开火息失败")
+		-- end
+
+
+
+		ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_FireConnect" ,condata,function(result) 
+		if result ~= 0 then 
+			
+			display.showMsg("发送开火息失败")
+			return 
 		end
+	end)
 	end
 end
 
@@ -699,7 +720,7 @@ function Cannon:autoUpdate(dt)
 
 		local pos = cc.p(fish:getPositionX(),fish:getPositionY())
 		if self._dataModel.m_reversal then
-			pos = cc.p(yl.WIDTH-pos.x,yl.HEIGHT-pos.y)
+			pos = cc.p(D_SIZE.width-pos.x,D_SIZE.height-pos.y)
 		end
 
 		local angle = self._dataModel:getAngleByTwoPoint(pos, self.m_cannonPoint)

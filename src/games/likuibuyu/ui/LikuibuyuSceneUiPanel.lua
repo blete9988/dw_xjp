@@ -41,14 +41,17 @@ function LikuibuyuUiPanel:ctor()
 	self:addChild(mutipleBtn)
 	mutipleBtn:addTouchEventListener(function(sender,eventype)
 	    if eventype == ccui.TouchEventType.ended then
-            -- local index = self._scene._dataModel.m_secene.nMultipleIndex[1][self._scene.m_nChairID+1]
-            -- index = index + 1
-            -- index = math.mod(index,6)
+            local index = self._scene._dataModel.m_secene.nMultipleIndex[1][self._scene.m_nChairID+1]
+            index = index + 1
+            index = math.mod(index,6)
         --     local cmddata = CCmd_Data:create(4)
         --  cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_MULTIPLE);
         --  cmddata:pushint(index)
         -- self._scene:sendNetData(cmddata) 
-        end
+          local condata = {}
+          condata.int1 = index
+          ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_MultipleConnect" ,condata,function(result) end)
+      end
     end)
     Coord.ingap(self,mutipleBtn,"CC",0,"BB",-20)
     -- mutipleBtn:setPosition(yl.WIDTH/2 - 70, -20)
@@ -120,6 +123,7 @@ function LikuibuyuUiPanel:initUserInfo()
     score:setPosition(71, 22)
     self:addChild(score,22)	
 end
+
 function LikuibuyuUiPanel:ButtonEvent(sender,eventType)
     if eventType == ccui.TouchEventType.ended then
             local function getCannonPos()
@@ -198,7 +202,7 @@ function LikuibuyuUiPanel:updteBackGround(param)
 
         local bgfile = string.format("game/likuibuyu/game_bg_%d.png", param)
         local _bg = cc.Sprite:create(bgfile)
-        _bg:setPosition(yl.WIDTH/2, yl.HEIGHT/2)
+        _bg:setPosition(D_SIZE.width/2, D_SIZE.height/2)
         _bg:setOpacity(0)
         _bg:setTag(TAG.tag_bg)
         self:addChild(_bg)
@@ -208,7 +212,7 @@ function LikuibuyuUiPanel:updteBackGround(param)
 
         --鱼阵提示
         local groupTips = ccui.ImageView:create("game/likuibuyu/fish_grounp.png")
-        groupTips:setPosition(cc.p(yl.WIDTH/2,yl.HEIGHT/2))
+        groupTips:setPosition(cc.p(D_SIZE.width/2,D_SIZE.height/2))
         groupTips:setTag(TAG.tag_grounpTips)
         self:addChild(groupTips,30)
 
@@ -463,40 +467,47 @@ function LikuibuyuUiPanel:ShowAwardTip(data)
 
   end
 
-  local lb1 =  cc.Label:createWithTTF(tableStr, "fonts/round_body.ttf", 20)
-  lb1:setTextColor(cc.YELLOW)
+  -- local lb1 =  cc.Label:createWithTTF(tableStr, "fonts/round_body.ttf", 20)
+   local lb1 = display.newText(tableStr, 26,Color.YELLOW)
+  -- lb1:setTextColor(cc.YELLOW)
   lb1:setAnchorPoint(0,0.5)
   table.insert(labelList, lb1)
  
 
-  local lb2 =  cc.Label:createWithTTF(name, "fonts/round_body.ttf", 20)
-  lb2:setTextColor(cc.RED)
+  -- local lb2 =  cc.Label:createWithTTF(name, "fonts/round_body.ttf", 20)
+  local lb2 = display.newText(name, 26,Color.RED)
+  -- lb2:setTextColor(cc.RED)
   lb2:setAnchorPoint(0,0.5)
   table.insert(labelList, lb2)
 
-  local lb3 =  cc.Label:createWithTTF(tipStr, "fonts/round_body.ttf", 20)
-  lb3:setTextColor(cc.YELLOW)
+  -- local lb3 =  cc.Label:createWithTTF(tipStr, "fonts/round_body.ttf", 20)
+  local lb3 = display.newText(tipStr, 26,Color.YELLOW)
+  -- lb3:setTextColor(cc.YELLOW)
   lb3:setAnchorPoint(0,0.5)
   table.insert(labelList, lb3)
 
-  local lb4 =  cc.Label:createWithTTF(tipStr1, "fonts/round_body.ttf", 20)
-  lb4:setTextColor(cc.RED)
+  -- local lb4 =  cc.Label:createWithTTF(tipStr1, "fonts/round_body.ttf", 20)
+  local lb4 = display.newText(tipStr1, 26,Color.RED)
+  -- lb4:setTextColor(cc.RED)
   lb4:setAnchorPoint(0,0.5)
   table.insert(labelList, lb4)
 
-  local lb5 =  cc.Label:createWithTTF(tipStr2, "fonts/round_body.ttf", 20)
-  lb5:setTextColor(cc.YELLOW)
+  -- local lb5 =  cc.Label:createWithTTF(tipStr2, "fonts/round_body.ttf", 20)
+  local lb5 = display.newText(tipStr2, 26,Color.YELLOW)
+  -- lb5:setTextColor(cc.YELLOW)
   lb5:setAnchorPoint(0,0.5)
   table.insert(labelList, lb5)
 
   else
 
-    local lb1 =  cc.Label:createWithTTF("恭喜你捕中了补给箱,获得", "fonts/round_body.ttf", 20)
-    lb1:setTextColor(cc.YELLOW)
+    -- local lb1 =  cc.Label:createWithTTF("恭喜你捕中了补给箱,获得", "fonts/round_body.ttf", 20)
+    local lb1 = display.newText("恭喜你捕中了补给箱,获得", 26,Color.YELLOW)
+    -- lb1:setTextColor(cc.YELLOW)
     lb1:setAnchorPoint(0,0.5)
 
-    local lb1 =  cc.Label:createWithTTF(string.format("%d倍 %d分数 !", data.nFishMultiple,data.lFishScore), "fonts/round_body.ttf", 20)
-    lb1:setTextColor(cc.RED)
+    -- local lb1 =  cc.Label:createWithTTF(string.format("%d倍 %d分数 !", data.nFishMultiple,data.lFishScore), "fonts/round_body.ttf", 20)
+    local lb1 = display.newText(string.format("%d倍 %d分数 !", data.nFishMultiple,data.lFishScore), 26,Color.RED)
+    -- lb1:setTextColor(cc.RED)
     lb1:setAnchorPoint(0,0.5)
 
     table.insert(labelList, lb1)
@@ -529,6 +540,21 @@ function LikuibuyuUiPanel:ShowAwardTip(data)
     labelList = {}
 end
 
+function LikuibuyuUiPanel:Showtips( tips )
+  
+    -- local lb =  cc.Label:createWithTTF(tips, "fonts/round_body.ttf", 20)
+     local lb = display.newText(tips, 26,Color.YELLOW)
+    local bg = ccui.ImageView:create("game/likuibuyu/clew_box.png")
+    -- lb:setTextColor(cc.YELLOW)
+    bg:setScale9Enabled(true)
+    bg:setContentSize(cc.size(lb:getContentSize().width + 60  , 40))
+    bg:setScale(0.1)
+    lb:setPosition(bg:getContentSize().width/2, 20)
+    bg:addChild(lb)
+
+    self:ShowTipsForBg(bg)
+
+end
 
 function LikuibuyuUiPanel:ShowTipsForBg( bg )
 
@@ -549,7 +575,7 @@ function LikuibuyuUiPanel:ShowTipsForBg( bg )
     infoCount = #self._scene.m_infoList
   end
 
-  bg:setPosition(yl.WIDTH/2, yl.HEIGHT-120-60*infoCount)
+  bg:setPosition(D_SIZE.width/2, D_SIZE.height-120-60*infoCount)
   self:addChild(bg,30)
   table.insert(self._scene.m_infoList, bg)
 

@@ -38,7 +38,9 @@ function CannonLayer:ctor(viewParent)
     	wTableID = 1,
     	wChairID = 1,
     	dwUserID = Player.id,
-    	lScore   = Player.gold
+    	lScore   = Player.gold,
+    	szNickName = Player.name
+
 	}
 	--自己信息
 	-- self.m_pUserItem = self._gameFrame:GetMeUserItem()
@@ -111,36 +113,36 @@ function CannonLayer:init()
 	self:addChild(myCannon)
 
 	-- --位置提示
-	-- local tipsImage = ccui.ImageView:create("game/likuibuyu/pos_tips.png")
-	-- tipsImage:setAnchorPoint(cc.p(0.5,0.0))
-	-- tipsImage:setPosition(cc.p(myCannon:getPositionX(),180))
-	-- self:addChild(tipsImage)
+	local tipsImage = ccui.ImageView:create("game/likuibuyu/pos_tips.png")
+	tipsImage:setAnchorPoint(cc.p(0.5,0.0))
+	tipsImage:setPosition(cc.p(myCannon:getPositionX(),180))
+	self:addChild(tipsImage)
 
-	-- local arrow = ccui.ImageView:create("game/likuibuyu/pos_arrow.png")
-	-- arrow:setAnchorPoint(cc.p(0.5,1.0))
-	-- arrow:setPosition(cc.p(tipsImage:getContentSize().width/2,3))
-	-- tipsImage:addChild(arrow)
+	local arrow = ccui.ImageView:create("game/likuibuyu/pos_arrow.png")
+	arrow:setAnchorPoint(cc.p(0.5,1.0))
+	arrow:setPosition(cc.p(tipsImage:getContentSize().width/2,3))
+	tipsImage:addChild(arrow)
 
 
 	--跳跃动画
-	-- local jumpUP = cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),210))
-	-- local jumpDown =  cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),180))
-	-- tipsImage:runAction(cc.Repeat:create(cc.Sequence:create(jumpUP,jumpDown), 20))
+	local jumpUP = cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),210))
+	local jumpDown =  cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),180))
+	tipsImage:runAction(cc.Repeat:create(cc.Sequence:create(jumpUP,jumpDown), 20))
 
-	-- tipsImage:runAction(cc.Sequence:create(cc.DelayTime:create(5),cc.CallFunc:create(function (  )
-	-- 	tipsImage:removeFromParent()
-	-- end)))
+	tipsImage:runAction(cc.Sequence:create(cc.DelayTime:create(5),cc.CallFunc:create(function (  )
+		tipsImage:removeFromParent()
+	end)))
 
-	-- local pos = self.m_nChairID
-	-- if self._dataModel.m_reversal then 
-	-- 	pos = 5 - pos
-	-- end
+	local pos = self.m_nChairID
+	if self._dataModel.m_reversal then 
+		pos = 5 - pos
+	end
 
-	-- self:showCannonByChair(pos+1)
-	-- self:initUserInfo(pos+1,self.m_pUserItem)
+	self:showCannonByChair(pos+1)
+	self:initUserInfo(pos+1,self.m_pUserItem)
 	
-	-- local cannonInfo ={d=self.m_dwUserID,c=pos+1}
-	-- table.insert(self.m_cannonList,cannonInfo)
+	local cannonInfo ={d=self.m_dwUserID,c=pos+1}
+	table.insert(self.m_cannonList,cannonInfo)
 
 end	
 
@@ -176,7 +178,7 @@ function CannonLayer:initUserInfo(viewpos,userItem)
 	-- nick:setPosition(self.m_NickPos.x, self.m_NickPos.y)
 	-- infoBG:removeChildByTag(TAG.Tag_userNick)
 	-- infoBG:addChild(nick)
-	local nick = display.newText(string.format("%d秒",self.m_nSecondCount), 26,Color.white)
+	local nick = display.newText(userItem.szNickName, 26,Color.WHITE)
 	nick:setAnchorPoint(0.5,0.5)
 	nick:setTag(TAG.Tag_userNick)
 	nick:setPosition(self.m_NickPos.x, self.m_NickPos.y)
@@ -269,8 +271,11 @@ function CannonLayer:showCannonByChair( chair )
 	self:removeChildByTag(TAG.Tag_Buttom+chair)
 	self:addChild(gunPlatformButtom,5)
 	
+	-- local score = cc.Label:createWithCharMap("game/likuibuyu/scoreNum.png",16,22,string.byte("0"))
+
 	--倍数
-	local labelMutiple = cc.LabelAtlas:create("1","game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
+	local labelMutiple = cc.Label:createWithCharMap("game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
+	labelMutiple:setString("1")
 	labelMutiple:setTag(500)
 	labelMutiple:setAnchorPoint(0.5,0.5)
 	labelMutiple:setPosition(gunPlatformButtom:getContentSize().width/2,22)
