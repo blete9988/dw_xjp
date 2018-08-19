@@ -2,7 +2,9 @@
 -- Author: Tang
 -- Date: 2016-08-09 10:31:00
 --炮台
-local CannonLayer = class("CannonLayer", cc.Layer)
+local CannonLayer = class("CannonLayer", require("src.base.extend.CCLayerExtend"),function() 
+	return display.newLayout(cc.size(D_SIZE.w,D_SIZE.h))
+end)
 
 local module_pre = "src.games.likuibuyu"			
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
@@ -30,13 +32,22 @@ function CannonLayer:ctor(viewParent)
 	self.parent = viewParent
 	self._dataModel = self.parent._dataModel
 
-	self._gameFrame  = self.parent._gameFrame
-	
+	self._gameFrame  = Player
+
+    self.m_pUserItem = {
+    	wTableID = 1,
+    	wChairID = 1,
+    	dwUserID = Player.id,
+    	lScore   = Player.gold
+	}
 	--自己信息
-	self.m_pUserItem = self._gameFrame:GetMeUserItem()
-    self.m_nTableID  = self.m_pUserItem.wTableID
-    self.m_nChairID  = self.m_pUserItem.wChairID
-    self.m_dwUserID  = self.m_pUserItem.dwUserID
+	-- self.m_pUserItem = self._gameFrame:GetMeUserItem()
+    -- self.m_nTableID  = self.m_pUserItem.wTableID
+    -- self.m_nChairID  = self.m_pUserItem.wChairID
+    self.m_nTableID = 1
+    self.m_nChairID = 1
+    self.m_dwUserID  = Player.id
+
 
     self.m_cannonList = {} --炮台列表
 
@@ -85,11 +96,11 @@ end
 function CannonLayer:init()
 	
 	--加载csb资源
-	local csbNode = ExternalFun.loadCSB("game_res/Cannon.csb", self)
+	local csbNode = ExternalFun.loadCSB("game/likuibuyu/Cannon.csb", self)
     self.rootNode = csbNode
-
+    -- self:addChild(csbnode);
 	--初始化自己炮台
-	local myCannon = g_var(Cannon):create(self)
+	local myCannon = g_var(Cannon).new(self)
 
 	myCannon:initWithUser(self.m_pUserItem)
 	myCannon:setPosition(self.m_pCannonPos[myCannon.m_pos + 1])
@@ -99,37 +110,37 @@ function CannonLayer:init()
 	self:initCannon()
 	self:addChild(myCannon)
 
-	--位置提示
-	local tipsImage = ccui.ImageView:create("game_res/pos_tips.png")
-	tipsImage:setAnchorPoint(cc.p(0.5,0.0))
-	tipsImage:setPosition(cc.p(myCannon:getPositionX(),180))
-	self:addChild(tipsImage)
+	-- --位置提示
+	-- local tipsImage = ccui.ImageView:create("game/likuibuyu/pos_tips.png")
+	-- tipsImage:setAnchorPoint(cc.p(0.5,0.0))
+	-- tipsImage:setPosition(cc.p(myCannon:getPositionX(),180))
+	-- self:addChild(tipsImage)
 
-	local arrow = ccui.ImageView:create("game_res/pos_arrow.png")
-	arrow:setAnchorPoint(cc.p(0.5,1.0))
-	arrow:setPosition(cc.p(tipsImage:getContentSize().width/2,3))
-	tipsImage:addChild(arrow)
+	-- local arrow = ccui.ImageView:create("game/likuibuyu/pos_arrow.png")
+	-- arrow:setAnchorPoint(cc.p(0.5,1.0))
+	-- arrow:setPosition(cc.p(tipsImage:getContentSize().width/2,3))
+	-- tipsImage:addChild(arrow)
 
 
 	--跳跃动画
-	local jumpUP = cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),210))
-	local jumpDown =  cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),180))
-	tipsImage:runAction(cc.Repeat:create(cc.Sequence:create(jumpUP,jumpDown), 20))
+	-- local jumpUP = cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),210))
+	-- local jumpDown =  cc.MoveTo:create(0.4,cc.p(myCannon:getPositionX(),180))
+	-- tipsImage:runAction(cc.Repeat:create(cc.Sequence:create(jumpUP,jumpDown), 20))
 
-	tipsImage:runAction(cc.Sequence:create(cc.DelayTime:create(5),cc.CallFunc:create(function (  )
-		tipsImage:removeFromParent()
-	end)))
+	-- tipsImage:runAction(cc.Sequence:create(cc.DelayTime:create(5),cc.CallFunc:create(function (  )
+	-- 	tipsImage:removeFromParent()
+	-- end)))
 
-	local pos = self.m_nChairID
-	if self._dataModel.m_reversal then 
-		pos = 5 - pos
-	end
+	-- local pos = self.m_nChairID
+	-- if self._dataModel.m_reversal then 
+	-- 	pos = 5 - pos
+	-- end
 
-	self:showCannonByChair(pos+1)
-	self:initUserInfo(pos+1,self.m_pUserItem)
+	-- self:showCannonByChair(pos+1)
+	-- self:initUserInfo(pos+1,self.m_pUserItem)
 	
-	local cannonInfo ={d=self.m_dwUserID,c=pos+1}
-	table.insert(self.m_cannonList,cannonInfo)
+	-- local cannonInfo ={d=self.m_dwUserID,c=pos+1}
+	-- table.insert(self.m_cannonList,cannonInfo)
 
 end	
 
@@ -158,17 +169,22 @@ function CannonLayer:initUserInfo(viewpos,userItem)
 	end
 
 	--用户昵称
-	local nick =  cc.Label:createWithTTF(userItem.szNickName, "fonts/round_body.ttf", 18)
-	nick:setTextColor(cc.WHITE)
+	-- local nick =  cc.Label:createWithTTF(userItem.szNickName, "fonts/round_body.ttf", 18)
+	-- nick:setTextColor(cc.WHITE)
+	-- nick:setAnchorPoint(0.5,0.5)
+	-- nick:setTag(TAG.Tag_userNick)
+	-- nick:setPosition(self.m_NickPos.x, self.m_NickPos.y)
+	-- infoBG:removeChildByTag(TAG.Tag_userNick)
+	-- infoBG:addChild(nick)
+	local nick = display.newText(string.format("%d秒",self.m_nSecondCount), 26,Color.white)
 	nick:setAnchorPoint(0.5,0.5)
 	nick:setTag(TAG.Tag_userNick)
 	nick:setPosition(self.m_NickPos.x, self.m_NickPos.y)
 	infoBG:removeChildByTag(TAG.Tag_userNick)
 	infoBG:addChild(nick)
 
-
 	--用户分数
-	local score = cc.Label:createWithCharMap("game_res/scoreNum.png",16,22,string.byte("0"))
+	local score = cc.Label:createWithCharMap("game/likuibuyu/scoreNum.png",16,22,string.byte("0"))
 	score:setString(string.format("%d", userItem.lScore))
 	score:setAnchorPoint(0.5,0.5)
 	score:setTag(TAG.Tag_userScore)
@@ -219,6 +235,11 @@ function CannonLayer:HiddenCannonByChair( chair )
 	print("隐藏隐藏.........."..chair)
 
 	local infoBG = self.rootNode:getChildByName(string.format("im_info_bg_%d", chair))
+
+	if infoBG == nil then
+		return
+	end
+
 	infoBG:setVisible(false)
 
 	local gunPlatformCenter = self.rootNode:getChildByName(string.format("gunPlatformCenter_%d", chair))
@@ -242,14 +263,14 @@ function CannonLayer:showCannonByChair( chair )
 	gunPlatformCenter:setVisible(true)
 
 
-	local gunPlatformButtom = cc.Sprite:create("game_res/gunPlatformButtom.png")
+	local gunPlatformButtom = cc.Sprite:create("game/likuibuyu/gunPlatformButtom.png")
 	gunPlatformButtom:setPosition(self.m_GunPlatformPos[chair].x, self.m_GunPlatformPos[chair].y)
 	gunPlatformButtom:setTag(TAG.Tag_Buttom+chair)
 	self:removeChildByTag(TAG.Tag_Buttom+chair)
 	self:addChild(gunPlatformButtom,5)
 	
 	--倍数
-	local labelMutiple = cc.LabelAtlas:create("1","game_res/mutipleNum.png",14,17,string.byte("0"))
+	local labelMutiple = cc.LabelAtlas:create("1","game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
 	labelMutiple:setTag(500)
 	labelMutiple:setAnchorPoint(0.5,0.5)
 	labelMutiple:setPosition(gunPlatformButtom:getContentSize().width/2,22)

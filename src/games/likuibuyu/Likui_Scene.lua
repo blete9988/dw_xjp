@@ -13,6 +13,7 @@ local scheduler = cc.Director:getInstance():getScheduler()
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
 local g_var = ExternalFun.req_var
 local cmd = module_pre..".content.CMD_LKGame"
+local CannonLayer = module_pre..".ui.CannonLayer"
 function Lkby_Scene:ctor(room)
 	self:super("ctor")
 	self.room = room
@@ -35,6 +36,7 @@ function Lkby_Scene:ctor(room)
 
 
 	self._dataModel = require("src.games.likuibuyu.content.GameFrame").getInstance()
+	self._dataModel:setRoom(room)
 		--设置场景引力
     self:getPhysicsWorld():setGravity(cc.p(0,-100))
 
@@ -85,7 +87,12 @@ end
 
 function Lkby_Scene:addEvent()
 
-	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU ,require("src.games.likuibuyu.connect.Likuibuyu_Port").extend())
+	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU ,require("src.games.likuibuyu.content.Likuibuyu_Port").extend())
+
+
+     --添加炮台层
+    self.m_cannonLayer = g_var(CannonLayer).new(self)
+    self._gameView:addChild(self.m_cannonLayer, 6)
 
    --通知监听
   -- local function eventListener(event)

@@ -3,8 +3,10 @@
 -- Date: 2016-08-09 10:26:25
 -- 子弹
 
-local Bullet = class("Bullet", 	cc.Sprite)
-		
+local Bullet = class("Bullet", require("src.base.extend.CCSpriteExtend"),function() 
+	return display.newSprite()
+end)
+
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
 local cmd = "src.games.likuibuyu.content.models.CMD_LKGame"
 local g_var = ExternalFun.req_var
@@ -283,11 +285,11 @@ function Bullet:fallingNet()
 
 	for i=1,bulletNum+1 do
 
-		local net = cc.Sprite:create("game_res/im_net.png") 
+		local net = cc.Sprite:create("game/likuibuyu/im_net.png") 
 		if self.m_Type == Type.Normal_Bullet or self.m_Type == Type.Special_Bullet  then
-			net = cc.Sprite:create("game_res/im_net.png")
+			net = cc.Sprite:create("game/likuibuyu/im_net.png")
 		elseif self.m_Type == Type.Bignet_Bullet then
-			net = cc.Sprite:create("game_res/im_net_big.png")
+			net = cc.Sprite:create("game/likuibuyu/im_net_big.png")
 		end
 
 		net:setScale(205/net:getContentSize().width)
@@ -319,11 +321,11 @@ function Bullet:fallingNet()
 
 	if self.m_isSelf then
 
-		local net = cc.Sprite:create("game_res/im_net.png") 
+		local net = cc.Sprite:create("game/likuibuyu/im_net.png") 
 		if self.m_Type == Type.Normal_Bullet or self.m_Type == Type.Special_Bullet  then
-			net = cc.Sprite:create("game_res/im_net.png")
+			net = cc.Sprite:create("game/likuibuyu/im_net.png")
 		elseif self.m_Type == Type.Bignet_Bullet then
-			net = cc.Sprite:create("game_res/im_net_big.png")
+			net = cc.Sprite:create("game/likuibuyu/im_net_big.png")
 		end
 
 

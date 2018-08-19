@@ -1,8 +1,10 @@
 --
 -- Author: Tang
 -- Date: 2016-08-09 10:27:07
---炮
-local Cannon = class("Cannon", cc.Sprite)
+--炮 CCSpriteExtend
+local Cannon = class("Cannon", require("src.base.extend.CCSpriteExtend"),function() 
+	return display.newSprite()
+end)
 local module_pre = "src.games.likuibuyu"			
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
 local cmd = module_pre..".content.CMD_LKGame"
@@ -36,7 +38,7 @@ function Cannon:ctor(viewParent)
 	self.orignalAngle = 0
 	self.m_fishIndex = g_var(cmd).INT_MAX
 	self.m_index  = 0 --子弹索引
-	self.m_ChairID  = yl.INVALID_CHAIR
+	self.m_ChairID  = 65535
 	self.m_autoShootSchedule = nil
 	self.m_otherShootSchedule = nil
 	self.m_typeSchedule = nil
@@ -54,8 +56,16 @@ function Cannon:ctor(viewParent)
 	self._dataModel = self.parent._dataModel
 	self.frameEngine = self.parent._gameFrame 
 
+
+    self.m_pUserItem = {
+    	wTableID = 1,
+    	wChairID = 1,
+    	dwUserID = Player.id,
+    	lScore   = Player.gold
+	}
+
 --获取自己信息
-	self.m_pUserItem = self.frameEngine:GetMeUserItem()
+	-- self.m_pUserItem = self.frameEngine:GetMeUserItem()
   	self.m_nTableID  = self.m_pUserItem.wTableID
   	self.m_nChairID  = self.m_pUserItem.wChairID	
 
@@ -353,7 +363,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 	local angle = self.m_fort:getRotation()
 	self:setFishIndex(self._dataModel.m_fishIndex)
 	
-	local bullet0 = Bullet:create(angle,self.m_ChairID,self.m_nCurrentBulletScore,self.m_nMutipleIndex,self.m_Type,self)
+	local bullet0 = Bullet.new(angle,self.m_ChairID,self.m_nCurrentBulletScore,self.m_nMutipleIndex,self.m_Type,self)
 
 	angle = math.rad(90-angle)
 	local movedir = cc.pForAngle(angle)
@@ -443,7 +453,7 @@ function Cannon:setCannonType( cannontype,times)
 			self:otherSchedule(time)
 		end
 
-		local Type = cc.Sprite:create("game_res/im_icon_0.png")
+		local Type = cc.Sprite:create("game/likuibuyu/im_icon_0.png")
 		Type:setTag(TagEnum.Tag_Type)
 		Type:setPosition(-16,-40)
 		self:removeTypeTag()
@@ -462,7 +472,7 @@ function Cannon:setCannonType( cannontype,times)
 		self:typeTimeSchedule(1.0)
 
 
-		local timeShow = cc.LabelAtlas:create(string.format("%d", times),"game_res/lockNum.png",16,22,string.byte("0"))
+		local timeShow = cc.LabelAtlas:create(string.format("%d", times),"game/likuibuyu/lockNum.png",16,22,string.byte("0"))
 		timeShow:setAnchorPoint(0.5,0.5)
 		timeShow:setPosition(Type:getContentSize().width/2, 27)
 		timeShow:setTag(1)
@@ -511,7 +521,7 @@ function Cannon:setCannonType( cannontype,times)
 	
 		self:removeTypeTag()
 
-		local Type = cc.Sprite:create("game_res/im_icon_1.png")
+		local Type = cc.Sprite:create("game/likuibuyu/im_icon_1.png")
 		Type:setTag(TagEnum.Tag_Type)
 		Type:setPosition(-16,40)
 		self:addChild(Type)
@@ -552,11 +562,11 @@ function Cannon:ShowSupply( data )
 
 	local call = cc.CallFunc:create(function ()
 		if nSupplyType ~= g_var(cmd).SupplyType.EST_NULL then
-			local gold = cc.Sprite:create("game_res/im_box_gold.png")
+			local gold = cc.Sprite:create("game/likuibuyu/im_box_gold.png")
 			gold:setPosition(box:getContentSize().width/2,box:getContentSize().height/2)
 			box:addChild(gold)
 
-			local typeStr = string.format("game_res/im_supply_%d.png", nSupplyType)
+			local typeStr = string.format("game/likuibuyu/im_supply_%d.png", nSupplyType)
 			local title = cc.Sprite:create(typeStr)
 			if nil ~= title  then
 				title:setPosition(box:getContentSize().width/2,100)

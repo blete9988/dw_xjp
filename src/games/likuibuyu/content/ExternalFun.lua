@@ -325,9 +325,9 @@ end
 --加载csb资源
 function ExternalFun.loadCSB( csbFile, parent )
 	local csbnode = cc.CSLoader:createNode(csbFile);
-	if nil ~= parent then
-		parent:addChild(csbnode);
-	end
+	-- if nil ~= parent and csbnode ~= nil then
+	-- 	parent:addChild(csbnode);
+	-- end
 	return csbnode;	
 end
 

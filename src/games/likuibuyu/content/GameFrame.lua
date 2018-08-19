@@ -8,6 +8,14 @@ local MATERIAL_DEFAULT = cc.PhysicsMaterial(0.1, 0.5, 0.5)
 
 local instance = nil
 
+--获取单列
+function GameFrame.getInstance()
+	if not instance then
+		instance = GameFrame.new()
+	end
+	return instance
+end
+
 function GameFrame:ctor()
  	
  	self.m_autoshoot = false    --自动射击
@@ -45,13 +53,10 @@ function GameFrame:ctor()
 
 end
 
-function GameFrame.getInstance()
-	if instance == nil then
-		instance = GameFrame.new()
-	end
-	return instance
+--设置房间数据
+function GameFrame:setRoom(room)
+	self.room = room
 end
-
 --解析刚体数据 plist
 function GameFrame:readyBodyPlist( param )
 	

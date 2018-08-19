@@ -313,7 +313,7 @@ function Fish:deadDeal()
 		local angle = 20
 		local radius = 1200
 		for i=1,nKnife do
-			local sKnife = cc.Sprite:create("game_res/knife.png")
+			local sKnife = cc.Sprite:create("game/likkuibuyu/knife.png")
 			sKnife:setAnchorPoint(0,0.5)
 			sKnife:setPosition(self:getPositionX(),self:getPositionY())
 			local pos = cc.p(self:getPositionX(),self:getPositionY())

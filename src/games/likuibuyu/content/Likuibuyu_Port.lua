@@ -1,7 +1,7 @@
 --[[
-*	抢庄牛牛推送端口
+*	推送端口
 * 
-*	@author：lqh
+*	@author：zj
 ]]
 local Likuibuyu_Port = {}
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
@@ -50,8 +50,15 @@ function Likuibuyu_Port.extend(data)
 			--开始加倍
 	mlog("李逵捕鱼同步信息101收到数据返回！")
 			
-
+		elseif tp == cmd.SUB_S_UPDATE_GAME then --更新游戏
+			-- self:onSubUpdateGame(dataBuffer)
+		  local update = ExternalFun.read_netdata(g_var(cmd).CMD_S_UpdateGame,databuffer)
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletVelocity = update.nBulletVelocity
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletCoolingTime = update.nBulletCoolingTime
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nFishMultiple = update.nFishMultiple
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nMultipleValue = update.nMultipleValue
 		end
+
 	end
 	return handler
 end
