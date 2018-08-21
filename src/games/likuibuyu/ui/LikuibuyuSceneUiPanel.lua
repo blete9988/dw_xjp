@@ -19,9 +19,18 @@ LikuibuyuUiPanel.VIEW_TAG =
     tag_Menu = 5000
 }
 
+
+local module_pre = "src.games.likuibuyu" 
+local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
+local g_var = ExternalFun.req_var
+local cmd = module_pre..".content.CMD_LKGame"
+
 local  TAG = LikuibuyuUiPanel.VIEW_TAG
 
-function LikuibuyuUiPanel:ctor()
+function LikuibuyuUiPanel:ctor(scene)
+	self._tag = 0
+	self._scene = scene
+
 	local game_bg = display.newImage("#game/likuibuyu/game_bg_0.png")
 	game_bg:setAnchorPoint(cc.p(0,0))
 	self:addChild(game_bg)
@@ -31,7 +40,7 @@ function LikuibuyuUiPanel:ctor()
     local menuBG = display.newImage("#game/likuibuyu/game_buttom.png")
     menuBG:setAnchorPoint(0.5,0.0)
     menuBG:setScaleY(0.9)
-    -- menuBG:setPosition(667, -6)
+    menuBG:setPositionX(667)
     self:addChild(Coord.ingap(self,menuBG,"CC",0,"BB",0),109,20)
     self.menuBG = menuBG
 
@@ -50,7 +59,7 @@ function LikuibuyuUiPanel:ctor()
         -- self._scene:sendNetData(cmddata) 
           local condata = {}
           condata.int1 = index
-          ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_MultipleConnect" ,condata,function(result) end)
+          ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_MultipleConnect" ,condata,function(result) end)
       end
     end)
     Coord.ingap(self,mutipleBtn,"CC",0,"BB",-20)
@@ -71,7 +80,7 @@ function LikuibuyuUiPanel:ctor()
     autoShootBtn:setPosition(675, 24)
     autoShootBtn:setTag(TAG.tag_autoshoot)
     autoShootBtn:addTouchEventListener(callBack)
-    self:addChild(autoShootBtn,20)
+    self:addChild(autoShootBtn,30)
 
 
     --自动锁定
@@ -81,7 +90,7 @@ function LikuibuyuUiPanel:ctor()
     autoLockBtn:setPosition(894, 24)
     autoLockBtn:setTag(TAG.tag_autolock)
     autoLockBtn:addTouchEventListener(callBack)
-    self:addChild(autoLockBtn,20)
+    self:addChild(autoLockBtn,30)
 
 
     --水波效果

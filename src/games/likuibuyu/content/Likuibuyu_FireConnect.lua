@@ -5,11 +5,11 @@
 local Likuibuyu_FireConnect = class("Likuibuyu_FireConnect",BaseConnect)
 
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
-local cmd = "src.games.likuibuyu.content.models.CMD_LKGame"
+local cmd = "src.games.likuibuyu.content.CMD_LKGame"
 local g_var = ExternalFun.req_var
 
 Likuibuyu_FireConnect.port = Port.PORT_LIKUIBUYU
-Likuibuyu_FireConnect.type = cmd.SUB_C_FIRE
+Likuibuyu_FireConnect.type = g_var(cmd).SUB_C_FIRE
 
 function Likuibuyu_FireConnect:ctor(condata)
 	self.condata = condata

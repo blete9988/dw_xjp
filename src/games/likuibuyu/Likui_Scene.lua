@@ -30,7 +30,7 @@ function Lkby_Scene:ctor(room)
 	  -- self._gameFrame:setKindInfo(cmd.KIND_ID,cmd.VERSION)
 	  -- self._roomRule = self._gameFrame._dwServerRule
 
-	local gameView = require("src.games.likuibuyu.ui.LikuibuyuSceneUiPanel").new()
+	local gameView = require("src.games.likuibuyu.ui.LikuibuyuSceneUiPanel").new(self)
 	self:addChild(gameView)
 	self._gameView = gameView
 
@@ -46,10 +46,18 @@ function Lkby_Scene:ctor(room)
    	-- self:initUi()
    	-- self:initData()
 	-- SoundsManager.playMusic("qznn_bgm",true)
+    self.m_pUserItem = {
+    	wTableID = 1,
+    	wChairID = 1,
+    	dwUserID = Player.id,
+    	lScore   = Player.gold,
+    	szNickName = Player.name
 
+	}
+	
   -- self.m_pUserItem = self._gameFrame:GetMeUserItem()
-  -- self.m_nTableID  = self.m_pUserItem.wTableID
-  -- self.m_nChairID  = self.m_pUserItem.wChairID  
+  self.m_nTableID  = self.m_pUserItem.wTableID
+  self.m_nChairID  = self.m_pUserItem.wChairID  
 
   	self:setReversal()
 

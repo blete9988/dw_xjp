@@ -8,7 +8,7 @@ local Bullet = class("Bullet", require("src.base.extend.CCSpriteExtend"),functio
 end)
 
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
-local cmd = "src.games.likuibuyu.content.models.CMD_LKGame"
+local cmd = "src.games.likuibuyu.content.CMD_LKGame"
 local g_var = ExternalFun.req_var
 local scheduler = cc.Director:getInstance():getScheduler()
 
@@ -421,7 +421,7 @@ function Bullet:sendCathcFish( rect )
 	-- end
 
 	--下注请求
-	ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_CatchConnect" , self.m_index,request,function(result) 
+	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,function(result) 
 		if result ~= 0 then 
 			display.showMsg("发送捕鱼信息失败")
 			return 

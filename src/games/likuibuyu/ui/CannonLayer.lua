@@ -100,7 +100,6 @@ function CannonLayer:init()
 	--加载csb资源
 	local csbNode = ExternalFun.loadCSB("game/likuibuyu/Cannon.csb", self)
     self.rootNode = csbNode
-    -- self:addChild(csbnode);
 	--初始化自己炮台
 	local myCannon = g_var(Cannon).new(self)
 

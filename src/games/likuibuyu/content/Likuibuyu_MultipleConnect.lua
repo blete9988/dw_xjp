@@ -5,11 +5,11 @@
 local Likuibuyu_MultipleConnect = class("Likuibuyu_MultipleConnect",BaseConnect)
 
 local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
-local cmd = "src.games.likuibuyu.content.models.CMD_LKGame"
+local cmd = "src.games.likuibuyu.content.CMD_LKGame"
 local g_var = ExternalFun.req_var
 
 Likuibuyu_MultipleConnect.port = Port.PORT_LIKUIBUYU
-Likuibuyu_MultipleConnect.type = cmd.SUB_C_MULTIPLE
+Likuibuyu_MultipleConnect.type = g_var(cmd).SUB_C_MULTIPLE
 
 function Likuibuyu_MultipleConnect:ctor(condata)
 	self.condata = condata

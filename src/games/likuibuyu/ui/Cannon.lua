@@ -423,7 +423,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 
 
 
-		ConnectMgr.connect("src.games.likuibuyu.connect.Likuibuyu_FireConnect" ,condata,function(result) 
+		ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_FireConnect" ,condata,function(result) 
 		if result ~= 0 then 
 			
 			display.showMsg("发送开火息失败")
