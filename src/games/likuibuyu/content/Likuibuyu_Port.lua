@@ -22,14 +22,14 @@ function Likuibuyu_Port.extend(data)
 
 		elseif tp == g_var(cmd).SUB_S_FISH_CREATE then
 			mlog("李逵捕鱼创建鱼收到数据返回！")
-		  	if math.mod(data:getlen(),577) == 0 then --576 sizeof(CMD_S_FishCreate)
+		  	-- if math.mod(data:getlen(),577) == 0 then --576 sizeof(CMD_S_FishCreate)
 		        --通知
 		      -- local event = cc.EventCustom:new(g_var(cmd).Event_FishCreate)
 		      -- cc.Director:getInstance():getEventDispatcher():dispatchEvent(event)
 		      
 		  		--鱼创建
-		  		self:onSubFishCreate(data)
-		  	end
+		  		dataModel.m_secene.curscene:onSubFishCreate(data)
+		  	-- end
 			--玩家准备状态
 		elseif tp == g_var(cmd).SUB_S_DELAY_BEGIN then
 			--收到结果
@@ -71,7 +71,7 @@ function Likuibuyu_Port.extend(data)
 		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nMultipleValue = data.readInt()
 		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletVelocity = data.readInt()
 		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletCoolingTime = data.readInt()
-
+		  
 		  elseif tp == g_var(cmd).SUB_S_SUPPLY then --补给
 		  	dataModel.m_secene.curscene:onSubSupply(data)
 		 elseif tp == g_var(cmd).SUB_S_MULTIPLE then --beishu

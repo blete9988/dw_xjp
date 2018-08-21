@@ -14,6 +14,7 @@ local ExternalFun = require("src.games.likuibuyu.content.ExternalFun")
 local g_var = ExternalFun.req_var
 local cmd = module_pre..".content.CMD_LKGame"
 local CannonLayer = module_pre..".ui.CannonLayer"
+local Fish = module_pre..".ui.Fish"
 function Lkby_Scene:ctor(room)
 	self:super("ctor")
 	self.room = room
@@ -125,6 +126,7 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     self._dataModel.m_secene.lCellScore = dataBuffer:readInt()
     self._dataModel.m_secene.nBulletVelocity = dataBuffer:readInt()
     self._dataModel.m_secene.nBulletCoolingTime = dataBuffer:readInt()
+    mlog("场景返回nBulletCoolingTime：",self._dataModel.m_secene.nBulletCoolingTime)
     self._dataModel.m_secene.nFishMultiple = {}
     for i=1,26 do
       -- table.insert(self._dataModel.m_secene.nFishMultiple,dataBuffer:readInt())
@@ -150,6 +152,7 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     	self._dataModel.m_secene.nMultipleIndex[1][i] = dataBuffer:readInt()
     end
     self._dataModel.m_secene.bUnlimitedRebound = dataBuffer:readBoolean()
+    self._dataModel.m_secene.server_time = dataBuffer:readLong()
     -- self._dataModel.m_secene.szBrowseUrl = dataBuffer:readString()
 
     if self._dataModel.m_secene.cbBackIndex ~= 0 then
@@ -497,7 +500,7 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
     print("场景切换")
 
     self._dataModel:playEffect(g_var(cmd).Change_Scene)
-    local systime = currentTime()
+    local systime = os.time()
     self._dataModel.m_enterTime = systime
 
     self._dataModel._exchangeSceneing = true
@@ -515,18 +518,85 @@ end
 
 
 --创建鱼
-function Lkby_Scene:onSubFishCreate( dataBuffer )
+function Lkby_Scene:onSubFishCreate( databuffer )
   	 print("鱼创建")
 
-    local fishNum = math.floor(dataBuffer:getlen()/577)
+    -- local fishNum = math.floor(dataBuffer:getlen()/577)
+    local fishNum = databuffer:readInt()
+    	mlog(fishNum,"FishCreate.fishNum")
+
     if fishNum >= 1 then
     	for i=1,fishNum do
        
-    	  local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishCreate,dataBuffer)
-    
+    	  -- local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinishhCreate,dataBuffer)
+    	local FishCreate = {}
+    	FishCreate.nFishKey = databuffer:readInt()
+    	FishCreate.unCreateTime = databuffer:readInt()
+    	FishCreate.wHitChair = databuffer:readShort()
+    	FishCreate.nFishType = databuffer:readByte()
+    	FishCreate.nFishState = databuffer:readInt()
+    	FishCreate.bRepeatCreate = databuffer:readBoolean()
+    	FishCreate.bFlockKill = databuffer:readBoolean()
+    	FishCreate.fRotateAngle = databuffer:readFloat()
+    	FishCreate.PointOffSet = {}
+    	FishCreate.PointOffSet.x = databuffer:readShort()
+    	FishCreate.PointOffSet.y = databuffer:readShort()
+
+    	FishCreate.fInitalAngle = databuffer:readFloat()
+    	FishCreate.nBezierCount = databuffer:readInt()
+    	FishCreate.TBzierPoint = {}
+
+    	-- mlog(FishCreate.nFishKey,"FishCreate.nFishKey")
+    	-- mlog(FishCreate.unCreateTime,"FishCreate.unCreateTime")
+    	-- mlog(FishCreate.wHitChair,"FishCreate.wHitChair")
+    	-- mlog(FishCreate.nFishType,"FishCreate.nFishType")
+    	-- mlog(FishCreate.nFishState,"FishCreate.nFishState")
+    	-- mlog(FishCreate.bRepeatCreate,"FishCreate.bRepeatCreate")
+    	-- mlog(FishCreate.bFlockKill,"FishCreate.bFlockKill")
+    	-- if(FishCreate.bRepeatCreate)then
+    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
+    	-- 	mlog("bRepeatCreate返回true")
+    	-- else
+    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
+    	-- 	mlog("bRepeatCreate返回false")
+    		
+    	-- end
+    	-- if(FishCreate.bFlockKill)then
+    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
+    	-- 	mlog("bFlockKill返回true")
+    	-- else
+    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
+    	-- 	mlog("bFlockKill返回false")
+    		
+    	-- end
+    	-- mlog(FishCreate.fRotateAngle,"FishCreate.fRotateAngle")
+    	-- mlog(FishCreate.PointOffSet.x,"FishCreate.PointOffSet.x")
+    	-- mlog(FishCreate.PointOffSet.y,"FishCreate.PointOffSet.y")
+    	-- mlog(FishCreate.fInitalAngle,"FishCreate.fInitalAngle")
+    	-- mlog(FishCreate.nBezierCount,"FishCreate.nBezierCount")
+    	for i=1,FishCreate.nBezierCount do
+    		local tagBezierPoint = {}
+    		tagBezierPoint.BeginPoint = {}
+    		tagBezierPoint.EndPoint = {}
+    		tagBezierPoint.KeyOne = {}
+    		tagBezierPoint.KeyTwo = {}
+    		tagBezierPoint.BeginPoint.x = databuffer:readShort()
+    		tagBezierPoint.BeginPoint.y = databuffer:readShort()
+    		tagBezierPoint.EndPoint.x = databuffer:readShort()
+    		tagBezierPoint.EndPoint.y = databuffer:readShort()
+    		tagBezierPoint.KeyOne.x = databuffer:readShort()
+    		tagBezierPoint.KeyOne.y = databuffer:readShort()
+    		-- tagBezierPoint.KeyTwo.x = databuffer:readShort()
+    		-- tagBezierPoint.KeyTwo.y = databuffer:readShort()
+    		tagBezierPoint.Time  =  databuffer:readShort()
+
+    		FishCreate.TBzierPoint[1][i] = {tagBezierPoint}
+    		
+    	end
+
          local function dealproducttime ()
             local entertime = self._dataModel.m_enterTime
-            local productTime = entertime + FishCreate.unCreateTime
+            local productTime = FishCreate.unCreateTime + (self._dataModel.m_secene.server_time - entertime)
             return productTime 
          end
 
@@ -550,6 +620,7 @@ function Lkby_Scene:onSubFishCreate( dataBuffer )
             self._gameView:Showtips(tips)
          end
     	end
+    	mlog("#self._dataModel.m_fishCreateList==========",self._dataModel.m_fishCreateList)
     end
 end
 
@@ -769,15 +840,16 @@ function Lkby_Scene:onCreateSchedule()
   local isBreak0 = false
   local isBreak1 = true
 
-
 --鱼队列
 	  local function dealCanAddFish()
+  		-- mlog("isBreak0",isBreak0)
+  		-- mlog("isBreak1",isBreak1)
 
 	    if isBreak0 then
 	       isBreak1 = false
 	      return
 	    end
-
+	    mlog("#self._dataModel.m_waitList",#self._dataModel.m_waitList)
 	     if #self._dataModel.m_waitList >=5 then
 	       isBreak0 = true
 	       isBreak1 = false
@@ -793,7 +865,7 @@ function Lkby_Scene:onCreateSchedule()
 	    
 	      local iscanadd = false
 
-	      local time = currentTime()
+	      local time = os.time()
 	      if data.nProductTime <= time and data.nProductTime ~= 0  then
 
 	          iscanadd = true
@@ -803,19 +875,23 @@ function Lkby_Scene:onCreateSchedule()
 	       return iscanadd
 	    end
 
-	    local texture = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibbuyu/fish_move1.png")
-	    local texture1 = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibbuyu/fish_move2.png")
+	    local texture = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibuyu/fish_move1.png")
+	    local texture1 = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibuyu/fish_move2.png")
 	    local anim = cc.AnimationCache:getInstance():getAnimation("animation_fish_move26")
+	    -- mlog("texture",texture)
+	    -- mlog("texture1",texture1)
+	    -- mlog("anim",anim)
 	    if not texture or not texture1 or not anim then
 	       return
 	    end
-
+	    mlog("#self._dataModel.m_fishCreateList",#self._dataModel.m_fishCreateList)
 	    if 0 ~= #self._dataModel.m_fishCreateList  then
 	      local fishdata = self._dataModel.m_fishCreateList[1]
 	      table.remove(self._dataModel.m_fishCreateList,1)
 	      local iscanadd = isCanAddtoScene(fishdata)
+	      mlog("iscanadd",iscanadd)
 	      if iscanadd then
-	          local fish =  g_var(Fish):create(fishdata,self)
+	          local fish =  g_var(Fish).new(fishdata,self)
 	          fish:initAnim()
 	          fish:setTag(g_var(cmd).Tag_Fish)
 	          fish:initWithState()

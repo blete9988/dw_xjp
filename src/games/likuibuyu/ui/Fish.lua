@@ -3,9 +3,8 @@
 -- Date: 2016-08-09 10:45:28
 --鱼
 
-local Fish = class("Fish",function(fishData,target)
-	local fish =  display.newSprite()
-	return fish
+local Fish = class("Fish",require("src.base.extend.CCSpriteExtend"),function() 
+	return display.newSprite()
 end)
 
 local FISHTAG = 
@@ -20,6 +19,7 @@ local g_var = ExternalFun.req_var
 local scheduler = cc.Director:getInstance():getScheduler()
 
 function Fish:ctor(fishData,target)
+	mlog("开始创建鱼....")
 	self.m_bezierArry = {}
 	self.fishCreateData = fishData
 
@@ -173,22 +173,26 @@ function Fish:initBezierConfig( param )
 	if not param.bRepeatCreate then --按原路径返回
 		
 		local beziers =  param.TBzierPoint[1] -- table
+		mlog("param.TBzierPoint[1]",#param.TBzierPoint[1],param.TBzierPoint[1])
 		local tmp = {} 
+		mlog("#beziers-1",#beziers)
 		for i=1,#beziers-1 do
 			tmp[i] = beziers[i]
 		end
 
 		for i=1,#tmp do
 			local config = tmp[i]
+			mlog("i",i)
 			table.insert(beziers,#tmp+2,config)
 		end
 		tmp = {}
 		self.m_data.TBzierPoint[1] = beziers
-
+		mlog("beziers!!",beziers)
 	end
 
 	for i=1,param.nBezierCount do
 		local bezier =  param.TBzierPoint[1] -- table
+		mlog("bezier[i]",i,bezier[i])
 		local tbp =  bezier[i]
 	
 		local bconfig = 
@@ -201,13 +205,20 @@ function Fish:initBezierConfig( param )
 			dCy = 0
 		}
 	
-		bconfig.dCx = 3.0 * (tbp.KeyOne.x - tbp.BeginPoint.x)
-		bconfig.dBx = 3.0 * (tbp.KeyTwo.x - tbp.KeyOne.x) - bconfig.dCx
-		bconfig.dAx = tbp.EndPoint.x - tbp.BeginPoint.x - bconfig.dCx - bconfig.dBx
+		-- bconfig.dCx = 3.0 * (tbp.KeyOne.x - tbp.BeginPoint.x)
+		-- bconfig.dBx = 3.0 * (tbp.KeyTwo.x - tbp.KeyOne.x) - bconfig.dCx
+		-- bconfig.dAx = tbp.EndPoint.x - tbp.BeginPoint.x - bconfig.dCx - bconfig.dBx
 
-		bconfig.dCy = 3.0 * (tbp.KeyOne.y - tbp.BeginPoint.y)
-		bconfig.dBy = 3.0 * (tbp.KeyTwo.y - tbp.KeyOne.y) - bconfig.dCy
-		bconfig.dAy = tbp.EndPoint.y - tbp.BeginPoint.y - bconfig.dCy - bconfig.dBy
+		-- bconfig.dCy = 3.0 * (tbp.KeyOne.y - tbp.BeginPoint.y)
+		-- bconfig.dBy = 3.0 * (tbp.KeyTwo.y - tbp.KeyOne.y) - bconfig.dCy
+		-- bconfig.dAy = tbp.EndPoint.y - tbp.BeginPoint.y - bconfig.dCy - bconfig.dBy
+		bconfig.dCx = tbp.EndPoint.x
+		bconfig.dBx = tbp.KeyOne.x
+		bconfig.dAx = tbp.BeginPoint.x
+
+		bconfig.dCy = tbp.EndPoint.y
+		bconfig.dBy = tbp.KeyOne.y
+		bconfig.dAy = tbp.BeginPoint.y
 		table.insert(self.m_bezierArry, bconfig)
 	end
 end
