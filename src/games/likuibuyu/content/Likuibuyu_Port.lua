@@ -68,11 +68,10 @@ function Likuibuyu_Port.extend(data)
 
 		elseif tp == cmd.SUB_S_UPDATE_GAME then --更新游戏
 			-- self:onSubUpdateGame(dataBuffer)
-		  local update = ExternalFun.read_netdata(g_var(cmd).CMD_S_UpdateGame,databuffer)
-		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletVelocity = update.nBulletVelocity
-		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletCoolingTime = update.nBulletCoolingTime
-		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nFishMultiple = update.nFishMultiple
-		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nMultipleValue = update.nMultipleValue
+		--   local update = ExternalFun.read_netdata(g_var(cmd).CMD_S_UpdateGame,databuffer)
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nMultipleValue = data.readInt()
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletVelocity = data.readInt()
+		  require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.nBulletCoolingTime = data.readInt()
 
 		  elseif tp == cmd.SUB_S_SUPPLY then --补给
 		  	dataModel.m_secene.curscene:onSubSupply(data)

@@ -218,7 +218,7 @@ function ExternalFun.read_netdata( keyTable, dataBuffer )
 	local cmd_table = {};
 
 	--辅助读取int64
-    local int64 = Integer64.new();
+    -- local int64 = Integer64.new();
 	for k,v in pairs(keyTable) do
 		local keys = v;
 

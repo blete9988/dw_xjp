@@ -123,9 +123,12 @@ function Cannon:setMultiple(multiple)
 	--dump(self._dataModel.m_secene.nMultipleIndex, "xxxxis ===========================", 6)
 	--print("mutiple is =========================="..multiple)
 	self.m_nMutipleIndex = multiple
-
+	mlog(multiple,"!!!!~~~~")
 	local nMultipleValue = self._dataModel.m_secene.nMultipleValue[1][multiple+1]
-
+	for i,v in ipairs(self._dataModel.m_secene.nMultipleValue[1]) do
+		mlog(i,v)
+	end
+	mlog(nMultipleValue,"!!!!!!!!!!!!!!!!!")
 	self.m_nCurrentBulletScore = nMultipleValue
 
 	local nNum = 1

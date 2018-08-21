@@ -98,10 +98,51 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     end
 
     self.m_bScene = true
-  	local systime = currentTime()
+  	local systime = os.time()
     self._dataModel.m_enterTime = systime
 
-    self._dataModel.m_secene = ExternalFun.read_netdata(g_var(cmd).GameScene,dataBuffer)
+    -- self._dataModel.m_secene = ExternalFun.read_netdata(g_var(cmd).GameScene,dataBuffer)
+  
+   self._dataModel.m_secene.cbBackIndex = dataBuffer:readByte()
+    self._dataModel.m_secene.lPlayScore = dataBuffer:readLong()
+    self._dataModel.m_secene.lPalyCurScore = {}
+    for i=1,6 do
+    	table.insert(self._dataModel.m_secene.lPalyCurScore,dataBuffer:readLong())
+    end
+    self._dataModel.m_secene.lPlayStartScore = {}
+    for i=1,6 do
+    	table.insert(self._dataModel.m_secene.lPlayStartScore,dataBuffer:readLong())
+    end
+    
+    self._dataModel.m_secene.lCellScore = dataBuffer:readInt()
+    self._dataModel.m_secene.nBulletVelocity = dataBuffer:readInt()
+    self._dataModel.m_secene.nBulletCoolingTime = dataBuffer:readInt()
+    self._dataModel.m_secene.nFishMultiple = {}
+    for i=1,26 do
+      -- table.insert(self._dataModel.m_secene.nFishMultiple,dataBuffer:readInt())
+      table.insert(self._dataModel.m_secene.nFishMultiple, 0)
+    end
+    self._dataModel.m_secene.nMaxTipsCount = dataBuffer:readInt()
+    self._dataModel.m_secene.lBulletConsume = {}
+    for i=1,6 do
+    	table.insert(self._dataModel.m_secene.lBulletConsume,dataBuffer:readLong())
+    end
+    self._dataModel.m_secene.lPlayFishCount = {}
+    for i=1,26 do
+      -- table.insert(self._dataModel.m_secene.lPlayFishCount,dataBuffer:readInt())
+      table.insert(self._dataModel.m_secene.lPlayFishCount, 0)
+    end
+    self._dataModel.m_secene.nMultipleValue = {{0,0,0,0,0,0}}
+    for i=1,6 do
+    	self._dataModel.m_secene.nMultipleValue[1][i] = dataBuffer:readInt()
+    end
+
+    self._dataModel.m_secene.nMultipleIndex = {{0,0,0,0,0,0}}
+    for i=1,6 do
+    	self._dataModel.m_secene.nMultipleIndex[1][i] = dataBuffer:readInt()
+    end
+    self._dataModel.m_secene.bUnlimitedRebound = dataBuffer:readBoolean()
+    -- self._dataModel.m_secene.szBrowseUrl = dataBuffer:readString()
 
     if self._dataModel.m_secene.cbBackIndex ~= 0 then
      	  self._gameView:updteBackGround(self._dataModel.m_secene.cbBackIndex)
@@ -109,10 +150,42 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 
     self._gameView:updateMultiple(self._dataModel.m_secene.nMultipleValue[1][1])
 
-    self:setUserMultiple(multiple)
+    self:setUserMultiple(self._dataModel.m_secene.nMultipleValue[1][1])
       
     self:dismissPopWait()
 end
+
+
+function Lkby_Scene:setUserMultiple()
+
+    if not self.m_cannonLayer then
+      return
+    end
+
+  --设置炮台倍数
+     for i=1,6 do
+       local cannon = self.m_cannonLayer:getCannoByPos(i)
+       local pos = i
+       if nil ~= cannon then
+
+          if self._dataModel.m_reversal then 
+            pos = 6+1-i
+          end
+
+          if not  self._dataModel.m_secene.nMultipleIndex then
+            return
+          end
+          mlog(pos,"pos")
+          for i,v in ipairs(self._dataModel.m_secene.nMultipleIndex[1]) do
+          	mlog(i,v)
+          end
+          mlog(self._dataModel.m_secene.nMultipleIndex[1][pos],"self._dataModel.m_secene.nMultipleIndex[1][pos]")
+
+          cannon:setMultiple(self._dataModel.m_secene.nMultipleIndex[1][pos])
+       end
+     end
+end
+
 
 --关闭等待
 function Lkby_Scene:dismissPopWait()

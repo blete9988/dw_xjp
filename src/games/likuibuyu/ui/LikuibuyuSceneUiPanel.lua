@@ -540,6 +540,16 @@ function LikuibuyuUiPanel:ShowAwardTip(data)
     labelList = {}
 end
 
+
+function LikuibuyuUiPanel:updateMultiple( multiple )
+    local _Multiple = self:getChildByTag(TAG.tag_gameMultiple)
+    if nil ~=  _Multiple then
+        _Multiple:setString(string.format("%d:",multiple))
+    end
+
+end
+
+
 function LikuibuyuUiPanel:Showtips( tips )
   
     -- local lb =  cc.Label:createWithTTF(tips, "fonts/round_body.ttf", 20)
