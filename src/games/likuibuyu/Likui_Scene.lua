@@ -605,7 +605,7 @@ function Lkby_Scene:onSubFishCreate( databuffer )
 	            -- mlog(" self._dataModel.m_enterTime", self._dataModel.m_enterTime)
 	            -- mlog(" FishCreate.unCreateTime", FishCreate.unCreateTime)
 	            -- mlog(" self._dataModel.m_secene.server_time", self._dataModel.m_secene.server_time)
-	            local productTime = FishCreate.unCreateTime + (self._dataModel.m_secene.server_time - entertime)
+	            local productTime = FishCreate.unCreateTime + (entertime - self._dataModel.m_secene.server_time)
 	            return productTime 
 	         end
 
