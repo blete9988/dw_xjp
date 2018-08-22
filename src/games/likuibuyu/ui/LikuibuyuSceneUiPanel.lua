@@ -112,6 +112,9 @@ function LikuibuyuUiPanel:ctor(scene)
 
     local action = cc.RepeatForever:create(cc.Sequence:create(ani1,ani2))
     water:runAction(action)
+
+         --注册事件
+    ExternalFun.registerTouchEvent(self,true)
 end
 
 function LikuibuyuUiPanel:initUserInfo()

@@ -113,20 +113,26 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     -- self._dataModel.m_secene = ExternalFun.read_netdata(g_var(cmd).GameScene,dataBuffer)
   
    self._dataModel.m_secene.cbBackIndex = dataBuffer:readByte()
+   -- mlog("self._dataModel.m_secene.cbBackIndex",self._dataModel.m_secene.cbBackIndex)
     self._dataModel.m_secene.lPlayScore = dataBuffer:readLong()
+
     self._dataModel.m_secene.lPalyCurScore = {}
     for i=1,6 do
     	table.insert(self._dataModel.m_secene.lPalyCurScore,dataBuffer:readLong())
+    	 -- mlog("self._dataModel.m_secene.lPalyCurScore "..i,self._dataModel.m_secene.lPalyCurScore)
     end
     self._dataModel.m_secene.lPlayStartScore = {}
     for i=1,6 do
     	table.insert(self._dataModel.m_secene.lPlayStartScore,dataBuffer:readLong())
+    	-- mlog("self._dataModel.m_secene.lPlayStartScore "..i,self._dataModel.m_secene.lPlayStartScore)
     end
     
     self._dataModel.m_secene.lCellScore = dataBuffer:readInt()
+    -- mlog("self._dataModel.m_secene.lCellScore",self._dataModel.m_secene.lCellScore)
     self._dataModel.m_secene.nBulletVelocity = dataBuffer:readInt()
+    -- mlog("self._dataModel.m_secene.nBulletVelocity",self._dataModel.m_secene.nBulletVelocity)
     self._dataModel.m_secene.nBulletCoolingTime = dataBuffer:readInt()
-    mlog("场景返回nBulletCoolingTime：",self._dataModel.m_secene.nBulletCoolingTime)
+    -- mlog("场景返回nBulletCoolingTime：",self._dataModel.m_secene.nBulletCoolingTime)
     self._dataModel.m_secene.nFishMultiple = {}
     for i=1,26 do
       -- table.insert(self._dataModel.m_secene.nFishMultiple,dataBuffer:readInt())
@@ -186,11 +192,11 @@ function Lkby_Scene:setUserMultiple()
           if not  self._dataModel.m_secene.nMultipleIndex then
             return
           end
-          mlog(pos,"pos")
-          for i,v in ipairs(self._dataModel.m_secene.nMultipleIndex[1]) do
-          	mlog(i,v)
-          end
-          mlog(self._dataModel.m_secene.nMultipleIndex[1][pos],"self._dataModel.m_secene.nMultipleIndex[1][pos]")
+          -- mlog(pos,"pos")
+          -- for i,v in ipairs(self._dataModel.m_secene.nMultipleIndex[1]) do
+          -- 	mlog(i,v)
+          -- end
+          -- mlog(self._dataModel.m_secene.nMultipleIndex[1][pos],"self._dataModel.m_secene.nMultipleIndex[1][pos]")
 
           cannon:setMultiple(self._dataModel.m_secene.nMultipleIndex[1][pos])
        end
@@ -519,7 +525,7 @@ end
 
 --创建鱼
 function Lkby_Scene:onSubFishCreate( databuffer )
-  	 print("鱼创建")
+  	 mlog("鱼创建")
 
     -- local fishNum = math.floor(dataBuffer:getlen()/577)
     local fishNum = databuffer:readInt()
@@ -529,98 +535,101 @@ function Lkby_Scene:onSubFishCreate( databuffer )
     	for i=1,fishNum do
        
     	  -- local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinishhCreate,dataBuffer)
-    	local FishCreate = {}
-    	FishCreate.nFishKey = databuffer:readInt()
-    	FishCreate.unCreateTime = databuffer:readInt()
-    	FishCreate.wHitChair = databuffer:readShort()
-    	FishCreate.nFishType = databuffer:readByte()
-    	FishCreate.nFishState = databuffer:readInt()
-    	FishCreate.bRepeatCreate = databuffer:readBoolean()
-    	FishCreate.bFlockKill = databuffer:readBoolean()
-    	FishCreate.fRotateAngle = databuffer:readFloat()
-    	FishCreate.PointOffSet = {}
-    	FishCreate.PointOffSet.x = databuffer:readShort()
-    	FishCreate.PointOffSet.y = databuffer:readShort()
+	    	local FishCreate = {}
+	    	FishCreate.nFishKey = databuffer:readInt()
+	    	FishCreate.unCreateTime = databuffer:readInt()
+	    	FishCreate.wHitChair = databuffer:readShort()
+	    	FishCreate.nFishType = databuffer:readByte()
+	    	FishCreate.nFishState = databuffer:readInt()
+	    	FishCreate.bRepeatCreate = databuffer:readBoolean()
+	    	FishCreate.bFlockKill = databuffer:readBoolean()
+	    	FishCreate.fRotateAngle = databuffer:readFloat()
+	    	FishCreate.PointOffSet = {}
+	    	FishCreate.PointOffSet.x = databuffer:readShort()
+	    	FishCreate.PointOffSet.y = databuffer:readShort()
 
-    	FishCreate.fInitalAngle = databuffer:readFloat()
-    	FishCreate.nBezierCount = databuffer:readInt()
-    	FishCreate.TBzierPoint = {}
+	    	FishCreate.fInitalAngle = databuffer:readFloat()
+	    	FishCreate.nBezierCount = databuffer:readInt()
+	    	FishCreate.TBzierPoint = {}
+	    	FishCreate.TBzierPoint[1] = {}
 
-    	-- mlog(FishCreate.nFishKey,"FishCreate.nFishKey")
-    	-- mlog(FishCreate.unCreateTime,"FishCreate.unCreateTime")
-    	-- mlog(FishCreate.wHitChair,"FishCreate.wHitChair")
-    	-- mlog(FishCreate.nFishType,"FishCreate.nFishType")
-    	-- mlog(FishCreate.nFishState,"FishCreate.nFishState")
-    	-- mlog(FishCreate.bRepeatCreate,"FishCreate.bRepeatCreate")
-    	-- mlog(FishCreate.bFlockKill,"FishCreate.bFlockKill")
-    	-- if(FishCreate.bRepeatCreate)then
-    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
-    	-- 	mlog("bRepeatCreate返回true")
-    	-- else
-    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
-    	-- 	mlog("bRepeatCreate返回false")
-    		
-    	-- end
-    	-- if(FishCreate.bFlockKill)then
-    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
-    	-- 	mlog("bFlockKill返回true")
-    	-- else
-    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
-    	-- 	mlog("bFlockKill返回false")
-    		
-    	-- end
-    	-- mlog(FishCreate.fRotateAngle,"FishCreate.fRotateAngle")
-    	-- mlog(FishCreate.PointOffSet.x,"FishCreate.PointOffSet.x")
-    	-- mlog(FishCreate.PointOffSet.y,"FishCreate.PointOffSet.y")
-    	-- mlog(FishCreate.fInitalAngle,"FishCreate.fInitalAngle")
-    	-- mlog(FishCreate.nBezierCount,"FishCreate.nBezierCount")
-    	for i=1,FishCreate.nBezierCount do
-    		local tagBezierPoint = {}
-    		tagBezierPoint.BeginPoint = {}
-    		tagBezierPoint.EndPoint = {}
-    		tagBezierPoint.KeyOne = {}
-    		tagBezierPoint.KeyTwo = {}
-    		tagBezierPoint.BeginPoint.x = databuffer:readShort()
-    		tagBezierPoint.BeginPoint.y = databuffer:readShort()
-    		tagBezierPoint.EndPoint.x = databuffer:readShort()
-    		tagBezierPoint.EndPoint.y = databuffer:readShort()
-    		tagBezierPoint.KeyOne.x = databuffer:readShort()
-    		tagBezierPoint.KeyOne.y = databuffer:readShort()
-    		-- tagBezierPoint.KeyTwo.x = databuffer:readShort()
-    		-- tagBezierPoint.KeyTwo.y = databuffer:readShort()
-    		tagBezierPoint.Time  =  databuffer:readShort()
+	    	-- mlog(FishCreate.nFishKey,"FishCreate.nFishKey")
+	    	-- mlog(FishCreate.unCreateTime,"FishCreate.unCreateTime")
+	    	-- mlog(FishCreate.wHitChair,"FishCreate.wHitChair")
+	    	-- mlog(FishCreate.nFishType,"FishCreate.nFishType")
+	    	-- mlog(FishCreate.nFishState,"FishCreate.nFishState")
+	    	-- mlog(FishCreate.bRepeatCreate,"FishCreate.bRepeatCreate")
+	    	-- mlog(FishCreate.bFlockKill,"FishCreate.bFlockKill")
+	    	-- if(FishCreate.bRepeatCreate)then
+	    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
+	    	-- 	mlog("bRepeatCreate返回true")
+	    	-- else
+	    	-- 	mlog("bRepeatCreate",FishCreate.bRepeatCreate)
+	    	-- 	mlog("bRepeatCreate返回false")
+	    		
+	    	-- end
+	    	-- if(FishCreate.bFlockKill)then
+	    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
+	    	-- 	mlog("bFlockKill返回true")
+	    	-- else
+	    	-- 	mlog("bFlockKill",FishCreate.bFlockKill)
+	    	-- 	mlog("bFlockKill返回false")
+	    		
+	    	-- end
+	    	-- mlog(FishCreate.fRotateAngle,"FishCreate.fRotateAngle")
+	    	-- mlog(FishCreate.PointOffSet.x,"FishCreate.PointOffSet.x")
+	    	-- mlog(FishCreate.PointOffSet.y,"FishCreate.PointOffSet.y")
+	    	-- mlog(FishCreate.fInitalAngle,"FishCreate.fInitalAngle")
+	    	-- mlog(FishCreate.nBezierCount,"FishCreate.nBezierCount")
+	    	for i=1,FishCreate.nBezierCount do
+	    		local tagBezierPoint = {}
+	    		tagBezierPoint.BeginPoint = {}
+	    		tagBezierPoint.EndPoint = {}
+	    		tagBezierPoint.KeyOne = {}
+	    		tagBezierPoint.KeyTwo = {}
+	    		tagBezierPoint.BeginPoint.x = databuffer:readShort()
+	    		tagBezierPoint.BeginPoint.y = databuffer:readShort()
+	    		tagBezierPoint.EndPoint.x = databuffer:readShort()
+	    		tagBezierPoint.EndPoint.y = databuffer:readShort()
+	    		tagBezierPoint.KeyOne.x = databuffer:readShort()
+	    		tagBezierPoint.KeyOne.y = databuffer:readShort()
+	    		-- tagBezierPoint.KeyTwo.x = databuffer:readShort()
+	    		-- tagBezierPoint.KeyTwo.y = databuffer:readShort()
+	    		tagBezierPoint.Time  =  databuffer:readShort()
+	    		FishCreate.TBzierPoint[1][i] = tagBezierPoint
+	    		
+	    	end
 
-    		FishCreate.TBzierPoint[1][i] = {tagBezierPoint}
-    		
+	         local function dealproducttime ()
+	            local entertime = self._dataModel.m_enterTime
+	            -- mlog(" self._dataModel.m_enterTime", self._dataModel.m_enterTime)
+	            -- mlog(" FishCreate.unCreateTime", FishCreate.unCreateTime)
+	            -- mlog(" self._dataModel.m_secene.server_time", self._dataModel.m_secene.server_time)
+	            local productTime = FishCreate.unCreateTime + (self._dataModel.m_secene.server_time - entertime)
+	            return productTime 
+	         end
+
+	         FishCreate.nProductTime = dealproducttime()
+
+	         table.insert(self._dataModel.m_fishCreateList, FishCreate)
+
+	         if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn or FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong or FishCreate.nFishType == g_var(cmd).FishType.FishType_LiKui then
+	            local tips 
+
+	            if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn then
+	                tips = "双头企鹅"
+	            elseif FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong then
+	                tips = "金龙"
+	            else
+	                tips = "李逵"
+	            end
+
+	            tips = tips.."即将出现,请玩家做好准备!!!"
+
+	            self._gameView:Showtips(tips)
+	         end
     	end
-
-         local function dealproducttime ()
-            local entertime = self._dataModel.m_enterTime
-            local productTime = FishCreate.unCreateTime + (self._dataModel.m_secene.server_time - entertime)
-            return productTime 
-         end
-
-         FishCreate.nProductTime = dealproducttime()
-
-         table.insert(self._dataModel.m_fishCreateList, FishCreate)
-
-         if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn or FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong or FishCreate.nFishType == g_var(cmd).FishType.FishType_LiKui then
-            local tips 
-
-            if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn then
-                tips = "双头企鹅"
-            elseif FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong then
-                tips = "金龙"
-            else
-                tips = "李逵"
-            end
-
-            tips = tips.."即将出现,请玩家做好准备!!!"
-
-            self._gameView:Showtips(tips)
-         end
-    	end
-    	mlog("#self._dataModel.m_fishCreateList==========",self._dataModel.m_fishCreateList)
+    	-- mlog("#self._dataModel.m_fishCreateList==========",self._dataModel.m_fishCreateList)
     end
 end
 
@@ -849,7 +858,7 @@ function Lkby_Scene:onCreateSchedule()
 	       isBreak1 = false
 	      return
 	    end
-	    mlog("#self._dataModel.m_waitList",#self._dataModel.m_waitList)
+	    -- mlog("#self._dataModel.m_waitList",#self._dataModel.m_waitList)
 	     if #self._dataModel.m_waitList >=5 then
 	       isBreak0 = true
 	       isBreak1 = false
@@ -884,12 +893,12 @@ function Lkby_Scene:onCreateSchedule()
 	    if not texture or not texture1 or not anim then
 	       return
 	    end
-	    mlog("#self._dataModel.m_fishCreateList",#self._dataModel.m_fishCreateList)
+	    -- mlog("#self._dataModel.m_fishCreateList",#self._dataModel.m_fishCreateList)
 	    if 0 ~= #self._dataModel.m_fishCreateList  then
 	      local fishdata = self._dataModel.m_fishCreateList[1]
 	      table.remove(self._dataModel.m_fishCreateList,1)
 	      local iscanadd = isCanAddtoScene(fishdata)
-	      mlog("iscanadd",iscanadd)
+	      -- mlog("iscanadd",iscanadd)
 	      if iscanadd then
 	          local fish =  g_var(Fish).new(fishdata,self)
 	          fish:initAnim()

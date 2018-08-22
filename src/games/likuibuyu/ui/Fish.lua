@@ -31,7 +31,7 @@ function Fish:ctor(fishData,target)
 	self.m_pathIndex = 1
 	self.m_nQucikClickNum = 0
 	self.m_fTouchInterval = 0
-	self:setPosition(cc.p(-500,-500))
+	self:setPosition(cc.p(100,100))
 	self:setTag(g_var(cmd).Tag_Fish)
 	self._dataModel = target._dataModel
 
@@ -46,10 +46,16 @@ function Fish:schedulerUpdate()
 
 	local function updateFish(dt)
 
-		self.m_ydtime = self.m_ydtime + dt * 1000
+		-- if(self.m_data.nFishKey ~= 1)then
+		-- 	return 
+		-- end
+		-- mlog("updateFish")
+		self.m_ydtime = self.m_ydtime + dt
+		mlog("dt:"..dt)
 		local bezier =  self.m_data.TBzierPoint[1] -- table
 		local tbp =  bezier[self.m_pathIndex]
-	
+		mlog("self.m_ydtime:"..self.m_ydtime )
+		mlog("tbp.Time:"..tbp.Time)
 		while self.m_ydtime > tbp.Time  do
 			self.m_ydtime = self.m_ydtime - tbp.Time
 			self.m_pathIndex = self.m_pathIndex + 1
@@ -61,15 +67,18 @@ function Fish:schedulerUpdate()
 			self:unScheduleFish()
 			self:removeFromParent()
 			
-			print("******************fish removeFromParent********************")
+			mlog("******************fish removeFromParent********************")
 			return
 		end
 
 		--路径百分比
 		local percent = self.m_ydtime/tbp.Time
+		mlog("self.m_ydtime"..self.m_ydtime)
+		mlog("tbp.Time"..tbp.Time)
+		mlog("percent"..percent)
 
 		local point = self:PointOnCubicBezier(self.m_pathIndex,percent)
-
+		mlog("self.m_data.fRotateAngle",self.m_data.fRotateAngle)
 		if self.m_data.fRotateAngle then
 			local bzierpoint = bezier[1]
 			local beginVec2 = cc.p(bzierpoint.BeginPoint.x,bzierpoint.BeginPoint.y)
@@ -77,6 +86,8 @@ function Fish:schedulerUpdate()
 		end
 
 		point = cc.p(point.x+self.m_data.PointOffSet.x,point.y+self.m_data.PointOffSet.y)
+		mlog("point===> point.x:"..point.x.." self.m_data.PointOffSet.x:"..self.m_data.PointOffSet.x)
+		mlog("point===> point.y:"..point.y.." self.m_data.PointOffSet.y:"..self.m_data.PointOffSet.y)
 		local m_oldPoint = cc.p(self:getPositionX(),self:getPositionY())
 		self:setConvertPoint(point)
 
@@ -110,6 +121,7 @@ function Fish:schedulerUpdate()
 			self:setFlippedX(false)
 		end
 
+
 	end
 
 	--定时器
@@ -120,13 +132,17 @@ end
 
 function Fish:unScheduleFish()
 	if nil ~= self.m_schedule then
+		mlog("unScheduleFish --> m_schedule = nil")
 	scheduler:unscheduleScriptEntry(self.m_schedule)
 	self.m_schedule = nil
 	end
 end
 
 function Fish:onEnter()
-	local time = currentTime()
+	-- mlog("onEnter ->Fish")
+	local time = os.time()
+	mlog("time",time)
+	mlog("self.m_producttime",self.m_producttime)
 	self.m_ydtime = time - self.m_producttime
 	self:schedulerUpdate()
 end
@@ -248,6 +264,8 @@ function Fish:PointOnCubicBezier(pathIndex,t)
 	result.x = (bconfig.dAx * tCubed) + (bconfig.dBx * tSquard) + (bconfig.dCx * t) + tbp.BeginPoint.x
 	result.y = (bconfig.dAy * tCubed) + (bconfig.dBy * tSquard) + (bconfig.dCy * t) + tbp.BeginPoint.y
 
+	mlog("x:result.x:"..result.x.." bconfig.dAx:"..bconfig.dAx .. "tCubed: "..tCubed .. " bconfig.dBx:"..bconfig.dBx.. "tSquard: "..tSquard .. " bconfig.dCx:"..bconfig.dCx .. " t:"..t .. " tbp.BeginPoint.x:"..tbp.BeginPoint.x .. "\n\n " )
+	mlog("y:result.y:"..result.y.." bconfig.dAy:"..bconfig.dAy .. "tCubed: "..tCubed .. " bconfig.dBy:"..bconfig.dBy.. " tSquard:"..tSquard .. " bconfig.dCy:"..bconfig.dCy .. " t:"..t .. " tbp.BeginPoint.y:"..tbp.BeginPoint.y.. "\n\n " )
 	return result
 end
 
@@ -264,6 +282,7 @@ function Fish:RotatePoint(pcircle,dradian,ptsome)
 end
 
 function Fish:initAnim()
+	mlog("initAnim")
 	local namestr 
 	local aniName
 	if self.m_data.nFishType ~= g_var(cmd).FishType.FishType_YuanBao then
@@ -477,6 +496,7 @@ end
 
 --设置物理属性
 function Fish:initPhysicsBody()
+	mlog("initPhysicsBody")
 	local fishtype = self.fishCreateData.nFishType
 	local body = self._dataModel:getBodyByType(fishtype)
 
@@ -495,7 +515,7 @@ function Fish:initPhysicsBody()
 end
 
 function Fish:initWithState()
-	
+	mlog("initWithState")
 	local fishstate = self.fishCreateData.nFishState
 	if  fishstate ~= g_var(cmd).FishState.FishState_Normal then
 		local contentsize = self:getContentSize()
@@ -529,14 +549,19 @@ end
 --转换坐标
 function  Fish:setConvertPoint( point )
 		
-	 local WIN32_W = 1280
-	 local WIN32_H = 800
+	 local WIN32_W = 1360
+	 local WIN32_H = 765
 
 	 local scalex = D_SIZE.width/WIN32_W
 	 local scaley = D_SIZE.height/WIN32_H
 
 	 local pos = cc.p(point.x*scalex,(WIN32_H-point.y)*scaley) 
+	 mlog("最终坐标转换：point.x："..point.x.."scalex:",scalex.."WIN32_H"..WIN32_H.."point.y"..point.y.."scaley"..scaley)
 	 self:setPosition(pos)
+
+	mlog("鱼位置：")
+	mlog(self:getPosition())
+	
 end
 
 

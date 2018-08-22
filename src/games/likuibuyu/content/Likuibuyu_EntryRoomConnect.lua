@@ -14,8 +14,9 @@ function Likuibuyu_EntryRoomConnect:writeData(data)
 end
 
 function Likuibuyu_EntryRoomConnect:readData(data)
-	local result = data:readUnsignedByte()
+	local result = data:readUnsignedShort()
 	mlog("data = "..tostring(data:length()))
+	mlog("result = "..tostring(result))
 	if result == 0 then
 		require("src.games.likuibuyu.content.GameFrame").getInstance().m_secene.curscene:onEventGameScene(data)
 	else

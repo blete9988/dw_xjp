@@ -344,7 +344,7 @@ function Cannon:shootLaser()
 		local  beginPos = self._dataModel:convertCoordinateSystem(tmp, 0, self._dataModel.m_reversal)
 		local  endPos	= self._dataModel:convertCoordinateSystem(cc.p(node:getPositionX(),node:getPositionY()), 0, self._dataModel.m_reversal)
 
-		local unLossTime = currentTime() - self._dataModel.m_enterTime
+		local unLossTime = os.time() - self._dataModel.m_enterTime
 
 		local cmddata = CCmd_Data:create(12)
 		cmddata:pushshort(beginPos.x)
