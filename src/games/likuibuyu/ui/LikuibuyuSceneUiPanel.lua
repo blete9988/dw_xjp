@@ -286,7 +286,7 @@ end
 function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
 
   --print("score.."..score.."wChairID.."..wChairID.."fishtype.."..fishtype)
-
+  mlog(DEBUG_W，"播放金币，。。。")
   self._scene._dataModel:playEffect(g_var(cmd).Coinfly)
 
   local silverNum = {2,2,3,4,4}
@@ -355,7 +355,9 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
         coinNum = 10
       end
 
-     local num = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
+     -- local num = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
+     local num = cc.Label:createWithCharMap("game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
+     num:setString(string.format("%d", score))
      num:setAnchorPoint(0.5,0.5)
      num:setPosition(node:getContentSize().width/2, node:getContentSize().height-140)
      node:addChild(num)
@@ -424,7 +426,9 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
     local goldTxt = self:getChildByTag(TAG.tag_GoldCycleTxt + wChairID)
     if goldTxt == nil then
 
-      goldTxt = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
+      -- goldTxt = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
+     goldTxt = cc.Label:createWithCharMap("game/likuibuyu/mutipleNum.png",14,17,string.byte("0"))
+      goldTxt:setString(string.format("%d", score))
       goldTxt:setAnchorPoint(0.5,0.5)
 
       goldTxt:setPosition(pos.x, pos.y)          
@@ -560,8 +564,8 @@ end
 function LikuibuyuUiPanel:updateUserScore( score )
     
     local _score  = self:getChildByTag(TAG.tag_gameScore)
-    mlog(DEBUG_W,"_score",_score)
-    mlog(DEBUG_W,"score",score)
+    -- mlog(DEBUG_W,"_score",_score)
+    -- mlog(DEBUG_W,"score",score)
     if nil ~=  _score then
         _score:setString(string.format("%d",score))
     end

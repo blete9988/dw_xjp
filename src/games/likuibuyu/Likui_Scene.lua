@@ -422,8 +422,8 @@ function Lkby_Scene:onSubMultiple( databuffer )
     local mutiple = {}
     mutiple.wChairID = databuffer:readShort()
     mutiple.nMultipleIndex = databuffer:readInt()
-    mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
-    mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
+    -- mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
+    -- mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
     local cannonPos = mutiple.wChairID
     if self._dataModel.m_reversal then 
          cannonPos = 5 - cannonPos
@@ -815,7 +815,7 @@ function Lkby_Scene:onSubFishCatch( databuffer )
   
              if fish.m_data.nFishType > g_var(cmd).FishType.FishType_JianYu then
                self._dataModel:playEffect(g_var(cmd).CoinLightMove)
-               local praticle = cc.ParticleSystemQuad:create("game_res/particles_test2.plist")
+               local praticle = cc.ParticleSystemQuad:create("game/likuibuyu/particles_test2.plist")
                praticle:setPosition(fishPos)
                praticle:setPositionType(cc.POSITION_TYPE_GROUPED)
                self:addChild(praticle,3)
@@ -860,7 +860,7 @@ function Lkby_Scene:onSubFishCatch( databuffer )
                   local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
 
                   for k,v in pairs(self.m_cannonLayer._userList) do
-                    local item = v
+                    local item = g_var
                     if item.dwUserID == userid  then
                         item.lScore = item.lScore + catchData.lScoreCount
 

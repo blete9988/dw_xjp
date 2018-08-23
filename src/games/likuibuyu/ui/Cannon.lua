@@ -649,7 +649,7 @@ function Cannon:autoUpdate(dt)
 	end
 
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
-		mlog(DEBUG_W,"the view is not fish")
+		-- mlog(DEBUG_W,"the view is not fish")
 		return
 	end
 

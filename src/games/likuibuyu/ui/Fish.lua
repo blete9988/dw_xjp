@@ -322,7 +322,7 @@ end
 
 --死亡处理
 function Fish:deadDeal()
-	
+	mlog(DEBUG_W,"播放鱼死亡！！！！")
 	self:setColor(cc.WHITE)
 	self:stopAllActions()
 	self:unScheduleFish()
