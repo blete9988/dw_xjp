@@ -40,6 +40,8 @@ function GameFrame:ctor()
  	self.m_bodyList = {}  --物体刚体数据
 
  	self.m_secene = {}	--场景数据
+
+ 	self.myBullet = 0
     self.m_nMultiple = {1,10,100,500,1000,5000} --房间倍数
 
     self.m_sinList = {}

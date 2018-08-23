@@ -41,9 +41,10 @@ function LikuibuyuUiPanel:ctor(scene)
     menuBG:setAnchorPoint(0.5,0.0)
     menuBG:setScaleY(0.9)
     menuBG:setPositionX(667)
-    self:addChild(Coord.ingap(self,menuBG,"CC",0,"BB",0),109,20)
+    -- self:addChild(Coord.ingap(self,menuBG,"CC",0,"BB",0),109,20)
     self.menuBG = menuBG
-
+    menuBG:setPosition(667, -6)
+    self:addChild(menuBG,20)
 
 	--添加按钮
 	local mutipleBtn = ccui.Button:create("game/likuibuyu/im_multiple_tip_0.png","game/likuibuyu/im_multiple_tip_1.png",nil)
@@ -57,12 +58,14 @@ function LikuibuyuUiPanel:ctor(scene)
         --  cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_MULTIPLE);
         --  cmddata:pushint(index)
         -- self._scene:sendNetData(cmddata) 
+        mlog("切换倍数！！！！"..index)
           local condata = {}
           condata.int1 = index
           ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_MultipleConnect" ,condata,function(result) end)
+
       end
     end)
-    Coord.ingap(self,mutipleBtn,"CC",0,"BB",-20)
+    Coord.ingap(self,mutipleBtn,"CC",-100,"BB",-20)
     -- mutipleBtn:setPosition(yl.WIDTH/2 - 70, -20)
     mutipleBtn:setAnchorPoint(0.5,0.0)
     self.mutipleBtn = mutipleBtn
@@ -80,7 +83,7 @@ function LikuibuyuUiPanel:ctor(scene)
     autoShootBtn:setPosition(675, 24)
     autoShootBtn:setTag(TAG.tag_autoshoot)
     autoShootBtn:addTouchEventListener(callBack)
-    self:addChild(autoShootBtn,30)
+    self:addChild(autoShootBtn,20)
 
 
     --自动锁定
@@ -90,7 +93,7 @@ function LikuibuyuUiPanel:ctor(scene)
     autoLockBtn:setPosition(894, 24)
     autoLockBtn:setTag(TAG.tag_autolock)
     autoLockBtn:addTouchEventListener(callBack)
-    self:addChild(autoLockBtn,30)
+    self:addChild(autoLockBtn,20)
 
 
     --水波效果
@@ -557,6 +560,8 @@ end
 function LikuibuyuUiPanel:updateUserScore( score )
     
     local _score  = self:getChildByTag(TAG.tag_gameScore)
+    mlog(DEBUG_W,"_score",_score)
+    mlog(DEBUG_W,"score",score)
     if nil ~=  _score then
         _score:setString(string.format("%d",score))
     end

@@ -47,20 +47,19 @@ function Lkby_Scene:ctor(room)
    	-- self:initUi()
    	-- self:initData()
 	-- SoundsManager.playMusic("qznn_bgm",true)
-    self.m_pUserItem = {
-    	wTableID = 1,
-    	wChairID = 0,
-    	dwUserID = Player.id,
-    	lScore   = Player.gold,
-    	szNickName = Player.name
+ --    self.m_pUserItem = {
+ --    	wTableID = 1,
+ --    	wChairID = 1,
+ --    	dwUserID = Player.id,
+ --    	lScore   = Player.gold,
+ --    	szNickName = Player.name
 
-	}
+	-- }
+
 	
   -- self.m_pUserItem = self._gameFrame:GetMeUserItem()
-  self.m_nTableID  = self.m_pUserItem.wTableID
-  self.m_nChairID  = self.m_pUserItem.wChairID  
 
-  	self:setReversal()
+
 
   	--鱼层
 	  self.m_fishLayer = cc.Layer:create()
@@ -94,6 +93,9 @@ function Lkby_Scene:ctor(room)
 
 end
 
+function Lkby_Scene:sendNetData( cmddata )
+    return self._gameFrame:sendSocketData(cmddata);
+end
 
 -- 场景信息
 
@@ -162,6 +164,24 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     self._dataModel.m_secene.server_time = dataBuffer:readLong()
     -- self._dataModel.m_secene.szBrowseUrl = dataBuffer:readString()
 
+	local userItem = {}
+	userItem.wTableID = dataBuffer:readShort()
+	userItem.wChairID = dataBuffer:readShort()
+	userItem.szNickName = dataBuffer:readString()
+	userItem.dwUserID = dataBuffer:readLong()
+	userItem.lScore = dataBuffer:readLong()
+	userItem.cbUserStatus = dataBuffer:readByte()
+	self._dataModel.userItem = userItem
+	self.m_pUserItem = userItem
+	self.m_nTableID  = self.m_pUserItem.wTableID
+	self.m_nChairID  = self.m_pUserItem.wChairID
+
+	self:setReversal()  
+		     --添加炮台层
+    self.m_cannonLayer = g_var(CannonLayer).new(self)
+    self._gameView:addChild(self.m_cannonLayer, 6)
+
+
     if self._dataModel.m_secene.cbBackIndex ~= 0 then
      	  self._gameView:updteBackGround(self._dataModel.m_secene.cbBackIndex)
     end
@@ -219,9 +239,7 @@ function Lkby_Scene:addEvent()
 		--初始化房间数据
 	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_EntryRoomConnect")
 
-     --添加炮台层
-    self.m_cannonLayer = g_var(CannonLayer).new(self)
-    self._gameView:addChild(self.m_cannonLayer, 6)
+
 
    --通知监听
   -- local function eventListener(event)
@@ -342,7 +360,12 @@ function Lkby_Scene:onSubSupply(databuffer )
     return
   end
 
-  local supply =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Supply,databuffer)
+  -- local supply =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Supply,databuffer)
+  local supply = {}
+
+  supply.wChairID = databuffer:readShort()
+  supply.lSupplyCount = databuffer:readLong()
+  supply.nSupplyType = databuffer:readInt()
 
   local cannonPos = supply.wChairID
   if self._dataModel.m_reversal then 
@@ -364,9 +387,9 @@ function Lkby_Scene:onSubSupply(databuffer )
 
    local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
    local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
-   -- local userItem = self._gameFrame._UserList[userid]
-   local userItem = {}
-   userItem.szNickName = " xxx测试"
+   local userItem = self._gameFrame._UserList[userid]
+   -- local userItem = {}
+   -- userItem.szNickName = " xxx测试"
  
 
   if supply.nSupplyType == g_var(cmd).SupplyType.EST_Laser then
@@ -395,7 +418,12 @@ end
 
 function Lkby_Scene:onSubMultiple( databuffer )
 
-    local mutiple = ExternalFun.read_netdata(g_var(cmd).CMD_S_Multiple,databuffer)
+    -- local mutiple = ExternalFun.read_netdata(g_var(cmd).CMD_S_Multiple,databuffer)
+    local mutiple = {}
+    mutiple.wChairID = databuffer:readShort()
+    mutiple.nMultipleIndex = databuffer:readInt()
+    mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
+    mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
     local cannonPos = mutiple.wChairID
     if self._dataModel.m_reversal then 
          cannonPos = 5 - cannonPos
@@ -426,8 +454,9 @@ function Lkby_Scene:onSubSupplyTip(databuffer)
       return
     end
    
-     local tip = ExternalFun.read_netdata(g_var(cmd).CMD_S_SupplyTip,databuffer)
-
+     -- local tip = ExternalFun.read_netdata(g_var(cmd).CMD_S_SupplyTip,databuffer)
+     local tip = {}
+     tip.wChairID = databuffer:readShort()
      local tipStr = ""
      if tip.wChairID == self.m_nChairID then
        tipStr = "获得一个补给箱！击中可能获得大量奖励哟！赶快击杀！"
@@ -439,9 +468,9 @@ function Lkby_Scene:onSubSupplyTip(databuffer)
 
          local cannon = self.m_cannonLayer:getCannoByPos(cannonPos + 1)
          local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
-         -- local userItem = self._gameFrame._UserList[userid]
-         local userItem = {}
-         userItem.szNickName = "xxx测试"
+         local userItem = self._gameFrame._UserList[userid]
+         -- local userItem = {}
+         -- userItem.szNickName = "xxx测试"
          if not userItem then
             return
          end
@@ -456,7 +485,9 @@ end
 function Lkby_Scene:onSubSynchronous( databuffer )
 	  print("同步时间")
     self.m_bSynchronous = true
-	  local synchronous = ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinish,databuffer)
+	  -- local synchronous = ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinish,databuffer)
+	  local synchronous = {}
+	  synchronous.nOffSetTime = databuffer:readShort()
 	  if 0 ~= synchronous.nOffSetTime then
        print("同步时间1")
 	  	 local offtime = synchronous.nOffSetTime
@@ -465,10 +496,76 @@ function Lkby_Scene:onSubSynchronous( databuffer )
 
 end
 
+function Lkby_Scene:onUserInfo( databuffer )
+-- 	wTableID     short
+-- wChairID     short
+-- szNickName   string
+-- dwUserID  long
+-- lScore long
+	local userItem = {}
+	userItem.wTableID = databuffer:readShort()
+	userItem.wChairID = databuffer:readShort()
+	userItem.szNickName = databuffer:readString()
+	userItem.dwUserID = databuffer:readLong()
+	userItem.lScore = databuffer:readLong()
+	userItem.cbUserStatus = databuffer:readByte()
+
+
+	if(userItem.dwUserID == Player.id)then
+		self.m_pUserItem = userItem
+		self.m_nTableID  = self.m_pUserItem.wTableID
+  		self.m_nChairID  = self.m_pUserItem.wChairID  
+  		self._dataModel.userItem = userItem
+
+  		     --添加炮台层
+	    self.m_cannonLayer = g_var(CannonLayer).new(self)
+	    self._gameView:addChild(self.m_cannonLayer, 6)
+
+	else
+	-- self._dataModel._userItem = userItem
+	self:onEventUserEnter(userItem.wTableID,userItem.wChairID,userItem)
+	end
+
+end
+
+function Lkby_Scene:onUserOut(databuffer)
+	local chairID = databuffer:readShort()
+	local userid  = databuffer:readLong()
+	self.m_cannonLayer:onUserout(userid)
+end
+--用户进入
+function Lkby_Scene:onEventUserEnter( wTableID,wChairID,useritem )
+ 
+    if wTableID ~= self.m_nTableID or not self.m_cannonLayer then
+      return
+    end
+
+    self.m_cannonLayer:onEventUserEnter( wTableID,wChairID,useritem )
+
+    self:setUserMultiple()
+end
+
+--用户状态
+function Lkby_Scene:onEventUserStatus(useritem,newstatus,oldstatus)
+
+  if  not self.m_cannonLayer then
+    return
+  end
+
+
+  self.m_cannonLayer:onEventUserStatus(useritem,newstatus,oldstatus)
+
+  self:setUserMultiple()
+
+end
+
 function Lkby_Scene:onSubStayFish( databuffer )
 
-  local stay = ExternalFun.read_netdata(g_var(cmd).CMD_S_StayFish,databuffer)
-
+  -- local stay = ExternalFun.read_netdata(g_var(cmd).CMD_S_StayFish,databuffer)
+  local stay = {}
+  stay.nFishKey = databuffer:readInt()
+  stay.nStayStart = databuffer:readInt()
+  stay.nStayTime = databuffer:readInt()
   local fish = self._dataModel.m_fishList[stay.nFishKey]
   if nil ~= fish then
       fish:Stay(stay.nStayTime)
@@ -484,7 +581,17 @@ function Lkby_Scene:onSubFire(databuffer)
     return
   end
 
-  local fire =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Fire,databuffer)
+  -- local fire =  ExternalFun.read_netdata(g_var(cmd).CMD_S_Fire,databuffer)
+  local fire = {}
+  fire.nBulletKey = databuffer:readInt()
+  fire.nBulletScore = databuffer:readInt()
+  fire.nMultipleIndex = databuffer:readInt()
+  fire.nTrackFishIndex = databuffer:readInt()
+  fire.wChairID = databuffer:readShort()
+  fire.ptPos = {}
+  fire.ptPos.x = databuffer:readShort()
+  fire.ptPos.y = databuffer:readShort()
+
   if fire.wChairID == self.m_nChairID then
     return
   end
@@ -512,7 +619,9 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
 
     self._dataModel._exchangeSceneing = true
 
-    local exchangeScene = ExternalFun.read_netdata(g_var(cmd).CMD_S_ChangeSecene,dataBuffer)
+    -- local exchangeScene = ExternalFun.read_netdata(g_var(cmd).CMD_S_ChangeSecene,dataBuffer)
+    local exchangeScene = {}
+    exchangeScene.cbBackIndex = dataBuffer:readByte()
     self._gameView:updteBackGround(exchangeScene.cbBackIndex)
 
     local callfunc = cc.CallFunc:create(function()
@@ -643,11 +752,16 @@ function Lkby_Scene:onSubFishCatch( databuffer )
       return
     end
 
-    local catchNum = math.floor(databuffer:getlen()/18)
-
+    -- local catchNum = math.floor(databuffer:getlen()/18)
+    local catchNum = databuffer:readInt()
     if catchNum >= 1 then
         for i=1,catchNum do
-           local catchData = ExternalFun.read_netdata(g_var(cmd).CMD_S_CatchFish,databuffer)
+           -- local catchData = ExternalFun.read_netdata(g_var(cmd).CMD_S_CatchFish,databuffer)
+           local catchData = {}
+           catchData.nFishIndex = databuffer:readInt()
+           catchData.wChairID = databuffer:readShort()
+           catchData.nMultipleCount = databuffer:readInt()
+           catchData.lScoreCount = databuffer:readLong()
            local fish = self._dataModel.m_fishList[catchData.nFishIndex]
 
            if nil ~= fish then
@@ -727,10 +841,11 @@ function Lkby_Scene:onSubFishCatch( databuffer )
 
              if catchData.wChairID == self.m_nChairID then   --自己
 
-                 GlobalUserItem.lUserScore = GlobalUserItem.lUserScore + catchData.lScoreCount
-         
+                 -- GlobalUserItem.lUserScore = GlobalUserItem.lUserScore + catchData.lScoreCount
+                 -- Player.gold = Player.gold + catchData.lScoreCounts
+         		 self._dataModel.userItem.lScore = self._dataModel.userItem.lScore + catchData.lScoreCount
                   --更新用户分数
-                  self.m_cannonLayer:updateUserScore( GlobalUserItem.lUserScore,cannonPos+1 )
+                  self.m_cannonLayer:updateUserScore( self._dataModel.userItem.lScore,cannonPos+1 )
 
                   --捕获鱼收获
                   self._dataModel.m_getFishScore = self._dataModel.m_getFishScore + catchData.lScoreCount

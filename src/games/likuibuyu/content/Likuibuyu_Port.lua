@@ -13,9 +13,8 @@ function Likuibuyu_Port.extend(data)
 	local dataModel  = require("src.games.likuibuyu.content.GameFrame").getInstance()
 	local handler = function(data)
 		local tp = data:readUnsignedShort()
-		mlog(tp,"捕鱼推送返回")
 		if tp == g_var(cmd).SUB_S_FISH_CATCH then
-			mlog("李逵捕鱼catch捕获鱼收到数据返回！")
+			mlog(DEBUG_W,"李逵捕鱼catch捕获鱼收到数据返回！")
 		
 
 			dataModel.m_secene.curscene:onSubFishCatch(data)
@@ -54,7 +53,6 @@ function Likuibuyu_Port.extend(data)
 			mlog("李逵捕鱼结算收到数据返回！")
 			
 		elseif tp == g_var(cmd).SUB_S_STAY_FISH then
-			--抢庄
 			mlog("李逵捕鱼停留鱼120收到数据返回！")
 
 			dataModel.m_secene.curscene:onSubStayFish(data)
@@ -79,7 +77,12 @@ function Likuibuyu_Port.extend(data)
 
 		elseif tp == g_var(cmd).SUB_S_SUPPLY_TIP then --更新游戏
 		  	dataModel.m_secene.curscene:onSubSupplyTip(data)
-		
+		elseif tp == g_var(cmd).SUB_S_USER_INFO then --玩家信息
+			mlog("玩家信息...返回")
+		  	dataModel.m_secene.curscene:onUserInfo(data)
+		  elseif tp == g_var(cmd).SUB_S_USER_OUT then --玩家信息
+			mlog("玩家退出...返回")
+		  	dataModel.m_secene.curscene:onUserOut(data)
 		end
 
 	end

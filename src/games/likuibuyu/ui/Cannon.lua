@@ -57,15 +57,15 @@ function Cannon:ctor(viewParent)
 	-- self.frameEngine = self.parent._gameFrame 
 
 
-    self.m_pUserItem = {
-    	wTableID = 1,
-    	wChairID = 1,
-    	dwUserID = Player.id,
-    	lScore   = Player.gold
-	}
+ --    self.m_pUserItem = {
+ --    	wTableID = 1,
+ --    	wChairID = 1,
+ --    	dwUserID = Player.id,
+ --    	lScore   = Player.gold
+	-- }
 
 --获取自己信息
-	-- self.m_pUserItem = self.frameEngine:GetMeUserItem()
+	self.m_pUserItem = self._dataModel.userItem
   	self.m_nTableID  = self.m_pUserItem.wTableID
   	self.m_nChairID  = self.m_pUserItem.wChairID	
 
@@ -123,12 +123,10 @@ function Cannon:setMultiple(multiple)
 	--dump(self._dataModel.m_secene.nMultipleIndex, "xxxxis ===========================", 6)
 	--print("mutiple is =========================="..multiple)
 	self.m_nMutipleIndex = multiple
-	mlog(multiple,"!!!!~~~~")
 	local nMultipleValue = self._dataModel.m_secene.nMultipleValue[1][multiple+1]
 	for i,v in ipairs(self._dataModel.m_secene.nMultipleValue[1]) do
 		mlog(i,v)
 	end
-	mlog(nMultipleValue,"!!!!!!!!!!!!!!!!!")
 	self.m_nCurrentBulletScore = nMultipleValue
 
 	local nNum = 1
@@ -147,7 +145,7 @@ function Cannon:setMultiple(multiple)
 	local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(string.format("gun_%d_%d.png", bulletNum,nNum))
 
 	self.m_fort:setSpriteFrame(frame)
-
+	mlog("self.m_pos."..self.m_pos)
 	self.parent:updateMultiple(nMultipleValue,self.m_pos+1)
 
 end
@@ -391,6 +389,9 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 		mlog("isSelf true")
 		self.parent.parent:setSecondCount(60)
 
+
+		self._dataModel.myBullet = self._dataModel.myBullet + 1
+
 		local condata = {}
 
 		-- local cmddata = CCmd_Data:create(16)
@@ -422,6 +423,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 		-- 	self.frameEngine._callBack(-1,"发送开火息失败")
 		-- end
 
+		-- if()
 
 		mlog("开火~~！！！！")
 		ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_FireConnect" ,condata,function(result) 
@@ -636,18 +638,23 @@ end
 
 --自己开火
 function Cannon:autoUpdate(dt)
-			mlog("自己开火")
 	if not self.m_canShoot or self.m_Type == g_var(cmd).CannonType.Laser_Cannon  then
+		mlog(DEBUG_W,"类型不对。。。。....................")
 		return
 	end
 
-	mlog("切换场景")
 	if self._dataModel._exchangeSceneing  then 	--切换场景中不能发炮
+		mlog(v,"切换场景中不能发炮....................")
 		return false
 	end
 
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
-		mlog("the view is not fish")
+		mlog(DEBUG_W,"the view is not fish")
+		return
+	end
+
+	if(self._dataModel.myBullet > 20)then
+		mlog(DEBUG_W,"子弹上线....................")
 		return
 	end
 
@@ -656,9 +663,9 @@ function Cannon:autoUpdate(dt)
 	local mutiple = self._dataModel.m_secene.nMultipleIndex[1][self.m_nChairID+1]
 	local score = self._dataModel.m_secene.nMultipleValue[1][mutiple+1]
 
-	-- score =  GlobalUserItem.lUserScore - score
-	score = 0
-	if score < 0 then
+	self._dataModel.userItem.lScore =  self._dataModel.userItem.lScore - score
+	-- score = 0
+	if self._dataModel.userItem.lScore < 0 then
 		self:unAutoSchedule()
 		self.m_autoShoot = false
 
@@ -737,7 +744,7 @@ function Cannon:autoUpdate(dt)
 
 	end
 
-	self:updateScore(score)
+	self:updateScore(self._dataModel.userItem.lScore)
 
 	-- GlobalUserItem.lUserScore = score
 	-- mlog("self.m_nChairID",self.m_nChairID)
@@ -783,7 +790,7 @@ function Cannon:otherUpdate(dt)
 	-- print("the num is ............................."..table.nums(self._dataModel.m_InViewTag))
 	-- dump(self._dataModel.m_InViewTag, "the in view tag is ====================== >", 6)
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
-		print("the view is not fish")
+		mlog("the view is not fish")
 		return
 	end
 

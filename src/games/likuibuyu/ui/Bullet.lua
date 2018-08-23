@@ -330,7 +330,8 @@ function Bullet:fallingNet()
 		elseif self.m_Type == Type.Bignet_Bullet then
 			net = cc.Sprite:create("game/likuibuyu/im_net_big.png")
 		end
-
+        
+        self._dataModule.myBullet = self._dataModule.myBullet - 1
 
 		local pos = cc.p(self:getPositionX(),self:getPositionY())
 		pos = cc.pAdd(pos,offset)
@@ -422,7 +423,7 @@ function Bullet:sendCathcFish( rect )
 	-- if not self._gameFrame:sendSocketData(cmddata) then
 	-- 	self._gameFrame._callBack(-1,"发送捕鱼信息失败")
 	-- end
-
+	mlog("发生捕鱼 发送捕鱼信息。。。。")
 	--下注请求
 	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,function(result) 
 		if result ~= 0 then 

@@ -294,8 +294,10 @@ cmd.FishState = ExternalFun.declarEnumWithTable(0,enumFishState)
     cmd.SUB_S_AWARD_TIP		= 117					-- 分数提示117
     cmd.SUB_S_CONTROL		= 118					-- 控制消息118
     cmd.SUB_S_UPDATE_GAME	= 119					-- 更新游戏119
+    cmd.SUB_S_STAY_FISH   = 120         -- 停留鱼120
     cmd.SUB_S_STAY_FISH		= 120					-- 停留鱼120
-
+    cmd.SUB_S_USER_INFO   = 121         -- 加入用户120
+    cmd.SUB_S_USER_OUT   = 122         -- 离开120
 
 -----------------------------------------------------------------------------------------------
 

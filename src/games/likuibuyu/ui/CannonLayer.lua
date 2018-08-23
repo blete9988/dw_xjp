@@ -34,20 +34,20 @@ function CannonLayer:ctor(viewParent)
 
 	self._gameFrame  = Player
 
-    self.m_pUserItem = {
-    	wTableID = 1,
-    	wChairID = 0,
-    	dwUserID = Player.id,
-    	lScore   = Player.gold,
-    	szNickName = Player.name
+ --    self.m_pUserItem = {
+ --    	wTableID = 1,
+ --    	wChairID = 1,
+ --    	dwUserID = Player.id,
+ --    	lScore   = Player.gold,
+ --    	szNickName = Player.name
 
-	}
+	-- }
 	--自己信息
-	-- self.m_pUserItem = self._gameFrame:GetMeUserItem()
-    -- self.m_nTableID  = self.m_pUserItem.wTableID
-    -- self.m_nChairID  = self.m_pUserItem.wChairID
-    self.m_nTableID = 1
-    self.m_nChairID = 1
+	self.m_pUserItem = self._dataModel.userItem
+    self.m_nTableID  = self.m_pUserItem.wTableID
+    self.m_nChairID  = self.m_pUserItem.wChairID
+    -- self.m_nTableID = 1
+    -- self.m_nChairID = 1
     self.m_dwUserID  = Player.id
 
 
@@ -424,7 +424,7 @@ function CannonLayer:onEventUserEnter( wTableID,wChairID,useritem )
  		end
  	end
  	
-    local Cannon = g_var(Cannon):create(self)
+    local Cannon = g_var(Cannon).new(self)
 	Cannon:initWithUser(useritem)
 	Cannon:setPosition(self.m_pCannonPos[Cannon.m_pos + 1])
 	Cannon:setTag(TAG.Tag_Cannon + Cannon.m_pos + 1)
@@ -437,6 +437,44 @@ function CannonLayer:onEventUserEnter( wTableID,wChairID,useritem )
 	table.insert(self._userList, useritem)
 end
 
+function CannonLayer:onUserout(dwUserID)
+	if #self.m_cannonList > 0 then
+    	for i=1,#self.m_cannonList do
+
+	    	local cannonInfo = self.m_cannonList[i]
+	    	if cannonInfo.d == dwUserID then
+	    		-- print("用户离开"..cannonInfo.c)
+
+	    		-- dump(useritem, "the useritem is =============== >", 6)
+
+	    		self:HiddenCannonByChair(cannonInfo.c)
+
+	    		table.remove(self.m_cannonList,i)
+
+  	    	if #self._userList > 0 then
+		 		for i=1,#self._userList do
+		 			local Item = self._userList[i]
+		 			if Item.dwUserID == dwUserID then
+		 				table.remove(self._userList,i)
+		 				break
+		 			end
+		 		end
+		 	end
+
+
+	    	local cannon = self:getChildByTag(TAG.Tag_Cannon + cannonInfo.c)
+          	if nil ~= cannon then
+          		cannon:removeChildByTag(1000)
+	          	cannon:removeTypeTag()
+          	    cannon:removeLockTag()
+          	    cannon:removeFromParent()
+          	end
+	    		break
+	    	end
+   		 end
+    end 
+end
+
 --用户状态
 function CannonLayer:onEventUserStatus(useritem,newstatus,oldstatus)
 
@@ -444,6 +482,14 @@ function CannonLayer:onEventUserStatus(useritem,newstatus,oldstatus)
   			print("不是本桌用户....")
   			return
 		end
+		local yl = {}
+		yl.US_NULL								= 0x00		--没有状态
+		yl.US_FREE								= 0x01		--站立状态
+		yl.US_SIT								= 0x02		--坐下状态
+		yl.US_READY								= 0x03		--同意状态
+		yl.US_LOOKON							= 0x04		--旁观状态
+		yl.US_PLAYING					 		= 0x05		--游戏状态
+		yl.US_OFFLINE							= 0x06		--断线状态
 
         if newstatus.cbUserStatus == yl.US_FREE or  newstatus.cbUserStatus == yl.US_NULL then
                  
@@ -452,9 +498,9 @@ function CannonLayer:onEventUserStatus(useritem,newstatus,oldstatus)
 
 	          	    	local cannonInfo = self.m_cannonList[i]
 	          	    	if cannonInfo.d == useritem.dwUserID then
-	          	    		print("用户离开"..cannonInfo.c)
+	          	    		-- print("用户离开"..cannonInfo.c)
 
-	          	    		dump(useritem, "the useritem is =============== >", 6)
+	          	    		-- dump(useritem, "the useritem is =============== >", 6)
 
 	          	    		self:HiddenCannonByChair(cannonInfo.c)
 
