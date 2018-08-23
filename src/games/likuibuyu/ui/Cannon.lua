@@ -241,7 +241,7 @@ function Cannon:shoot( vec , isbegin )
 		if self.m_Type == g_var(cmd).CannonType.Special_Canonn then
 			time = time / 2 
 		end
-
+		mlog("开火9900000")
 		self:autoUpdate(0)
 		self:autoSchedule(time)
 	end
@@ -321,7 +321,7 @@ function Cannon:shootLaser()
 			if self.m_Type == g_var(cmd).CannonType.Special_Cannon then
 				time = time/2
 			end
-
+			mlog("开火。。！@@")
 			self:autoUpdate(0)
 			self:autoSchedule(time)
 
@@ -385,9 +385,10 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 	pos = cc.p(pos.x , pos.y - offset.y/2)
 	bullet0:setPosition(pos)
 	self.parent.parent._gameView:addChild(bullet0,5) --self.parent.parent为GameLayer
-
+	mlog("isSelf")
+	
 	if isSelf then
-
+		mlog("isSelf true")
 		self.parent.parent:setSecondCount(60)
 
 		local condata = {}
@@ -422,7 +423,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 		-- end
 
 
-
+		mlog("开火~~！！！！")
 		ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_FireConnect" ,condata,function(result) 
 		if result ~= 0 then 
 			
@@ -635,17 +636,18 @@ end
 
 --自己开火
 function Cannon:autoUpdate(dt)
-			
+			mlog("自己开火")
 	if not self.m_canShoot or self.m_Type == g_var(cmd).CannonType.Laser_Cannon  then
 		return
 	end
 
+	mlog("切换场景")
 	if self._dataModel._exchangeSceneing  then 	--切换场景中不能发炮
 		return false
 	end
 
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
-		print("the view is not fish")
+		mlog("the view is not fish")
 		return
 	end
 
@@ -654,8 +656,8 @@ function Cannon:autoUpdate(dt)
 	local mutiple = self._dataModel.m_secene.nMultipleIndex[1][self.m_nChairID+1]
 	local score = self._dataModel.m_secene.nMultipleValue[1][mutiple+1]
 
-	score =  GlobalUserItem.lUserScore - score
-	
+	-- score =  GlobalUserItem.lUserScore - score
+	score = 0
 	if score < 0 then
 		self:unAutoSchedule()
 		self.m_autoShoot = false
@@ -737,10 +739,12 @@ function Cannon:autoUpdate(dt)
 
 	self:updateScore(score)
 
-	GlobalUserItem.lUserScore = score
-
+	-- GlobalUserItem.lUserScore = score
+	-- mlog("self.m_nChairID",self.m_nChairID)
+	-- mlog("self._dataModel.m_secene.lBulletConsume[1][self.m_nChairID+1]",self._dataModel.m_secene.lBulletConsume[1][self.m_nChairID+1])
+	-- mlog("self.m_nMutipleIndex",self.m_nMutipleIndex)
+	-- mlog("self._dataModel.m_secene.nMultipleValue[1][self.m_nMutipleIndex+1]",self._dataModel.m_secene.nMultipleValue[1][self.m_nMutipleIndex+1])
 	self._dataModel.m_secene.lBulletConsume[1][self.m_nChairID+1] = self._dataModel.m_secene.lBulletConsume[1][self.m_nChairID+1] + self._dataModel.m_secene.nMultipleValue[1][self.m_nMutipleIndex+1]
-
 end
 
 
@@ -776,8 +780,8 @@ function Cannon:otherUpdate(dt)
 		return
 	end]]
 
-	print("the num is ............................."..table.nums(self._dataModel.m_InViewTag))
-	dump(self._dataModel.m_InViewTag, "the in view tag is ====================== >", 6)
+	-- print("the num is ............................."..table.nums(self._dataModel.m_InViewTag))
+	-- dump(self._dataModel.m_InViewTag, "the in view tag is ====================== >", 6)
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
 		print("the view is not fish")
 		return
@@ -796,7 +800,7 @@ function Cannon:otherUpdate(dt)
 	local angle = self._dataModel:getAngleByTwoPoint(pos, self.m_cannonPoint)
 
 	self.m_fort:setRotation(angle)
-
+	-- mlog("otherUpdate.....")
 	self:productBullet(false, fire.nTrackFishIndex, cc.WHITE)	
 	
 	--更新分数

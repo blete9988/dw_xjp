@@ -37,8 +37,11 @@ function Bullet:ctor(angle,chairId,score,mutipleIndex,CannonType,cannon)
    self.m_cannon = cannon
    self._dataModule = self.m_cannon._dataModel
    -- self._gameFrame  = self.m_cannon.frameEngine
+   mlog("self._dataModule.m_secene.nBulletVelocity"..self._dataModule.m_secene.nBulletVelocity)
+   self.m_speed = self._dataModule.m_secene.nBulletVelocity	--子弹速度
 
-   self.m_speed = self._dataModule.m_secene.nBulletVelocity/1000*25	--子弹速度
+   mlog(self.m_speed)
+
    self.m_nScore = score --子弹分数
    self.m_nMultipleIndex = mutipleIndex
 

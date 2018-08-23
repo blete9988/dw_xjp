@@ -553,6 +553,15 @@ function LikuibuyuUiPanel:ShowAwardTip(data)
 end
 
 
+
+function LikuibuyuUiPanel:updateUserScore( score )
+    
+    local _score  = self:getChildByTag(TAG.tag_gameScore)
+    if nil ~=  _score then
+        _score:setString(string.format("%d",score))
+    end
+end
+
 function LikuibuyuUiPanel:updateMultiple( multiple )
     local _Multiple = self:getChildByTag(TAG.tag_gameMultiple)
     if nil ~=  _Multiple then

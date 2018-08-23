@@ -36,7 +36,7 @@ function CannonLayer:ctor(viewParent)
 
     self.m_pUserItem = {
     	wTableID = 1,
-    	wChairID = 1,
+    	wChairID = 0,
     	dwUserID = Player.id,
     	lScore   = Player.gold,
     	szNickName = Player.name

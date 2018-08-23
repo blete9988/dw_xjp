@@ -49,7 +49,7 @@ function Lkby_Scene:ctor(room)
 	-- SoundsManager.playMusic("qznn_bgm",true)
     self.m_pUserItem = {
     	wTableID = 1,
-    	wChairID = 1,
+    	wChairID = 0,
     	dwUserID = Player.id,
     	lScore   = Player.gold,
     	szNickName = Player.name
@@ -140,8 +140,9 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     end
     self._dataModel.m_secene.nMaxTipsCount = dataBuffer:readInt()
     self._dataModel.m_secene.lBulletConsume = {}
+    self._dataModel.m_secene.lBulletConsume[1] = {}
     for i=1,6 do
-    	table.insert(self._dataModel.m_secene.lBulletConsume,dataBuffer:readLong())
+    	table.insert(self._dataModel.m_secene.lBulletConsume[1],dataBuffer:readLong())
     end
     self._dataModel.m_secene.lPlayFishCount = {}
     for i=1,26 do
@@ -525,11 +526,11 @@ end
 
 --创建鱼
 function Lkby_Scene:onSubFishCreate( databuffer )
-  	 mlog("鱼创建")
+  	 -- mlog("鱼创建")
 
     -- local fishNum = math.floor(dataBuffer:getlen()/577)
     local fishNum = databuffer:readInt()
-    	mlog(fishNum,"FishCreate.fishNum")
+    	-- mlog(fishNum,"FishCreate.fishNum")
 
     if fishNum >= 1 then
     	for i=1,fishNum do
@@ -988,13 +989,13 @@ end
 --判断自己位置 是否需翻转
 function Lkby_Scene:setReversal( )
    
-  -- if self.m_pUserItem then
-  --   if self.m_pUserItem.wChairID < 3 then
-  --       self._dataModel.m_reversal = true
-  --   end
-  -- end
+  if self.m_pUserItem then
+    if self.m_pUserItem.wChairID < 3 then
+        self._dataModel.m_reversal = true
+    end
+  end
 
-  -- return self._dataModel.m_reversal
+  return self._dataModel.m_reversal
 
 end
 

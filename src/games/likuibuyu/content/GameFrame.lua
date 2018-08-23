@@ -316,9 +316,9 @@ function GameFrame:initTrigonomentirc( )
 end
 
 function GameFrame:playEffect( file )
-	if not  GlobalUserItem.bSoundAble then
-		return
-	end
+	-- if not  GlobalUserItem.bSoundAble then
+	-- 	return
+	-- end
 	
 	AudioEngine.playEffect(file)
 
