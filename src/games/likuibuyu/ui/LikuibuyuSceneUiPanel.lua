@@ -286,8 +286,8 @@ end
 function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
 
   --print("score.."..score.."wChairID.."..wChairID.."fishtype.."..fishtype)
-  mlog(DEBUG_W，"播放金币，。。。")
-  self._scene._dataModel:playEffect(g_var(cmd).Coinfly)
+  -- mlog(DEBUG_W,"播放金币，。。。"..pos.x.. "  "..pos.y)
+  self._scene._dataModel:playEffect("coinfly")
 
   local silverNum = {2,2,3,4,4}
   local goldNum = {1,1,1,2,2,3,3,4,5,6,8,16,16,16,18,18,18}
@@ -329,13 +329,13 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
     coinNum = 1
   end
 
-  local posX = {}
-  local initX = -105
-  posX[1] = initX
+  -- local posX = {}
+  -- local initX = -105
+  -- posX[1] = initX
 
-  for i=2,10 do
-    posX[i] = initX-(i-1)*39
-  end
+  -- for i=2,10 do
+  --   posX[i] = initX-(i-1)*39
+  -- end
 
   local node = cc.Node:create()
   node:setAnchorPoint(0.5,0.5)
@@ -354,7 +354,7 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
       if coinNum > 10 then
         coinNum = 10
       end
-
+      -- mlog("score:"..score)
      -- local num = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
      local num = cc.Label:createWithCharMap("game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
      num:setString(string.format("%d", score))

@@ -31,7 +31,7 @@ function Fish:ctor(fishData,target)
 	self.m_pathIndex = 1
 	self.m_nQucikClickNum = 0
 	self.m_fTouchInterval = 0
-	self:setPosition(cc.p(100,100))
+	self:setPosition(cc.p(-500,-500))
 	self:setTag(g_var(cmd).Tag_Fish)
 	self._dataModel = target._dataModel
 
@@ -91,6 +91,7 @@ function Fish:schedulerUpdate()
 		local m_oldPoint = cc.p(self:getPositionX(),self:getPositionY())
 		self:setConvertPoint(point)
 
+		-- mlog("D_SIZE.width"..D_SIZE.width.." D_SIZE.height:"..D_SIZE.height)
 
 		if cc.rectContainsPoint( cc.rect(0,0,D_SIZE.width, D_SIZE.height), point ) then
 			if self.m_data.nFishType ~= g_var(cmd).FishType.FishType_YuanBao then
@@ -221,20 +222,20 @@ function Fish:initBezierConfig( param )
 			dCy = 0
 		}
 	
-		-- bconfig.dCx = 3.0 * (tbp.KeyOne.x - tbp.BeginPoint.x)
-		-- bconfig.dBx = 3.0 * (tbp.KeyTwo.x - tbp.KeyOne.x) - bconfig.dCx
-		-- bconfig.dAx = tbp.EndPoint.x - tbp.BeginPoint.x - bconfig.dCx - bconfig.dBx
+		bconfig.dCx = 3.0 * (tbp.KeyOne.x - tbp.BeginPoint.x)
+		bconfig.dBx = 3.0 * (tbp.KeyTwo.x - tbp.KeyOne.x) - bconfig.dCx
+		bconfig.dAx = tbp.EndPoint.x - tbp.BeginPoint.x - bconfig.dCx - bconfig.dBx
 
-		-- bconfig.dCy = 3.0 * (tbp.KeyOne.y - tbp.BeginPoint.y)
-		-- bconfig.dBy = 3.0 * (tbp.KeyTwo.y - tbp.KeyOne.y) - bconfig.dCy
-		-- bconfig.dAy = tbp.EndPoint.y - tbp.BeginPoint.y - bconfig.dCy - bconfig.dBy
-		bconfig.dCx = tbp.EndPoint.x
-		bconfig.dBx = tbp.KeyOne.x
-		bconfig.dAx = tbp.BeginPoint.x
+		bconfig.dCy = 3.0 * (tbp.KeyOne.y - tbp.BeginPoint.y)
+		bconfig.dBy = 3.0 * (tbp.KeyTwo.y - tbp.KeyOne.y) - bconfig.dCy
+		bconfig.dAy = tbp.EndPoint.y - tbp.BeginPoint.y - bconfig.dCy - bconfig.dBy
+		-- bconfig.dCx = tbp.EndPoint.x
+		-- bconfig.dBx = tbp.KeyOne.x
+		-- bconfig.dAx = tbp.BeginPoint.x
 
-		bconfig.dCy = tbp.EndPoint.y
-		bconfig.dBy = tbp.KeyOne.y
-		bconfig.dAy = tbp.BeginPoint.y
+		-- bconfig.dCy = tbp.EndPoint.y
+		-- bconfig.dBy = tbp.KeyOne.y
+		-- bconfig.dAy = tbp.BeginPoint.y
 		table.insert(self.m_bezierArry, bconfig)
 	end
 end
@@ -263,7 +264,7 @@ function Fish:PointOnCubicBezier(pathIndex,t)
 	tCubed = tSquard*t
 	result.x = (bconfig.dAx * tCubed) + (bconfig.dBx * tSquard) + (bconfig.dCx * t) + tbp.BeginPoint.x
 	result.y = (bconfig.dAy * tCubed) + (bconfig.dBy * tSquard) + (bconfig.dCy * t) + tbp.BeginPoint.y
-
+	
 	-- mlog("x:result.x:"..result.x.." bconfig.dAx:"..bconfig.dAx .. "tCubed: "..tCubed .. " bconfig.dBx:"..bconfig.dBx.. "tSquard: "..tSquard .. " bconfig.dCx:"..bconfig.dCx .. " t:"..t .. " tbp.BeginPoint.x:"..tbp.BeginPoint.x .. "\n\n " )
 	-- mlog("y:result.y:"..result.y.." bconfig.dAy:"..bconfig.dAy .. "tCubed: "..tCubed .. " bconfig.dBy:"..bconfig.dBy.. " tSquard:"..tSquard .. " bconfig.dCy:"..bconfig.dCy .. " t:"..t .. " tbp.BeginPoint.y:"..tbp.BeginPoint.y.. "\n\n " )
 	return result
@@ -334,11 +335,17 @@ function Fish:deadDeal()
 		aniName = "fish_ignot_dead"
 	end
 
+	-- mlog(DEBUG_W,"aniName:"..aniName)
+	-- mlog(DEBUG_W,"self.m_data.nFishType:"..self.m_data.nFishType)
+
+
 	local ani = cc.AnimationCache:getInstance():getAnimation(aniName)
 	local parent = self:getParent()
 
 	--爆炸飞镖
 	if self.m_data.nFishType == g_var(cmd).FishType.FishType_BaoZhaFeiBiao then
+		mlog(DEBUG_W,"爆炸飞镖:")
+
 		local nKnife = 18
 		local angle = 20
 		local radius = 1200
@@ -408,6 +415,8 @@ function Fish:deadDeal()
 		for i=1,nBomb do
 			local boomAnim = cc.AnimationCache:getInstance():getAnimation("BlueIceAnim")
 			local bomb = cc.Sprite:createWithSpriteFrameName("blue00.png")
+			-- mlog(DEBUG_W,"BlueIceAnim:"..bomb)
+			-- mlog(DEBUG_W,"pos:"..self:getPositionX().."  "..self:getPositionY())
 			bomb:setPosition(self:getPositionX(),self:getPositionY())
 			bomb:runAction(cc.Animate:create(boomAnim))
 			parent:addChild(bomb,40)
@@ -443,6 +452,8 @@ function Fish:deadDeal()
 
 		local pos = cc.p(self:getPositionX(),self:getPositionY())
 
+		-- mlog(DEBUG_W,"nBomb:"..nBomb)
+		-- mlog(DEBUG_W,"pos:"..self:getPositionX().."  "..self:getPositionY())
 		for i=1,nBomb do
 			local boomAnim = cc.AnimationCache:getInstance():getAnimation("BombAnim")
 			local bomb = cc.Sprite:createWithSpriteFrameName("boom00.png")
@@ -470,13 +481,13 @@ function Fish:deadDeal()
 		end
 	end
 
-	if nil ~= ani then
+	if nil ~= goldCircle then
 
 		local times = 4
 		if self.m_data.nFishType == g_var(cmd).FishType.FishType_YuanBao then
 			times = 1
 		end
-		local repeats = cc.Repeat:create(cc.Animate:create(ani),times)
+		local repeats = cc.Repeat:create(cc.goldCirclemate:create(ani),times)
 		local call = cc.CallFunc:create(function()	
 
 			self._dataModel.m_fishList[self.m_data.nFishKey] = nil

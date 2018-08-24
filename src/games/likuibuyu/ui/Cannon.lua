@@ -124,9 +124,9 @@ function Cannon:setMultiple(multiple)
 	--print("mutiple is =========================="..multiple)
 	self.m_nMutipleIndex = multiple
 	local nMultipleValue = self._dataModel.m_secene.nMultipleValue[1][multiple+1]
-	for i,v in ipairs(self._dataModel.m_secene.nMultipleValue[1]) do
-		mlog(i,v)
-	end
+	-- for i,v in ipairs(self._dataModel.m_secene.nMultipleValue[1]) do
+	-- 	mlog(i,v)
+	-- end
 	self.m_nCurrentBulletScore = nMultipleValue
 
 	local nNum = 1
@@ -145,7 +145,7 @@ function Cannon:setMultiple(multiple)
 	local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(string.format("gun_%d_%d.png", bulletNum,nNum))
 
 	self.m_fort:setSpriteFrame(frame)
-	mlog("self.m_pos."..self.m_pos)
+	-- mlog("self.m_pos."..self.m_pos)
 	self.parent:updateMultiple(nMultipleValue,self.m_pos+1)
 
 end
@@ -268,7 +268,7 @@ end
 --发射激光
 function Cannon:shootLaser()
 
-    self._dataModel:playEffect(g_var(cmd).Prop_armour_piercing)
+    self._dataModel:playEffect("PROP_ARMOUR_PIERCING")
 
 	self.m_Type = g_var(cmd).CannonType.Laser_Shooting
 
@@ -383,10 +383,10 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 	pos = cc.p(pos.x , pos.y - offset.y/2)
 	bullet0:setPosition(pos)
 	self.parent.parent._gameView:addChild(bullet0,5) --self.parent.parent为GameLayer
-	mlog("isSelf")
+	-- mlog("isSelf")
 	
 	if isSelf then
-		mlog("isSelf true")
+		-- mlog("isSelf true")
 		self.parent.parent:setSecondCount(60)
 
 
@@ -410,7 +410,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
   		pos = cc.p(self.m_cannonPoint.x + pos.x , self.m_cannonPoint.y + pos.y)
   		pos = self._dataModel:convertCoordinateSystem(pos, 0, self._dataModel.m_reversal)
 
-  		self._dataModel:playEffect(g_var(cmd).Shell_8)
+  		self._dataModel:playEffect("SHELL_8")
 
   		-- cmddata:pushshort(pos.x)
   		-- cmddata:pushshort(pos.y)
@@ -521,7 +521,7 @@ function Cannon:setCannonType( cannontype,times)
 			return
 		end
 
-		self._dataModel:playEffect(g_var(cmd).Small_Begin)
+		self._dataModel:playEffect("SMALL_BEGIN")
 
 		self.m_Type = g_var(cmd).CannonType.Laser_Cannon
 
@@ -661,7 +661,9 @@ function Cannon:autoUpdate(dt)
 	self:setFishIndex(self._dataModel.m_fishIndex)
 
 	local mutiple = self._dataModel.m_secene.nMultipleIndex[1][self.m_nChairID+1]
-	local score = self._dataModel.m_secene.nMultipleValue[1][mutiple+1]
+	-- local score = self._dataModel.m_secene.nMultipleValue[1][mutiple+1]
+	local score = self.m_nCurrentBulletScore
+	
 
 	self._dataModel.userItem.lScore =  self._dataModel.userItem.lScore - score
 	-- score = 0

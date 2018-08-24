@@ -176,6 +176,12 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 	self.m_nTableID  = self.m_pUserItem.wTableID
 	self.m_nChairID  = self.m_pUserItem.wChairID
 
+
+	-- self:onSubFishCreate(dataBuffer)
+	-- self:onUserInfo(dataBuffer)
+	-- self:onSubFire(dataBuffer)
+
+	self._dataModel.room_score = dataBuffer:readInt()
 	self:setReversal()  
 		     --添加炮台层
     self.m_cannonLayer = g_var(CannonLayer).new(self)
@@ -191,6 +197,9 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
     self:setUserMultiple(self._dataModel.m_secene.nMultipleValue[1][1])
       
     self:dismissPopWait()
+
+
+    -- self:createFish()
 end
 
 
@@ -406,7 +415,7 @@ function Lkby_Scene:onSubSupply(databuffer )
    
       tipStr = "很遗憾！补给箱里面什么都没有！"
 
-      self._dataModel:playEffect(g_var(cmd).SmashFail)
+      self._dataModel:playEffect("SmashFail")
 
   end
 
@@ -422,8 +431,8 @@ function Lkby_Scene:onSubMultiple( databuffer )
     local mutiple = {}
     mutiple.wChairID = databuffer:readShort()
     mutiple.nMultipleIndex = databuffer:readInt()
-    -- mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
-    -- mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
+    mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
+    mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
     local cannonPos = mutiple.wChairID
     if self._dataModel.m_reversal then 
          cannonPos = 5 - cannonPos
@@ -613,7 +622,7 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
 
     print("场景切换")
 
-    self._dataModel:playEffect(g_var(cmd).Change_Scene)
+    self._dataModel:playEffect("CHANGE_SCENE")
     local systime = os.time()
     self._dataModel.m_enterTime = systime
 
@@ -632,7 +641,6 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
 
 end
 
-
 --创建鱼
 function Lkby_Scene:onSubFishCreate( databuffer )
   	 -- mlog("鱼创建")
@@ -643,10 +651,11 @@ function Lkby_Scene:onSubFishCreate( databuffer )
 
     if fishNum >= 1 then
     	for i=1,fishNum do
-       
+       		
     	  -- local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinishhCreate,dataBuffer)
 	    	local FishCreate = {}
 	    	FishCreate.nFishKey = databuffer:readInt()
+	    	-- mlog("FishCreate.nFishKey.."..FishCreate.nFishKey)
 	    	FishCreate.unCreateTime = databuffer:readInt()
 	    	FishCreate.wHitChair = databuffer:readShort()
 	    	FishCreate.nFishType = databuffer:readByte()
@@ -699,12 +708,13 @@ function Lkby_Scene:onSubFishCreate( databuffer )
 	    		tagBezierPoint.KeyTwo = {}
 	    		tagBezierPoint.BeginPoint.x = databuffer:readShort()
 	    		tagBezierPoint.BeginPoint.y = databuffer:readShort()
-	    		tagBezierPoint.EndPoint.x = databuffer:readShort()
-	    		tagBezierPoint.EndPoint.y = databuffer:readShort()
+	    		
 	    		tagBezierPoint.KeyOne.x = databuffer:readShort()
 	    		tagBezierPoint.KeyOne.y = databuffer:readShort()
-	    		-- tagBezierPoint.KeyTwo.x = databuffer:readShort()
-	    		-- tagBezierPoint.KeyTwo.y = databuffer:readShort()
+	    		tagBezierPoint.KeyTwo.x = databuffer:readShort()
+	    		tagBezierPoint.KeyTwo.y = databuffer:readShort()
+	    		tagBezierPoint.EndPoint.x = databuffer:readShort()
+	    		tagBezierPoint.EndPoint.y = databuffer:readShort()
 	    		tagBezierPoint.Time  =  databuffer:readShort()
 	    		FishCreate.TBzierPoint[1][i] = tagBezierPoint
 	    		
@@ -754,14 +764,23 @@ function Lkby_Scene:onSubFishCatch( databuffer )
 
     -- local catchNum = math.floor(databuffer:getlen()/18)
     local catchNum = databuffer:readInt()
+    -- mlog(DEBUG_W,"catchNum:"..catchNum)
     if catchNum >= 1 then
         for i=1,catchNum do
            -- local catchData = ExternalFun.read_netdata(g_var(cmd).CMD_S_CatchFish,databuffer)
            local catchData = {}
            catchData.nFishIndex = databuffer:readInt()
+   			 -- mlog(DEBUG_W,"catchData.nFishIndex:"..catchData.nFishIndex)
+
            catchData.wChairID = databuffer:readShort()
+   			 -- mlog(DEBUG_W,"catchData.wChairID:"..catchData.wChairID)
+
            catchData.nMultipleCount = databuffer:readInt()
+   			 -- mlog(DEBUG_W,"catchData.nMultipleCount:"..catchData.nMultipleCount)
+
            catchData.lScoreCount = databuffer:readLong()
+   			 -- mlog(DEBUG_W,"catchData.lScoreCount:"..catchData.lScoreCount)
+
            local fish = self._dataModel.m_fishList[catchData.nFishIndex]
 
            if nil ~= fish then
@@ -797,8 +816,8 @@ function Lkby_Scene:onSubFishCatch( databuffer )
              end
 
              local random = math.random(5)
-             local smallSound = string.format("sound_res/samll_%d.wav", random)  
-             local bigSound = string.format("sound_res/big_%d.wav", fish.m_data.nFishType)
+             local smallSound = string.format("samll_%d", random)  
+             local bigSound = string.format("big_%d", fish.m_data.nFishType)
 
              if fish.m_data.nFishType <  g_var(cmd).FISH_KING_MAX then
                 self._dataModel:playEffect(smallSound)
@@ -807,14 +826,17 @@ function Lkby_Scene:onSubFishCatch( databuffer )
              end
 
              local fishPos = cc.p(fish:getPositionX(),fish:getPositionY())
-  
-             if self._dataModel.m_reversal then 
-               fishPos = cc.p(D_SIZE.width-fishPos.x,D_SIZE.height-fishPos.y)
-             end
+  			-- mlog(DEBUG_W,"fish:getPositionX():"..fish:getPositionX())
+  			-- mlog(DEBUG_W,"fish:getPositionY()"..fish:getPositionY())
+      --        if self._dataModel.m_reversal then 
+      --          fishPos = cc.p(D_SIZE.width-fishPos.x,D_SIZE.height-fishPos.y)
+      --          mlog(DEBUG_W,"D_SIZE.width:"..D_SIZE.width)
+  				-- mlog(DEBUG_W,"D_SIZE.height"..D_SIZE.height)
+      --        end
   
   
              if fish.m_data.nFishType > g_var(cmd).FishType.FishType_JianYu then
-               self._dataModel:playEffect(g_var(cmd).CoinLightMove)
+               self._dataModel:playEffect("CoinLightMove")
                local praticle = cc.ParticleSystemQuad:create("game/likuibuyu/particles_test2.plist")
                praticle:setPosition(fishPos)
                praticle:setPositionType(cc.POSITION_TYPE_GROUPED)
@@ -960,6 +982,57 @@ function  Lkby_Scene:onKeyBack()
     return true
 end
 
+
+
+function Lkby_Scene:createFish()
+
+	local FishCreate = {}
+	FishCreate.nFishKey = 1
+	FishCreate.unCreateTime = 111
+	FishCreate.wHitChair = 1
+	FishCreate.nFishType = 1
+	FishCreate.nFishState = 1
+	FishCreate.bRepeatCreate = true
+	FishCreate.bFlockKill = true
+	FishCreate.fRotateAngle = 11
+	FishCreate.PointOffSet = {}
+	FishCreate.PointOffSet.x = 0
+	FishCreate.PointOffSet.y = 0
+
+	FishCreate.fInitalAngle = 0
+	FishCreate.nBezierCount = 1
+	FishCreate.TBzierPoint = {}
+	FishCreate.TBzierPoint[1] = {}
+
+	for i=1,FishCreate.nBezierCount do
+		local tagBezierPoint = {}
+		tagBezierPoint.BeginPoint = {}
+		tagBezierPoint.EndPoint = {}
+		tagBezierPoint.KeyOne = {}
+		tagBezierPoint.KeyTwo = {}
+		tagBezierPoint.BeginPoint.x = 0
+		tagBezierPoint.BeginPoint.y = 0
+		tagBezierPoint.EndPoint.x = 0
+		tagBezierPoint.EndPoint.y = 0
+		tagBezierPoint.KeyOne.x = 0
+		tagBezierPoint.KeyOne.y = 0
+		-- tagBezierPoint.KeyTwo.x = databuffer:readShort()
+		-- tagBezierPoint.KeyTwo.y = databuffer:readShort()
+		tagBezierPoint.Time  =  0
+		FishCreate.TBzierPoint[1][i] = tagBezierPoint
+		
+	end
+
+
+	local fish =  g_var(Fish).new(FishCreate,self)
+  fish:initAnim()
+  fish:setTag(g_var(cmd).Tag_Fish)
+  fish:initWithState()
+  fish:initPhysicsBody()
+  self.m_fishLayer:addChild(fish, fish.m_data.nFishType + 1)
+  self._dataModel.m_fishList[fish.m_data.nFishKey] = fish
+end
+
 --创建定时器
 function Lkby_Scene:onCreateSchedule()
   local isBreak0 = false
@@ -969,7 +1042,6 @@ function Lkby_Scene:onCreateSchedule()
 	  local function dealCanAddFish()
   		-- mlog("isBreak0",isBreak0)
   		-- mlog("isBreak1",isBreak1)
-
 	    if isBreak0 then
 	       isBreak1 = false
 	      return

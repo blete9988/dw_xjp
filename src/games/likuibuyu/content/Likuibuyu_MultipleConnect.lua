@@ -15,8 +15,7 @@ function Likuibuyu_MultipleConnect:ctor(condata)
 	self.condata = condata
 end
 function Likuibuyu_MultipleConnect:writeData(data)
-	
-	data:writeInt(self.condata.ini1) 
+	data:writeInt(self.condata.int1) 
 end
 
 function Likuibuyu_MultipleConnect:readData(data)

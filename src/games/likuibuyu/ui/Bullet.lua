@@ -37,10 +37,10 @@ function Bullet:ctor(angle,chairId,score,mutipleIndex,CannonType,cannon)
    self.m_cannon = cannon
    self._dataModule = self.m_cannon._dataModel
    -- self._gameFrame  = self.m_cannon.frameEngine
-   mlog("self._dataModule.m_secene.nBulletVelocity"..self._dataModule.m_secene.nBulletVelocity)
+   -- mlog("self._dataModule.m_secene.nBulletVelocity"..self._dataModule.m_secene.nBulletVelocity)
    self.m_speed = self._dataModule.m_secene.nBulletVelocity	--子弹速度
 
-   mlog(self.m_speed)
+   -- mlog(self.m_speed)
 
    self.m_nScore = score --子弹分数
    self.m_nMultipleIndex = mutipleIndex
@@ -335,8 +335,8 @@ function Bullet:fallingNet()
 
 		local pos = cc.p(self:getPositionX(),self:getPositionY())
 		pos = cc.pAdd(pos,offset)
-		local catchPos = self._dataModule:convertCoordinateSystem(pos, 2, self._dataModule.m_reversal)
-		net:setPosition(catchPos)
+		-- local catchPos = self._dataModule:convertCoordinateSystem(pos, 2, self._dataModule.m_reversal)
+		net:setPosition(pos)
 
 		local rect = net:getBoundingBox()
 		rect.width = rect.width - 20 + bulletNum*10
@@ -353,11 +353,14 @@ function Bullet:sendCathcFish( rect )
 
 	for k,v in pairs(self._dataModule.m_fishList) do
 		local fish = v
-		local pos = fish:getPosition()
 		local _rect = fish:getBoundingBox()
+		-- mlog(DEBUG_W,_rect.x,_rect.y,_rect.width,_rect.height,"======fish.m_data.nFishKey:"..fish.m_data.nFishKey)
+		-- mlog(DEBUG_W,rect.x,rect.y,rect.width,rect.height,"======rect")
 
 		local bIntersect = cc.rectIntersectsRect(rect,_rect)
 		if bIntersect then
+			-- mlog(DEBUG_W,"撒网bIntersect true"..fish.m_data.nFishKey)
+
 			table.insert(tmp, fish)
 		end
 

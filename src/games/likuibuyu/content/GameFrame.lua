@@ -162,8 +162,8 @@ end
 ]]
 function GameFrame:convertCoordinateSystem( point,type,bconvert )
 
- local WIN32_W = 1280
- local WIN32_H = 800
+ local WIN32_W = 1360
+ local WIN32_H = 765
  local scalex = D_SIZE.width/WIN32_W
  local scaley = D_SIZE.height/WIN32_H
 
@@ -321,8 +321,8 @@ function GameFrame:playEffect( file )
 	-- if not  GlobalUserItem.bSoundAble then
 	-- 	return
 	-- end
-	
-	AudioEngine.playEffect(file)
+	SoundsManager.playSound(file)
+	-- AudioEngine.playEffect(file)
 
 end
 
