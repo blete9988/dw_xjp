@@ -230,7 +230,7 @@ function Bullet:followFish(dt)
 
 
 	local fishPos = cc.p(fish:getPositionX(),fish:getPositionY())
-	if self._dataModule.m_reversal then
+	if  self._dataModule.m_reversal then
 		fishPos = cc.p(D_SIZE.width - fishPos.x , D_SIZE.height - fishPos.y)
 	end
 
@@ -335,8 +335,8 @@ function Bullet:fallingNet()
 
 		local pos = cc.p(self:getPositionX(),self:getPositionY())
 		pos = cc.pAdd(pos,offset)
-		-- local catchPos = self._dataModule:convertCoordinateSystem(pos, 2, self._dataModule.m_reversal)
-		net:setPosition(pos)
+		local catchPos = self._dataModule:convertCoordinateSystem(pos, 2,  self._dataModule.m_reversal)
+		net:setPosition(catchPos)
 
 		local rect = net:getBoundingBox()
 		rect.width = rect.width - 20 + bulletNum*10
@@ -404,7 +404,7 @@ function Bullet:sendCathcFish( rect )
 	end
 
 --发送消息包
-	local request = {0,0,0,0,0}
+	local request = {-1,-1,-1,-1,-1}
 
 	for i=1,#catchList do
 		local fish = catchList[i]

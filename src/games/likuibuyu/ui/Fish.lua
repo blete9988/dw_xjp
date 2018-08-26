@@ -64,10 +64,11 @@ function Fish:schedulerUpdate()
 		if self.m_data.nBezierCount <= self.m_pathIndex-1 then 
 			self._dataModel.m_fishList[self.m_data.nFishKey] = nil
 			self._dataModel.m_InViewTag[self.m_data.nFishKey] = nil
+			mlog(self.m_data.nFishKey.."******************fish removeFromParent********************")
+			
 			self:unScheduleFish()
 			self:removeFromParent()
 			
-			-- mlog("******************fish removeFromParent********************")
 			return
 		end
 
@@ -357,7 +358,7 @@ function Fish:deadDeal()
 			local purPos = cc.p(0,0)
 			purPos.x = pos.x + radius * self._dataModel.m_cosList[20*i]
 			purPos.y = pos.y + radius * self._dataModel.m_sinList[20*i]
-			purPos = self._dataModel:convertCoordinateSystem(purPos, 1, self._dataModel.m_reversal)
+			purPos = self._dataModel:convertCoordinateSystem(purPos, 1,  self._dataModel.m_reversal)
 			local callfunc = cc.CallFunc:create(function()
 				sKnife:removeFromParent()
 			end)
@@ -469,7 +470,7 @@ function Fish:deadDeal()
 					local purPos = cc.p(0,0)
 					purPos.x = pos.x + self._dataModel.m_cosList[360/nBomb*i]
 					purPos.y = pos.y + self._dataModel.m_sinList[360/nBomb*i]
-					purPos = self._dataModel:convertCoordinateSystem(purPos, 2, self._dataModel.m_reversal)
+					purPos = self._dataModel:convertCoordinateSystem(purPos, 2,  self._dataModel.m_reversal)
 					action = cc.MoveTo:create(0.8,purPos)
 
 				end
@@ -481,13 +482,13 @@ function Fish:deadDeal()
 		end
 	end
 
-	if nil ~= goldCircle then
+	if nil ~= ani then
 
 		local times = 4
 		if self.m_data.nFishType == g_var(cmd).FishType.FishType_YuanBao then
 			times = 1
 		end
-		local repeats = cc.Repeat:create(cc.goldCirclemate:create(ani),times)
+		local repeats = cc.Repeat:create(cc.Animate:create(ani),times)
 		local call = cc.CallFunc:create(function()	
 
 			self._dataModel.m_fishList[self.m_data.nFishKey] = nil

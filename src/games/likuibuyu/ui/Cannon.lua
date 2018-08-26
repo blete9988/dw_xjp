@@ -339,8 +339,8 @@ function Cannon:shootLaser()
 		
 		local tmp =  cc.p(self.m_cannonPoint.x,self.m_cannonPoint.y)
 
-		local  beginPos = self._dataModel:convertCoordinateSystem(tmp, 0, self._dataModel.m_reversal)
-		local  endPos	= self._dataModel:convertCoordinateSystem(cc.p(node:getPositionX(),node:getPositionY()), 0, self._dataModel.m_reversal)
+		local  beginPos = self._dataModel:convertCoordinateSystem(tmp, 0,  self._dataModel.m_reversal)
+		local  endPos	= self._dataModel:convertCoordinateSystem(cc.p(node:getPositionX(),node:getPositionY()), 0,  self._dataModel.m_reversal)
 
 		local unLossTime = os.time() - self._dataModel.m_enterTime
 
@@ -408,7 +408,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 
   		local pos = cc.p(movedir.x * 25 , movedir.y * 25)
   		pos = cc.p(self.m_cannonPoint.x + pos.x , self.m_cannonPoint.y + pos.y)
-  		pos = self._dataModel:convertCoordinateSystem(pos, 0, self._dataModel.m_reversal)
+  		pos = self._dataModel:convertCoordinateSystem(pos, 0,  self._dataModel.m_reversal)
 
   		self._dataModel:playEffect("SHELL_8")
 
@@ -665,7 +665,7 @@ function Cannon:autoUpdate(dt)
 	local score = self.m_nCurrentBulletScore
 	
 
-	self._dataModel.userItem.lScore =  self._dataModel.userItem.lScore - score
+	self._dataModel.userItem.lScore =  self._dataModel.userItem.lScore - (score * self._dataModel.room_score)
 	-- score = 0
 	if self._dataModel.userItem.lScore < 0 then
 		self:unAutoSchedule()
@@ -733,7 +733,7 @@ function Cannon:autoUpdate(dt)
 		end
 
 		local pos = cc.p(fish:getPositionX(),fish:getPositionY())
-		if self._dataModel.m_reversal then
+		if   self._dataModel.m_reversal then
 			pos = cc.p(D_SIZE.width-pos.x,D_SIZE.height-pos.y)
 		end
 
@@ -800,7 +800,7 @@ function Cannon:otherUpdate(dt)
 	table.remove(self.m_firelist,1)
 
 	local pos = cc.p(fire.ptPos.x,fire.ptPos.y)
-	pos = self._dataModel:convertCoordinateSystem(pos, 1, self._dataModel.m_reversal)
+	pos = self._dataModel:convertCoordinateSystem(pos, 1,  self._dataModel.m_reversal)
 
 	if self.m_cannonPoint.x == 0 and self.m_cannonPoint.y == 0 then 
 		self.m_cannonPoint = self:convertToWorldSpace(cc.p(self.m_fort:getPositionX(),self.m_fort:getPositionY()))

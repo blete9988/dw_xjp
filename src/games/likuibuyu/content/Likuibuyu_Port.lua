@@ -46,8 +46,9 @@ function Likuibuyu_Port.extend(data)
 		elseif tp == g_var(cmd).SUB_S_FIRE then
 			--摊牌
 			-- mlog("李逵捕鱼收到kaihuo数据返回！")
-			
-			dataModel.m_secene.curscene:onSubFire(data)
+			if(dataModel.m_secene.curscene.onSubFire)then
+				dataModel.m_secene.curscene:onSubFire(data)
+			end
 		elseif tp == g_var(cmd).SUB_S_OVER then
 			--开始抢庄
 			mlog("李逵捕鱼结算收到数据返回！")

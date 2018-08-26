@@ -64,14 +64,8 @@ function Lkby_Scene:ctor(room)
   	--鱼层
 	  self.m_fishLayer = cc.Layer:create()
 	  self._gameView:addChild(self.m_fishLayer, 5)
-    
-    if self._dataModel.m_reversal then
-	    self.m_fishLayer:setRotation(180)
-	end
 
 
-  --自己信息
-  self._gameView:initUserInfo()
 
    --创建定时器
   self:onCreateSchedule()
@@ -86,6 +80,8 @@ function Lkby_Scene:ctor(room)
   self:addEvent()
 
 
+       --播放背景音乐
+	SoundsManager.playMusic("MUSIC_BACK_01",true)
 
 	require("src.ui.item.TalkControl").show(room,self)
 	local quitebtn = require("src.ui.QuitButton").new()
@@ -176,13 +172,24 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 	self.m_nTableID  = self.m_pUserItem.wTableID
 	self.m_nChairID  = self.m_pUserItem.wChairID
 
-
-	-- self:onSubFishCreate(dataBuffer)
-	-- self:onUserInfo(dataBuffer)
-	-- self:onSubFire(dataBuffer)
-
 	self._dataModel.room_score = dataBuffer:readInt()
+
+	self:onSubFishCreate(dataBuffer)
+	local user_count = dataBuffer:readInt()
+	for i=1,user_count do
+		self:onUserInfo(dataBuffer,true)
+	end
+	
 	self:setReversal()  
+
+
+    if self._dataModel.m_reversal then
+	    self.m_fishLayer:setRotation(180)
+	end
+
+	  --自己信息
+	  self._gameView:initUserInfo()
+
 		     --添加炮台层
     self.m_cannonLayer = g_var(CannonLayer).new(self)
     self._gameView:addChild(self.m_cannonLayer, 6)
@@ -505,7 +512,7 @@ function Lkby_Scene:onSubSynchronous( databuffer )
 
 end
 
-function Lkby_Scene:onUserInfo( databuffer )
+function Lkby_Scene:onUserInfo( databuffer ,isFire)
 -- 	wTableID     short
 -- wChairID     short
 -- szNickName   string
@@ -531,10 +538,15 @@ function Lkby_Scene:onUserInfo( databuffer )
 	    self._gameView:addChild(self.m_cannonLayer, 6)
 
 	else
-	-- self._dataModel._userItem = userItem
-	self:onEventUserEnter(userItem.wTableID,userItem.wChairID,userItem)
+		-- self._dataModel._userItem = userItem
+		self:onEventUserEnter(userItem.wTableID,userItem.wChairID,userItem)
 	end
-
+	if(isFire)then
+		local fire_count = databuffer:readInt()
+		for i=1,fire_count do
+			self:onSubFire()
+		end
+	end
 end
 
 function Lkby_Scene:onUserOut(databuffer)
@@ -655,7 +667,7 @@ function Lkby_Scene:onSubFishCreate( databuffer )
     	  -- local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinishhCreate,dataBuffer)
 	    	local FishCreate = {}
 	    	FishCreate.nFishKey = databuffer:readInt()
-	    	-- mlog("FishCreate.nFishKey.."..FishCreate.nFishKey)
+	    	mlog("FishCreate.nFishKey.."..FishCreate.nFishKey)
 	    	FishCreate.unCreateTime = databuffer:readInt()
 	    	FishCreate.wHitChair = databuffer:readShort()
 	    	FishCreate.nFishType = databuffer:readByte()
@@ -816,7 +828,7 @@ function Lkby_Scene:onSubFishCatch( databuffer )
              end
 
              local random = math.random(5)
-             local smallSound = string.format("samll_%d", random)  
+             local smallSound = string.format("small_%d", random)  
              local bigSound = string.format("big_%d", fish.m_data.nFishType)
 
              if fish.m_data.nFishType <  g_var(cmd).FISH_KING_MAX then
@@ -828,11 +840,11 @@ function Lkby_Scene:onSubFishCatch( databuffer )
              local fishPos = cc.p(fish:getPositionX(),fish:getPositionY())
   			-- mlog(DEBUG_W,"fish:getPositionX():"..fish:getPositionX())
   			-- mlog(DEBUG_W,"fish:getPositionY()"..fish:getPositionY())
-      --        if self._dataModel.m_reversal then 
-      --          fishPos = cc.p(D_SIZE.width-fishPos.x,D_SIZE.height-fishPos.y)
+             if self._dataModel.m_reversal then 
+               fishPos = cc.p(D_SIZE.width-fishPos.x,D_SIZE.height-fishPos.y)
       --          mlog(DEBUG_W,"D_SIZE.width:"..D_SIZE.width)
   				-- mlog(DEBUG_W,"D_SIZE.height"..D_SIZE.height)
-      --        end
+             end
   
   
              if fish.m_data.nFishType > g_var(cmd).FishType.FishType_JianYu then
