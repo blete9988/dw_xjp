@@ -277,7 +277,7 @@ function Fish:RotatePoint(pcircle,dradian,ptsome)
 	ptsome.x = ptsome.x - pcircle.x
 	ptsome.y = ptsome.y - pcircle.y
 
-	tmp.x = ptsome.x*math.cos(dradian) - ptsome.y*math.sin(dradian) + pcircle.x
+	tmp.x = ptsome.x * math.cos(dradian) - ptsome.y*math.sin(dradian) + pcircle.x
 	tmp.y = ptsome.x * math.sin(dradian) + ptsome.y*math.cos(dradian) + pcircle.y
 
 	return tmp

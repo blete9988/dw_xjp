@@ -43,6 +43,8 @@ function Cannon:ctor(viewParent)
 	self.m_otherShootSchedule = nil
 	self.m_typeSchedule = nil
 
+	self.m_userID = 0
+
 	self.m_targetPoint = cc.p(0,0)
 	self.m_cannonPoint = cc.p(0,0)
 	self.m_firelist = {}
@@ -358,9 +360,16 @@ function Cannon:shootLaser()
 end
 
 --制造子弹
-function Cannon:productBullet( isSelf,fishIndex, netColor)
+function Cannon:productBullet( isSelf,fishIndex, netColor, bulletIndex)
 
-	self.m_index = self.m_index + 1
+	local index = 0
+	if bulletIndex ~= 0 then
+		index = bulletIndex
+	else
+		self.m_index = self.m_index + 1
+		index = self.m_index
+	end
+	
 	local angle = self.m_fort:getRotation()
 	self:setFishIndex(self._dataModel.m_fishIndex)
 	
@@ -374,7 +383,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor)
 	self.m_fort:runAction(cc.Sequence:create(moveBy,moveBy:reverse()))
 
 	bullet0:setType(self.m_Type)
-	bullet0:setIndex(self.m_index)
+	bullet0:setIndex(index)
 	bullet0:setIsSelf(isSelf)
 	bullet0:setFishIndex(fishIndex)
 	bullet0:initPhysicsBody()
@@ -740,9 +749,9 @@ function Cannon:autoUpdate(dt)
 		local angle = self._dataModel:getAngleByTwoPoint(pos, self.m_cannonPoint)
 		self.m_fort:setRotation(angle)
 
-		self:productBullet(true,self.m_fishIndex,self._dataModel:getNetColor(1))
+		self:productBullet(true,self.m_fishIndex,self._dataModel:getNetColor(1),0)
 	else
-		self:productBullet(true,g_var(cmd).INT_MAX,self._dataModel:getNetColor(1))
+		self:productBullet(true,g_var(cmd).INT_MAX,self._dataModel:getNetColor(1),0)
 
 	end
 
@@ -810,7 +819,7 @@ function Cannon:otherUpdate(dt)
 
 	self.m_fort:setRotation(angle)
 	-- mlog("otherUpdate.....")
-	self:productBullet(false, fire.nTrackFishIndex, cc.WHITE)	
+	self:productBullet(false, fire.nTrackFishIndex, cc.WHITE, fire.nBulletIndex)	
 	
 	--更新分数
 	self.m_pOtherUserItem.lScore = self.m_pOtherUserItem.lScore - fire.nBulletScore

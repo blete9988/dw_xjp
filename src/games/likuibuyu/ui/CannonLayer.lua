@@ -200,6 +200,10 @@ function CannonLayer:initUserInfo(viewpos,userItem)
 
 end
 
+function CannonLayer:getCannons()
+	return self.m_cannonList
+end
+
 function CannonLayer:updateMultiple( mutiple,cannonPos )
 	local gunPlatformButtom = self:getChildByTag(TAG.Tag_Buttom+cannonPos)
 	local labelMutiple = gunPlatformButtom:getChildByTag(500)

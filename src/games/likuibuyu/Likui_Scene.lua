@@ -97,7 +97,7 @@ end
 
 function Lkby_Scene:onEventGameScene(dataBuffer)
 
-  print("场景数据")
+  mlog(DEBUG_W,"场景数据")
 
    if self.m_bScene then
       self:dismissPopWait()
@@ -176,6 +176,8 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 
 	self:onSubFishCreate(dataBuffer)
 	local user_count = dataBuffer:readInt()
+	mlog(DEBUG_W,"user_count:"..user_count)
+
 	for i=1,user_count do
 		self:onUserInfo(dataBuffer,true)
 	end
@@ -526,6 +528,13 @@ function Lkby_Scene:onUserInfo( databuffer ,isFire)
 	userItem.lScore = databuffer:readLong()
 	userItem.cbUserStatus = databuffer:readByte()
 
+	mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
+	mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
+	mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
+	mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
+	mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
+	mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
+	mlog(DEBUG_W,"Player.id:"..Player.id)
 
 	if(userItem.dwUserID == Player.id)then
 		self.m_pUserItem = userItem
@@ -612,6 +621,7 @@ function Lkby_Scene:onSubFire(databuffer)
   fire.ptPos = {}
   fire.ptPos.x = databuffer:readShort()
   fire.ptPos.y = databuffer:readShort()
+  fire.nBulletIndex = databuffer:readInt()
 
   if fire.wChairID == self.m_nChairID then
     return
@@ -894,7 +904,7 @@ function Lkby_Scene:onSubFishCatch( databuffer )
                   local userid = self.m_cannonLayer:getUserIDByCannon(cannonPos+1)
 
                   for k,v in pairs(self.m_cannonLayer._userList) do
-                    local item = g_var
+                    local item = v
                     if item.dwUserID == userid  then
                         item.lScore = item.lScore + catchData.lScoreCount
 

@@ -207,7 +207,24 @@ function Bullet:normalUpdate( dt )
 		pos = cc.p(self:getPositionX()+moveDir.x,self:getPositionY()+moveDir.y)
 		self:setPosition(pos.x,pos.y)
 	end
+end
 
+function Bullet:isRobot()
+	return self.m_cannon.m_pOtherUserItem ~= nil and self.m_cannon.m_pOtherUserItem.dwUserID <= 10
+end
+
+function Bullet:canSendRobot()
+	local cannons = self.m_cannon.parent.m_cannonList
+	local selfId = self.m_cannon.m_ChairID
+	local minPos = -1
+
+	for i=1, #cannons do
+		if cannons[i] ~= nil and cannons[i].m_pOtherUserItem and cannons[i].m_pOtherUserItem.dwUserID > 10 and cannons[i].m_ChairID < selfId then
+			return false
+		end
+	end
+
+	return true
 end
 
 --锁定鱼
@@ -343,8 +360,112 @@ function Bullet:fallingNet()
 		rect.height = rect.height - 20 + bulletNum*10
 
 		self:sendCathcFish(rect)
+	end
+
+	--是机器人的子弹并且当前客户端负责处理机器人信息
+	if self:isRobot() and self:canSendRobot() then
+		local net = cc.Sprite:create("game/likuibuyu/im_net.png") 
+		if self.m_Type == Type.Normal_Bullet or self.m_Type == Type.Special_Bullet  then
+			net = cc.Sprite:create("game/likuibuyu/im_net.png")
+		elseif self.m_Type == Type.Bignet_Bullet then
+			net = cc.Sprite:create("game/likuibuyu/im_net_big.png")
+		end
+
+		local pos = cc.p(self:getPositionX(),self:getPositionY())
+		pos = cc.pAdd(pos,offset)
+		local catchPos = self._dataModule:convertCoordinateSystem(pos, 2,  self._dataModule.m_reversal)
+		net:setPosition(catchPos)
+
+		local rect = net:getBoundingBox()
+		rect.width = rect.width - 20 + bulletNum*10
+		rect.height = rect.height - 20 + bulletNum*10
+
+		self:sendRobotCatchFish(rect)
+	end
+end
+
+function Bullet:sendRobotCatchFish(rect)
+	local tmp = {}
+
+	for k,v in pairs(self._dataModule.m_fishList) do
+		local fish = v
+		local _rect = fish:getBoundingBox()
+		local bIntersect = cc.rectIntersectsRect(rect,_rect)
+		if bIntersect then
+			table.insert(tmp, fish)
+		end
 
 	end
+
+	local count = 0 --网中符合条件的鱼的个数
+	local catchList = {}
+	local isBigFish = true
+
+	local bigFishList = {}
+
+	--筛选大鱼
+	for i=1,#tmp do
+		local fish = tmp[i]
+		if fish.nFishState ~= g_var(cmd).FishType.FishState_Normal then
+			table.insert(bigFishList,fish)
+		    table.remove(tmp,i)
+		end
+	end
+
+	--把大鱼插入队列的前端
+	if 0 ~= #bigFishList then
+		for i=1,#bigFishList do
+			local fish = bigFishList[i]
+			table.insert(tmp, 1,fish)
+		end
+	end
+	
+	bigFishList = nil
+
+	--取出前5条鱼
+	if #tmp > 5 then
+		count = 5
+	else
+		count = #tmp
+	end
+
+	for i=1,count do
+		local fish = tmp[i]
+		table.insert(catchList,fish)
+	end
+
+--发送消息包
+	local request = {-1,-1,-1,-1,-1}
+
+	for i=1,#catchList do
+		local fish = catchList[i]
+		request[i] = fish.m_data.nFishKey
+	end
+
+	-- local cmddata = CCmd_Data:create(24)
+ --   	cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_CATCH_FISH);
+ --    cmddata:pushint(self.m_index)
+ --    for i=1,5 do
+ --    	cmddata:pushint(request[i])
+ --    end
+
+ --     if not  self._gameFrame then
+ --    	return
+ --    end
+
+ --    --发送失败
+	-- if not self._gameFrame:sendSocketData(cmddata) then
+	-- 	self._gameFrame._callBack(-1,"发送捕鱼信息失败")
+	-- end
+	mlog("发生捕鱼 发送捕鱼信息。。。。")
+	--下注请求
+	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,self.m_cannon.m_ChairID, function(result) 
+		if result ~= 0 then 
+			display.showMsg("发送捕鱼信息失败")
+			return 
+		end
+	end)
+
 end
 
 --发送捕获消息
@@ -428,7 +549,7 @@ function Bullet:sendCathcFish( rect )
 	-- end
 	mlog("发生捕鱼 发送捕鱼信息。。。。")
 	--下注请求
-	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,function(result) 
+	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,-1,function(result) 
 		if result ~= 0 then 
 			display.showMsg("发送捕鱼信息失败")
 			return 

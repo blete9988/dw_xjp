@@ -11,16 +11,20 @@ local g_var = ExternalFun.req_var
 Likuibuyu_CatchConnect.port = Port.PORT_LIKUIBUYU
 Likuibuyu_CatchConnect.type = g_var(cmd).SUB_C_CATCH_FISH
 
-function Likuibuyu_CatchConnect:ctor(index,request)
+function Likuibuyu_CatchConnect:ctor(index,request,robotChairID)
 	self.index = index
 	self.request = request
+	self.robotChairID = robotChairID
 end
 function Likuibuyu_CatchConnect:writeData(data)
-	data:writeInt(self.index) 
+	data:writeInt(self.index)
+	data:writeInt(self.robotChairID)
 	for i=1,5 do
 		mlog(DEBUG_W,self.request[i],"====")
 		data:writeInt(self.request[i]) 
 	end
+
+	mlog("CatchLength : "..tostring(data:length()))
 end
 
 function Likuibuyu_CatchConnect:readData(data)
