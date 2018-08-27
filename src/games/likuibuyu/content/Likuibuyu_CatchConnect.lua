@@ -20,11 +20,11 @@ function Likuibuyu_CatchConnect:writeData(data)
 	data:writeInt(self.index)
 	data:writeInt(self.robotChairID)
 	for i=1,5 do
-		mlog(DEBUG_W,self.request[i],"====")
+		-- mlog(DEBUG_W,self.request[i],"====")
 		data:writeInt(self.request[i]) 
 	end
 
-	mlog("CatchLength : "..tostring(data:length()))
+	-- mlog("CatchLength : "..tostring(data:length()))
 end
 
 function Likuibuyu_CatchConnect:readData(data)

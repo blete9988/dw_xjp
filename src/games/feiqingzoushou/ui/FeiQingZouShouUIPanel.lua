@@ -89,14 +89,14 @@ function FeiQingZouShouUIPanel:ctor(room)
 	    		end
 	    		ConnectMgr.connect("src.games.feiqingzoushou.content.FeiQingZouShouBecomeBankerConnect",function(result)
 	    			if result then
-	    				display.showMsg("您已申请上庄,正在排队中")
+	    				display.showMsg(display.trans("##20018"))
 	    				self.dataController:setIsbanker(true)
 	    			end
 	    		end)
 	    	else
 	    		ConnectMgr.connect("src.games.feiqingzoushou.content.FeiQingZouShouOutGoBankerConnect",function(result)
 	    			if result then
-	    				display.showMsg("您已申请下庄")
+	    				display.showMsg(display.trans("##20019"))
 	    				self.dataController:setIsbanker(false)
 	    			end
 	    		end)
@@ -106,7 +106,7 @@ function FeiQingZouShouUIPanel:ctor(room)
 
 	self.sz_btn:setVisible(false)
 
-	local szsqrs_label = display.newText("申请人数:0",20,Color.GWJ_III)
+	local szsqrs_label = display.newText(display.trans("##20020"),20,Color.GWJ_III)
 	middle_menu_layout:addChild(szsqrs_label)
 	Coord.outgap(sz_btn,szsqrs_label,"CC",0,"BT",-2)
 	self.szsqrs_label = szsqrs_label
@@ -116,7 +116,7 @@ function FeiQingZouShouUIPanel:ctor(room)
 	middle_menu_layout:addChild(zxz_label)
 	zxz_label:setPosition(cc.p(355,80))
 	self.zxz_label = zxz_label
-	local sz_label =  display.newText("上庄需1亿",20,Color.GWJ_III)
+	local sz_label =  display.newText(display.trans("##20021"),20,Color.GWJ_III)
 	middle_menu_layout:addChild(sz_label)
 	Coord.outgap(zxz_label,sz_label,"CC",0,"BT",-25)
 	sz_label:setVisible(false)
@@ -152,11 +152,11 @@ function FeiQingZouShouUIPanel:ctor(room)
 		item:addTouchEventListener(function(sender,eventype)
 		    if eventype ~= ccui.TouchEventType.ended then return end
 		    if self.dataController.state ~= 1 then
-		    	display.showMsg("还未到下注时间")
+		    	display.showMsg(display.trans("##20022"))
 		    	return
 		    end
 		    if not self.m_currentBetBtn then
-		    	display.showMsg("请选择筹码再进行下注")
+		    	display.showMsg(display.trans("##20023"))
 		    	return 
 		    end
 		    ConnectMgr.connect("src.games.feiqingzoushou.content.FeiQingZouShouGetBetConnect",self.m_currentBetBtn.betvalue,sender.sid,
@@ -254,7 +254,7 @@ function FeiQingZouShouUIPanel:ctor(room)
 	continue_btn:addTouchEventListener(function(sender,eventype)
 		    if eventype ~= ccui.TouchEventType.ended then
 		    	if self.dataController.state ~= 1 then
-			    	display.showMsg("还未到下注时间")
+			    	display.showMsg(display.trans("##20022"))
 			    	return
 			    end
 		    	ConnectMgr.connect("src.games.feiqingzoushou.content.FeiQingZouShouGetBetAgainConnect",self.dataController.againData,function(result)
@@ -327,7 +327,7 @@ function FeiQingZouShouUIPanel:handlerEvent(event,arg)
 		self:showWait()
 	elseif event == ST.COMMAND_GAMEFQZS_UPDATEBANKER then
 		if arg then
-			display.showMsg("庄家轮换")
+			display.showMsg(display.trans("##4011"))
 		end
 		if self.dataController:playerIsBanker() then
 			self.zx_icon_img:loadTexture("fqzs_icon_4.png",1)
@@ -337,7 +337,7 @@ function FeiQingZouShouUIPanel:handlerEvent(event,arg)
 		self.zhuangname_label:setString(self.dataController.banker_name)
 		self.zhuang_jinbi_label:setFormatNumber(self.dataController.banker_money)
 	elseif event == ST.COMMAND_GAMEFQZS_UPDATEAPPLY then
-		self.szsqrs_label:setString("申请人数:"..self.dataController.apply_number)
+		self.szsqrs_label:setString(display.trans("##20024")..self.dataController.apply_number)
 	elseif event == ST.COMMAND_MAINSOCKET_BREAK then
 		--主socket断开连接
 		self.noNeedClearRes = true
@@ -559,7 +559,7 @@ end
 function FeiQingZouShouUIPanel:playGame(animalSid)
 	if self.clock_item and self.clock_item:getSurplusTime() > 2 then
 		self:removeClock()
-		display.showMsg("下注额已到上限,提前开奖!")
+		display.showMsg(display.trans("##20025"))
 	end
 	self:removeScoreItem()
 	self:disableAllBet()
@@ -754,7 +754,7 @@ function FeiQingZouShouUIPanel:updateZhuang(name,value)
 	self.zhuang_jinbi_label:setFormatNumber(value)
 end
 function FeiQingZouShouUIPanel:updateAllBetValue(value)
-	self.zxz_label:setString("总下注:"..value)
+	self.zxz_label:setString(display.trans("##20026")..value)
 end
 function FeiQingZouShouUIPanel:updateSQRS(value)
 	self.szsqrs_label:setString(value)

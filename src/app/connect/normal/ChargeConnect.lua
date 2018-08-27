@@ -16,7 +16,7 @@ end
 function ChargeConnect:readData(data)
 	local result = data:readUnsignedByte()
 	if result ~= 0 then
-		display.showMsg("充值失败")
+		display.showMsg(display.trans("##1006"))
 	else
         local sign = data.readString()
 

@@ -412,17 +412,17 @@ function Lkby_Scene:onSubSupply(databuffer )
 
   if supply.nSupplyType == g_var(cmd).SupplyType.EST_Laser then
      if supply.wChairID == self.m_nChairID then
-       tipStr = self.m_pUserItem.szNickName.."击中补给箱打出了激光！秒杀利器！赶快使用！"
+       tipStr = self.m_pUserItem.szNickName..display.trans("##20027")
     else
-       tipStr = userItem.szNickName .." 击中补给箱打出了激光！秒杀利器!"
+       tipStr = userItem.szNickName ..display.trans("##20028")
     end
 
   elseif supply.nSupplyType == g_var(cmd).SupplyType.EST_Laser then
     
-      tipStr = userItem.szNickName.." 击中补给箱打出了加速！所有子弹速度翻倍！"
+      tipStr = userItem.szNickName..display.trans("##20029")
   elseif supply.nSupplyType == g_var(cmd).SupplyType.EST_Null then
    
-      tipStr = "很遗憾！补给箱里面什么都没有！"
+      tipStr = display.trans("##20030")
 
       self._dataModel:playEffect("SmashFail")
 
@@ -440,8 +440,8 @@ function Lkby_Scene:onSubMultiple( databuffer )
     local mutiple = {}
     mutiple.wChairID = databuffer:readShort()
     mutiple.nMultipleIndex = databuffer:readInt()
-    mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
-    mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
+    -- mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
+    -- mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
     local cannonPos = mutiple.wChairID
     if self._dataModel.m_reversal then 
          cannonPos = 5 - cannonPos
@@ -477,7 +477,7 @@ function Lkby_Scene:onSubSupplyTip(databuffer)
      tip.wChairID = databuffer:readShort()
      local tipStr = ""
      if tip.wChairID == self.m_nChairID then
-       tipStr = "获得一个补给箱！击中可能获得大量奖励哟！赶快击杀！"
+       tipStr = display.trans("##20031")
       else
          local cannonPos = tip.wChairID
          if self._dataModel.m_reversal then 
@@ -492,7 +492,7 @@ function Lkby_Scene:onSubSupplyTip(databuffer)
          if not userItem then
             return
          end
-         tipStr = userItem.szNickName .." 获得了一个补给箱！羡慕吧，继续努力，你也可能得到！"
+         tipStr = userItem.szNickName ..display.trans("##20032")
      end
 
      self._gameView:Showtips(tipStr)
@@ -528,13 +528,13 @@ function Lkby_Scene:onUserInfo( databuffer ,isFire)
 	userItem.lScore = databuffer:readLong()
 	userItem.cbUserStatus = databuffer:readByte()
 
-	mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
-	mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
-	mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
-	mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
-	mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
-	mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
-	mlog(DEBUG_W,"Player.id:"..Player.id)
+	-- mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
+	-- mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
+	-- mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
+	-- mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
+	-- mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
+	-- mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
+	-- mlog(DEBUG_W,"Player.id:"..Player.id)
 
 	if(userItem.dwUserID == Player.id)then
 		self.m_pUserItem = userItem
@@ -759,14 +759,14 @@ function Lkby_Scene:onSubFishCreate( databuffer )
 	            local tips 
 
 	            if FishCreate.nFishType == g_var(cmd).FishType.FishType_ShuangTouQiEn then
-	                tips = "双头企鹅"
+	                tips = display.trans("##20033")
 	            elseif FishCreate.nFishType == g_var(cmd).FishType.FishType_JinLong then
-	                tips = "金龙"
+	                tips = display.trans("##20034")
 	            else
-	                tips = "李逵"
+	                tips = display.trans("##20035")
 	            end
 
-	            tips = tips.."即将出现,请玩家做好准备!!!"
+	            tips = tips..display.trans("##20036")
 
 	            self._gameView:Showtips(tips)
 	         end
@@ -951,7 +951,7 @@ function Lkby_Scene:createSecoundSchedule()
 		  time:setTag(1)
 		  tipBG:addChild(time)
 
-		  local buttomTip = display.newText("60秒未开炮,即将退出游戏", 20,Color.danrubaise)
+		  local buttomTip = display.newText(display.trans("##20037"), 20,Color.danrubaise)
 		  buttomTip:setAnchorPoint(0.0,0.5)
 		  buttomTip:setPosition(117, 30)
 		  tipBG:addChild(buttomTip)

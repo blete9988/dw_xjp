@@ -195,9 +195,9 @@ local initRegView = function(self)
 	loginFrameBG:setPosition(cc.p(D_SIZE.hw, D_SIZE.hh))
 	node:addChild(loginFrameBG)
 
-	local usernameLabel = display.newText("账   号:", 30, cc.c3b(12, 49, 144))
-	local passwordLabel = display.newText("密   码:", 30, cc.c3b(12, 49, 144))
-	local confirmLabel = display.newText("密码确认:", 30, cc.c3b(12, 49, 144))
+	local usernameLabel = display.newText(display.trans("##20043"), 30, cc.c3b(12, 49, 144))
+	local passwordLabel = display.newText(display.trans("##20044"), 30, cc.c3b(12, 49, 144))
+	local confirmLabel = display.newText(display.trans("##20045"), 30, cc.c3b(12, 49, 144))
 	loginFrameBG:addChild(usernameLabel)
 	loginFrameBG:addChild(passwordLabel)
 	loginFrameBG:addChild(confirmLabel)
@@ -216,15 +216,15 @@ local initRegView = function(self)
 
 	local username = display.newInputText(
 		cc.size(loginFrameBGSize.width - p.x * 4 - confirmLabel:getContentSize().width, 50), "res/images/login/ui_772_grxx_ghtxdi.png",
-		25, cc.c3b(255,255,255), nil, "请输入账号(6-18位数字或字母)", cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
+		25, cc.c3b(255,255,255), nil, display.trans("##20046"), cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
 	)
 	local password = display.newInputText(
 		cc.size(loginFrameBGSize.width - p.x * 4 - confirmLabel:getContentSize().width, 50), "res/images/login/ui_772_grxx_ghtxdi.png",
-		25, cc.c3b(255,255,255), nil, "请输入密码(6-18位数字或字母)", cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
+		25, cc.c3b(255,255,255), nil, display.trans("##20047"), cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
 	)
 	local confirm = display.newInputText(
 		cc.size(loginFrameBGSize.width - p.x * 4 - confirmLabel:getContentSize().width, 50), "res/images/login/ui_772_grxx_ghtxdi.png",
-		25, cc.c3b(255,255,255), nil, "请再次输入密码", cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
+		25, cc.c3b(255,255,255), nil, display.trans("##20048"), cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
 	)
 
 	password:setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD)
@@ -254,17 +254,17 @@ local initRegView = function(self)
 		local _confirm = confirm:getText()
 
 		if _username == "" then
-			display.showMsg("请输入账号(6-18位数字或字母)")
+			display.showMsg(display.trans("##20046"))
 			return
 		end
 
 		if _password == "" then
-			display.showMsg("请输入密码(6-18位数字或字母)")
+			display.showMsg(display.trans("##20047"))
 			return
 		end
 
 		if _confirm ~= _password then
-			display.showMsg("两次输入密码不一致")
+			display.showMsg(display.trans("##20049"))
 			return
 		end
 
@@ -279,16 +279,16 @@ local initRegView = function(self)
 			self.sending = false
 
 			if data == nil then
-				display.showMsg("注册失败")
+				display.showMsg(display.trans("##50100"))
 				return
 			end
 
 			if data["errno"] ~= 0 then
-				display.showMsg(data["errmsg"] or "注册失败")
+				display.showMsg(data["errmsg"] or display.trans("##50100"))
 				return
 			end
 
-			display.showMsg("注册成功")
+			display.showMsg(display.trans("##20050"))
 
 			--注册成功，直接进入登陆流程
 			--进入登陆流程
@@ -324,8 +324,8 @@ local initLoginView = function(self)
 	loginFrameBG:setPosition(cc.p(D_SIZE.hw, D_SIZE.hh))
 	node:addChild(loginFrameBG)
 
-	local usernameLabel = display.newText("账号:", 30, cc.c3b(12, 49, 144))
-	local passwordLabel = display.newText("密码:", 30, cc.c3b(12, 49, 144))
+	local usernameLabel = display.newText(display.trans("##20051"), 30, cc.c3b(12, 49, 144))
+	local passwordLabel = display.newText(display.trans("##20052"), 30, cc.c3b(12, 49, 144))
 	loginFrameBG:addChild(usernameLabel)
 	loginFrameBG:addChild(passwordLabel)
 
@@ -340,11 +340,11 @@ local initLoginView = function(self)
 
 	local username = display.newInputText(
 		cc.size(loginFrameBGSize.width - p.x * 4 - usernameLabel:getContentSize().width, 50), "res/images/login/ui_772_grxx_ghtxdi.png",
-		30, cc.c3b(255,255,255), nil, "请输入账号(6-18位数字或字母)", cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
+		30, cc.c3b(255,255,255), nil, display.trans("##20046"), cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
 	)
 	local password = display.newInputText(
 		cc.size(loginFrameBGSize.width - p.x * 4 - usernameLabel:getContentSize().width, 50), "res/images/login/ui_772_grxx_ghtxdi.png",
-		30, cc.c3b(255,255,255), nil, "请输入密码(6-18位数字或字母)", cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
+		30, cc.c3b(255,255,255), nil,display.trans("##20047"), cc.c3b(76,175,232), nil, nil, ccui.TextureResType.localType
 	)
 
 	
@@ -367,12 +367,12 @@ local initLoginView = function(self)
 		local _password = password:getText()
 
 		if _username == "" then
-			display.showMsg("请输入账号(6-18位数字或字母)")
+			display.showMsg(display.trans("##20046"))
 			return
 		end
 
 		if _password == "" then
-			display.showMsg("请输入密码(6-18位数字或字母)")
+			display.showMsg(display.trans("##20047"))
 			return
 		end
 

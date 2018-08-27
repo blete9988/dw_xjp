@@ -27,7 +27,7 @@ local function loginCallback(result)
 
 		display.enterScene("src.ui.scene.login.LoginScene")
 
-		display.showMsg("登陆失败")
+		display.showMsg(display.trans("##1005"))
 		return 
 	end
 	--注册推送

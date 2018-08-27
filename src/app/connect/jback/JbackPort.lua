@@ -24,7 +24,7 @@ function JbackPort.extend(data)
 		elseif tp == 1001 then
 			--跑马灯
 			-- player.msgMgr:bytesRead(data)
-			display.showMsg("账号异常登录！")
+			display.showMsg(display.trans("##1004"))
 		end
 	end
 	return handler

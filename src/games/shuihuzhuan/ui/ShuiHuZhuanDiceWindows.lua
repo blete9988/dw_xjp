@@ -73,7 +73,7 @@ function ShuiHuZhuanDiceWindows:initUI()
 		if eventype ~= ccui.TouchEventType.ended then return end
 		if sender.state == 3 then
 			if Player.gold < self.winMoney * 2 then
-				display.showMsg("倍比金额不足")
+				display.showMsg(display.trans("##20042"))
 				return 
 			end
 		end

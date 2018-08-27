@@ -58,7 +58,7 @@ function LikuibuyuUiPanel:ctor(scene)
         --  cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_MULTIPLE);
         --  cmddata:pushint(index)
         -- self._scene:sendNetData(cmddata) 
-        mlog("切换倍数！！！！"..index)
+        -- mlog("切换倍数！！！！"..index)
           local condata = {}
           condata.int1 = index
           ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_MultipleConnect" ,condata,function(result) end)

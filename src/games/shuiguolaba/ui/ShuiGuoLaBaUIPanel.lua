@@ -319,7 +319,7 @@ end
 function ShuiGuoLaBaUIPanel:playGame()
 	local betdatas = self.dataController:getBetDatas()
 	if not betdatas then
-		display.showMsg("请先下注!")
+		display.showMsg(display.trans("##20040"))
 		return
 	end
 	ConnectMgr.connect("src.games.shuiguolaba.content.ShuiGuoLaBaPlayConnect",betdatas,function(result)
@@ -426,7 +426,7 @@ function ShuiGuoLaBaUIPanel:initmultiple()
 			self:cleanDesktop()
 		end
 		if self.dataController:getBetAllMoney() + self.m_currentBetBtn.betvalue > self.dataController.maxBetMoney then
-			display.showMsg("最大下注额为1亿")
+			display.showMsg(display.trans("##20041"))
 			return
 		end
 		sender:addTotalValue(self.m_currentBetBtn.betvalue)

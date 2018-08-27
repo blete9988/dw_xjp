@@ -457,11 +457,11 @@ function Bullet:sendRobotCatchFish(rect)
 	-- if not self._gameFrame:sendSocketData(cmddata) then
 	-- 	self._gameFrame._callBack(-1,"发送捕鱼信息失败")
 	-- end
-	mlog("发生捕鱼 发送捕鱼信息。。。。")
+	-- mlog("发生捕鱼 发送捕鱼信息。。。。")
 	--下注请求
 	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,self.m_cannon.m_ChairID, function(result) 
 		if result ~= 0 then 
-			display.showMsg("发送捕鱼信息失败")
+			display.showMsg(display.trans("##20038"))
 			return 
 		end
 	end)
@@ -547,11 +547,11 @@ function Bullet:sendCathcFish( rect )
 	-- if not self._gameFrame:sendSocketData(cmddata) then
 	-- 	self._gameFrame._callBack(-1,"发送捕鱼信息失败")
 	-- end
-	mlog("发生捕鱼 发送捕鱼信息。。。。")
+	-- mlog("发生捕鱼 发送捕鱼信息。。。。")
 	--下注请求
 	ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_CatchConnect" , self.m_index,request,-1,function(result) 
 		if result ~= 0 then 
-			display.showMsg("发送捕鱼信息失败")
+			display.showMsg(display.trans("##20038"))
 			return 
 		end
 	end)

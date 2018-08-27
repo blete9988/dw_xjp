@@ -175,7 +175,7 @@ function HaoChePiaoYiSceneUIPanel:ctor(room)
 	continue_btn:addTouchEventListener(function(sender,eventype)
 		    if eventype ~= ccui.TouchEventType.ended then return end
 	    	if self.dataController.state ~= 1 then
-		    	display.showMsg("还未到下注时间")
+		    	display.showMsg(display.trans("##20022"))
 		    	return
 		    end
 	    	ConnectMgr.connect("src.games.haochepiaoyi.content.HaoChePiaoYiGetBetAgainConnect",self.dataController.againData,function(result)
@@ -211,14 +211,14 @@ function HaoChePiaoYiSceneUIPanel:ctor(room)
 		    		end
 		    		ConnectMgr.connect("src.games.haochepiaoyi.content.HaoChePiaoYiBecomeBankerConnect",function(result)
 		    			if result then
-		    				display.showMsg("您已申请上庄,正在排队中")
+		    				display.showMsg(display.trans("##20018"))
 		    				self.dataController:setIsbanker(true)
 		    			end
 		    		end)
 		    	else
 		    		ConnectMgr.connect("src.games.haochepiaoyi.content.HaoChePiaoYiOutGoBankerConnect",function(result)
 		    			if result then
-		    				display.showMsg("您已申请下庄")
+		    				display.showMsg(display.trans("##20019"))
 		    				self.dataController:setIsbanker(false)
 		    			end
 		    		end)
@@ -259,7 +259,7 @@ function HaoChePiaoYiSceneUIPanel:ctor(room)
 	self.szsqrs_label:setVisible(false)
 
 	--上庄需要
-	local szxy_label = display.newText("上庄需要1亿",20,Color.GWJ_F)
+	local szxy_label = display.newText(display.trans("##20021"),20,Color.GWJ_F)
 	szxy_label:setAnchorPoint(cc.p(0,0.5))
 	Coord.outgap(sqrs_label,szxy_label,"LL",5,"BT",-19)
 	self.main_layout:addChild(szxy_label)
@@ -346,7 +346,7 @@ function HaoChePiaoYiSceneUIPanel:handlerEvent(event,arg)
 		self:showWait()
 	elseif event == ST.COMMAND_GAMEHCPY_UPDATEBANKER then
 		if arg then
-			display.showMsg("庄家轮换")
+			display.showMsg(display.trans("##4011"))
 		end
 		if self.dataController:playerIsBanker() then
 			self.zx_icon_img:loadTexture("fcpy_icon_42.png",1)
@@ -356,7 +356,7 @@ function HaoChePiaoYiSceneUIPanel:handlerEvent(event,arg)
 		self.zhuangname_label:setString(self.dataController.banker_name)
 		self.zhuang_jinbi_label:setFormatNumber(self.dataController.banker_money)
 	elseif event == ST.COMMAND_GAMEHCPY_UPDATEAPPLY then
-		self.szsqrs_label:setString("申请人数: "..self.dataController.apply_number)
+		self.szsqrs_label:setString(display.trans("##20024")..self.dataController.apply_number)
 	elseif event == ST.COMMAND_MAINSOCKET_BREAK then
 		--主socket断开连接
 		self.noNeedClearRes = true
@@ -395,7 +395,7 @@ function HaoChePiaoYiSceneUIPanel:multipleClick(index)
 	local sender = self.multipleList[index]
 	sender:blink()
 	if self.dataController.state ~= 1 then
-    	display.showMsg("还未到下注时间")
+    	display.showMsg(display.trans("##20022"))
     	return
     end
     if not self.m_currentBetBtn then return end
@@ -413,7 +413,7 @@ function HaoChePiaoYiSceneUIPanel:multipleClick(index)
 					self:checkDisable()
 					self:checkContinueState()
 				else
-					display.showMsg("请选择筹码再进行下注")
+					display.showMsg(display.trans("##20023"))
 			    end
 	    	end
 	    end)
@@ -597,7 +597,7 @@ end
 function HaoChePiaoYiSceneUIPanel:playGame()
 	if self.clock_item and self.clock_item:getSurplusTime() > 2 then
 		self:removeClock()
-		display.showMsg("下注额已到上限,提前开奖!")
+		display.showMsg(display.trans("##20025"))
 	end
 	self.nowTime = 0
 	self.overTime = 0

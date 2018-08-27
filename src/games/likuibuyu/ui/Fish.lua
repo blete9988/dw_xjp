@@ -64,7 +64,7 @@ function Fish:schedulerUpdate()
 		if self.m_data.nBezierCount <= self.m_pathIndex-1 then 
 			self._dataModel.m_fishList[self.m_data.nFishKey] = nil
 			self._dataModel.m_InViewTag[self.m_data.nFishKey] = nil
-			mlog(self.m_data.nFishKey.."******************fish removeFromParent********************")
+			-- mlog(self.m_data.nFishKey.."******************fish removeFromParent********************")
 			
 			self:unScheduleFish()
 			self:removeFromParent()

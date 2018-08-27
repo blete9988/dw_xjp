@@ -474,7 +474,7 @@ function JinShaYinShaUIPanel:initmultiple()
 	local function multiple_Click(sender,eventype)
 		if eventype ~= ccui.TouchEventType.ended then return end
 	    if self.dataController.state ~= 1 then
-	    	display.showMsg("还未到下注时间")
+	    	display.showMsg(display.trans("##20022"))
 	    	return
 	    end
 	    if not self.m_currentBetBtn then return end
@@ -491,7 +491,7 @@ function JinShaYinShaUIPanel:initmultiple()
 						self:checkDisable()
 						self:checkContinueState()
 					else
-						display.showMsg("请选择筹码再进行下注")
+						display.showMsg(display.trans("##20023"))
 				    end
 		    	end
 		    end)

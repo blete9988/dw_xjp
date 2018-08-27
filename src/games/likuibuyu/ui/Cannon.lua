@@ -241,7 +241,7 @@ function Cannon:shoot( vec , isbegin )
 		if self.m_Type == g_var(cmd).CannonType.Special_Canonn then
 			time = time / 2 
 		end
-		mlog("开火9900000")
+		-- mlog("开火9900000")
 		self:autoUpdate(0)
 		self:autoSchedule(time)
 	end
@@ -438,7 +438,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor, bulletIndex)
 		ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_FireConnect" ,condata,function(result) 
 		if result ~= 0 then 
 			
-			display.showMsg("发送开火息失败")
+			display.showMsg(display.trans("##20039"))
 			return 
 		end
 	end)
