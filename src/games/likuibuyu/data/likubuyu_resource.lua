@@ -43,6 +43,7 @@ resource.sounds={
 	{url="game/likuibuyu/sounds/big_14.wav"},
 	{url="game/likuibuyu/sounds/big_15.wav"},
 	{url="game/likuibuyu/sounds/big_16.wav"},
+	{url="game/likuibuyu/sounds/big_17.wav"},
 	{url="game/likuibuyu/sounds/CHANGE_SCENE.wav"},
 	{url="game/likuibuyu/sounds/CoinAnimation.wav"},
 	{url="game/likuibuyu/sounds/coinfly.wav"},

@@ -35,7 +35,7 @@ function Lkby_Scene:ctor(room)
 	self:addChild(gameView)
 	self._gameView = gameView
 
-
+	self.noNeedClearRes = true
 	self._dataModel = require("src.games.likuibuyu.content.GameFrame").getInstance()
 	self._dataModel:setRoom(room)
 	self._dataModel.m_secene.curscene = self
@@ -645,7 +645,7 @@ end
 --切换场景
 function Lkby_Scene:onSubExchangeScene( dataBuffer )
 
-    print("场景切换")
+    mlog(DEBUG_W,"场景切换")
 
     self._dataModel:playEffect("CHANGE_SCENE")
     local systime = os.time()
@@ -656,6 +656,7 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
     -- local exchangeScene = ExternalFun.read_netdata(g_var(cmd).CMD_S_ChangeSecene,dataBuffer)
     local exchangeScene = {}
     exchangeScene.cbBackIndex = dataBuffer:readByte()
+    mlog(DEBUG_W,exchangeScene.cbBackIndex,"场景ID")
     self._gameView:updteBackGround(exchangeScene.cbBackIndex)
 
     local callfunc = cc.CallFunc:create(function()
@@ -680,7 +681,7 @@ function Lkby_Scene:onSubFishCreate( databuffer )
     	  -- local FishCreate =   ExternalFun.read_netdata(g_var(cmd).CMD_S_FishFinishhCreate,dataBuffer)
 	    	local FishCreate = {}
 	    	FishCreate.nFishKey = databuffer:readInt()
-	    	mlog("FishCreate.nFishKey.."..FishCreate.nFishKey)
+	    	-- mlog("FishCreate.nFishKey.."..FishCreate.nFishKey)
 	    	FishCreate.unCreateTime = databuffer:readInt()
 	    	FishCreate.wHitChair = databuffer:readShort()
 	    	FishCreate.nFishType = databuffer:readByte()
@@ -1237,7 +1238,7 @@ function Lkby_Scene:onExit()
   -- cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(g_var(cmd).Event_LoadingFinish)
 
  		--移除推送端口
-	ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU)
+	ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_JBACK_LIKUIBUYU)
 	
   --释放游戏所有定时器
   self:unSchedule()
@@ -1265,7 +1266,8 @@ function Lkby_Scene:onCleanup()
 	self:removeAllEvent()
 	-- self:removeFromParent(true)
 	SoundsManager.stopAllMusic()
-	-- require("src.games.qiangzhuangniuniu.data.Qznn_GameMgr").getInstance():destory(self.noNeedClearRes)
+	require("src.games.likuibuyu.content.GameFrame").getInstance():destory(self.noNeedClearRes)
+
 	self:Quit()
 
 end

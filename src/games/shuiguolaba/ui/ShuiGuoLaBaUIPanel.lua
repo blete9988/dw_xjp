@@ -8,7 +8,7 @@ local ShuiGuoLaBaUIPanel = class("ShuiGuoLaBaUIPanel",function()
 	return layout
 end,require("src.base.event.EventDispatch"),IEventListener)
 
-function ShuiGuoLaBaUIPanel:ctor()
+function ShuiGuoLaBaUIPanel:ctor(room)
 	self.gameItemList = {}	 --游戏项集合
 	self.multipleList = {}   --倍数项集合
 	self.dropItemList = {}	 --右边显示项集合
@@ -24,6 +24,8 @@ function ShuiGuoLaBaUIPanel:ctor()
 	self.slowIndex = 0 		 --减速的步数
 	self.isClimb = false     --是否龟速
 	self.state = 0           --状态
+	self.room = room
+	
 	self.dataController = require("src.games.shuiguolaba.data.ShuiGuoLaBaController").getInstance()
 	self.effect_config = require("src.games.shuiguolaba.data.ShuiGuoLaBa_effect_config")
 	self.soundController = require("src.games.shuiguolaba.data.ShuiGuoLaBaSoundController").getInstance()
@@ -834,6 +836,7 @@ function ShuiGuoLaBaUIPanel:updateDeFen(value)
 end
 function ShuiGuoLaBaUIPanel:onCleanup()
 	self.dataController:init()
+	self.dataController:destory()
 	self:removeAllEvent()
 end
 

@@ -33,6 +33,7 @@ function LikuibuyuUiPanel:ctor(scene)
 
 	local game_bg = display.newImage("#game/likuibuyu/game_bg_0.png")
 	game_bg:setAnchorPoint(cc.p(0,0))
+  game_bg:setTag(TAG.tag_bg)
 	self:addChild(game_bg)
 	self.game_bg = game_bg
 
@@ -58,7 +59,7 @@ function LikuibuyuUiPanel:ctor(scene)
         --  cmddata:setcmdinfo(yl.MDM_GF_GAME, g_var(cmd).SUB_C_MULTIPLE);
         --  cmddata:pushint(index)
         -- self._scene:sendNetData(cmddata) 
-        -- mlog("切换倍数！！！！"..index)
+        mlog("切换倍数！！！！"..index)
           local condata = {}
           condata.int1 = index
           ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_MultipleConnect" ,condata,function(result) end)
@@ -207,7 +208,7 @@ function LikuibuyuUiPanel:updteBackGround(param)
 
 
     local bg = self:getChildByTag(TAG.tag_bg)
-
+    mlog(DEBUG_W,bg,"bg")
     if bg  then
         local call = cc.CallFunc:create(function()
             bg:removeFromParent()
@@ -224,7 +225,9 @@ function LikuibuyuUiPanel:updteBackGround(param)
 
         _bg:runAction(cc.FadeTo:create(5,255))
     end
-
+      if(param == 0)then
+        return
+      end
         --鱼阵提示
         local groupTips = ccui.ImageView:create("game/likuibuyu/fish_grounp.png")
         groupTips:setPosition(cc.p(D_SIZE.width/2,D_SIZE.height/2))
@@ -286,7 +289,7 @@ end
 function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
 
   --print("score.."..score.."wChairID.."..wChairID.."fishtype.."..fishtype)
-  -- mlog(DEBUG_W,"播放金币，。。。"..pos.x.. "  "..pos.y)
+  mlog(DEBUG_W,"播放金币，。。。")
   self._scene._dataModel:playEffect("coinfly")
 
   local silverNum = {2,2,3,4,4}
@@ -329,13 +332,13 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
     coinNum = 1
   end
 
-  -- local posX = {}
-  -- local initX = -105
-  -- posX[1] = initX
+  local posX = {}
+  local initX = -105
+  posX[1] = initX
 
-  -- for i=2,10 do
-  --   posX[i] = initX-(i-1)*39
-  -- end
+  for i=2,10 do
+    posX[i] = initX-(i-1)*39
+  end
 
   local node = cc.Node:create()
   node:setAnchorPoint(0.5,0.5)
@@ -354,7 +357,7 @@ function LikuibuyuUiPanel:ShowCoin( score,wChairID,pos,fishtype )
       if coinNum > 10 then
         coinNum = 10
       end
-      -- mlog("score:"..score)
+
      -- local num = cc.LabelAtlas:create(string.format("%d", score),"game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
      local num = cc.Label:createWithCharMap("game/likuibuyu/num_game_gold.png",37,34,string.byte("0"))
      num:setString(string.format("%d", score))
@@ -642,4 +645,10 @@ function LikuibuyuUiPanel:ShowTipsForBg( bg )
 
   bg:runAction(cc.Sequence:create(cc.ScaleTo:create(0.17,1.0),cc.DelayTime:create(5),cc.ScaleTo:create(0.17,0.1,1.0),call)) 
 end
+
+
+function LikuibuyuUiPanel:onCleanup()
+  -- self:removeAllEvent()
+end
+
 return LikuibuyuUiPanel
