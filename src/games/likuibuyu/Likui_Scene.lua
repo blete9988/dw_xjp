@@ -173,6 +173,11 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 	self.m_nChairID  = self.m_pUserItem.wChairID
 
 	self._dataModel.room_score = dataBuffer:readInt()
+	
+	self:setReversal()  
+		     --添加炮台层
+    self.m_cannonLayer = g_var(CannonLayer).new(self)
+    self._gameView:addChild(self.m_cannonLayer, 6)
 
 	self:onSubFishCreate(dataBuffer)
 	local user_count = dataBuffer:readInt()
@@ -182,7 +187,7 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 		self:onUserInfo(dataBuffer,true)
 	end
 	
-	self:setReversal()  
+
 
 
     if self._dataModel.m_reversal then
@@ -192,9 +197,7 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 	  --自己信息
 	  self._gameView:initUserInfo()
 
-		     --添加炮台层
-    self.m_cannonLayer = g_var(CannonLayer).new(self)
-    self._gameView:addChild(self.m_cannonLayer, 6)
+
 
 
     if self._dataModel.m_secene.cbBackIndex ~= 0 then
@@ -528,13 +531,13 @@ function Lkby_Scene:onUserInfo( databuffer ,isFire)
 	userItem.lScore = databuffer:readLong()
 	userItem.cbUserStatus = databuffer:readByte()
 
-	-- mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
-	-- mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
-	-- mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
-	-- mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
-	-- mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
-	-- mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
-	-- mlog(DEBUG_W,"Player.id:"..Player.id)
+	mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
+	mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
+	mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
+	mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
+	mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
+	mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
+	mlog(DEBUG_W,"Player.id:"..Player.id)
 
 	if(userItem.dwUserID == Player.id)then
 		self.m_pUserItem = userItem
@@ -565,7 +568,7 @@ function Lkby_Scene:onUserOut(databuffer)
 end
 --用户进入
 function Lkby_Scene:onEventUserEnter( wTableID,wChairID,useritem )
- 
+ 	mlog(DEBUG_W,wTableID,self.m_nTableID,self.m_cannonLayer)
     if wTableID ~= self.m_nTableID or not self.m_cannonLayer then
       return
     end
