@@ -1237,7 +1237,7 @@ function Lkby_Scene:onExit()
   -- cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(g_var(cmd).Event_LoadingFinish)
 
  		--移除推送端口
-	ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_LIKUIBUYU)
+	ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_JBACK_LIKUIBUYU)
 	
   --释放游戏所有定时器
   self:unSchedule()
