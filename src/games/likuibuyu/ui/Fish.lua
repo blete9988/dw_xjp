@@ -568,7 +568,7 @@ function  Fish:setConvertPoint( point )
 	 local scaley = D_SIZE.height/WIN32_H
 
 	 local pos = cc.p(point.x*scalex,(WIN32_H-point.y)*scaley) 
-	 -- mlog("最终坐标转换：point.x："..point.x.."scalex:",scalex.."WIN32_H"..WIN32_H.."point.y"..point.y.."scaley"..scaley)
+	 mlog("最终坐标转换：pos.x："..pos.x.."pos.y:"..pos.y.." key:"..self.m_data.nFishKey)
 	 self:setPosition(pos)
 
 	-- mlog("鱼位置：")

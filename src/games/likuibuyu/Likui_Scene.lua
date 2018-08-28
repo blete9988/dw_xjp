@@ -43,6 +43,8 @@ function Lkby_Scene:ctor(room)
     self:getPhysicsWorld():setGravity(cc.p(0,-100))
 
 
+    self:addEvent(ST.COMMAND_MAINSOCKET_BREAK)
+
 
    	-- self:initUi()
    	-- self:initData()
@@ -77,7 +79,7 @@ function Lkby_Scene:ctor(room)
   ExternalFun.registerTouchEvent(self,true)
 
   --注册通知
-  self:addEvent()
+  self:addEventCon()
 
 
        --播放背景音乐
@@ -215,6 +217,16 @@ function Lkby_Scene:onEventGameScene(dataBuffer)
 end
 
 
+
+function Lkby_Scene:handlerEvent(event,arg)
+	if event == ST.COMMAND_PLAYER_GOLD_UPDATE then
+	elseif event == ST.COMMAND_MAINSOCKET_BREAK then
+		--主socket断开连接
+		self.noNeedClearRes = true
+		local room = require("src.games.likuibuyu.content.GameFrame").getInstance().room
+		display.enterScene("src.ui.ReloginScene",{room})
+	end			
+end
 function Lkby_Scene:setUserMultiple()
 
     if not self.m_cannonLayer then
@@ -253,7 +265,7 @@ function Lkby_Scene:dismissPopWait()
     end
 end
 
-function Lkby_Scene:addEvent()
+function Lkby_Scene:addEventCon()
 
 	ConnectMgr.registorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_JBACK_LIKUIBUYU ,require("src.games.likuibuyu.content.Likuibuyu_Port").extend())
 
@@ -610,7 +622,7 @@ end
 
 function Lkby_Scene:onSubFire(databuffer)
   
-  if not self.m_cannonLayer  then
+  if not self.m_cannonLayer  or not databuffer then
     return
   end
 
@@ -648,8 +660,8 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
     mlog(DEBUG_W,"场景切换")
 
     self._dataModel:playEffect("CHANGE_SCENE")
-    local systime = os.time()
-    self._dataModel.m_enterTime = systime
+    -- local systime = os.time()
+    -- self._dataModel.m_enterTime = systime
 
     self._dataModel._exchangeSceneing = true
 
@@ -1064,95 +1076,44 @@ function Lkby_Scene:onCreateSchedule()
   local isBreak0 = false
   local isBreak1 = true
 
---鱼队列
-	  local function dealCanAddFish()
-  		-- mlog("isBreak0",isBreak0)
-  		-- mlog("isBreak1",isBreak1)
-	    if isBreak0 then
-	       isBreak1 = false
-	      return
-	    end
-	    -- mlog("#self._dataModel.m_waitList",#self._dataModel.m_waitList)
-	     if #self._dataModel.m_waitList >=5 then
-	       isBreak0 = true
-	       isBreak1 = false
-	       return
-	    end
+  local function isCanAddtoScene(data)
 
+	    
+    local iscanadd = false
+
+    local time = os.time()
+    mlog("isCanAddtoScene "..data.nProductTime.." "..time.." "..data.nFishKey.." "..tostring(data.nProductTime <= time and data.nProductTime ~= 0))
+    if data.nProductTime <= time and data.nProductTime ~= 0  then
+
+        iscanadd = true
+        return iscanadd
+    end
+
+     return iscanadd
+  end
+--鱼队列
+    local function dealCanAddFish()
+      --按时间排序
 	    table.sort( self._dataModel.m_fishCreateList, function ( a ,b )
 	      return a.nProductTime < b.nProductTime
 	    end )
-
-	    local function isCanAddtoScene(data)
-
-	    
-	      local iscanadd = false
-
-	      local time = os.time()
-	      if data.nProductTime <= time and data.nProductTime ~= 0  then
-
-	          iscanadd = true
-	          return iscanadd
-	      end
-
-	       return iscanadd
-	    end
-
-	    local texture = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibuyu/fish_move1.png")
-	    local texture1 = cc.Director:getInstance():getTextureCache():getTextureForKey("game/likuibuyu/fish_move2.png")
-	    local anim = cc.AnimationCache:getInstance():getAnimation("animation_fish_move26")
-	    -- mlog("texture",texture)
-	    -- mlog("texture1",texture1)
-	    -- mlog("anim",anim)
-	    if not texture or not texture1 or not anim then
-	       return
-	    end
 	    -- mlog("#self._dataModel.m_fishCreateList",#self._dataModel.m_fishCreateList)
 	    if 0 ~= #self._dataModel.m_fishCreateList  then
 	      local fishdata = self._dataModel.m_fishCreateList[1]
-	      table.remove(self._dataModel.m_fishCreateList,1)
 	      local iscanadd = isCanAddtoScene(fishdata)
 	      -- mlog("iscanadd",iscanadd)
-	      if iscanadd then
-	          local fish =  g_var(Fish).new(fishdata,self)
-	          fish:initAnim()
-	          fish:setTag(g_var(cmd).Tag_Fish)
-	          fish:initWithState()
-	          fish:initPhysicsBody()
-	          self.m_fishLayer:addChild(fish, fish.m_data.nFishType + 1)
-	          self._dataModel.m_fishList[fish.m_data.nFishKey] = fish
-	        else
-	          table.insert(self._dataModel.m_waitList, fishdata)
+        if iscanadd then
+          table.remove(self._dataModel.m_fishCreateList,1)
+          local fish =  g_var(Fish).new(fishdata,self)
+          fish:initAnim()
+          fish:setTag(g_var(cmd).Tag_Fish)
+          fish:initWithState()
+          fish:initPhysicsBody()
+          self.m_fishLayer:addChild(fish, fish.m_data.nFishType + 1)
+          self._dataModel.m_fishList[fish.m_data.nFishKey] = fish
 	      end
 	    end 
 	  end
-
---等待队列
-	  local function dealWaitList( )
-
-	      if isBreak1 then
-	        isBreak0 = false
-	        return
-	      end
-
-	      if  #self._dataModel.m_waitList == 0 then
-	         
-	          isBreak0 = false
-	          isBreak1 = true
-	          return
-	      end
-
-	      if  #self._dataModel.m_waitList ~= 0 then
-	       
-	          for i=1, #self._dataModel.m_waitList do
-	             local fishdata = self._dataModel.m_waitList[i]
-	             table.insert(self._dataModel.m_fishCreateList,1,fishdata)
-	          end
-
-	         self._dataModel.m_waitList = {}
-	      end
-	  end
-
 --定位大鱼
 	local function selectMaxFish()
 
@@ -1185,9 +1146,6 @@ function Lkby_Scene:onCreateSchedule()
 
 	--能加入显示的鱼群
 	  dealCanAddFish()
-
-	--需等待的鱼群
-	  dealWaitList()
 
 	end
 

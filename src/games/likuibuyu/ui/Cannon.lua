@@ -653,7 +653,7 @@ function Cannon:autoUpdate(dt)
 	end
 
 	if self._dataModel._exchangeSceneing  then 	--切换场景中不能发炮
-		mlog(v,"切换场景中不能发炮....................")
+		mlog(DEBUG_W,"切换场景中不能发炮....................")
 		return false
 	end
 
@@ -822,7 +822,7 @@ function Cannon:otherUpdate(dt)
 	self:productBullet(false, fire.nTrackFishIndex, cc.WHITE, fire.nBulletIndex)	
 	
 	--更新分数
-	self.m_pOtherUserItem.lScore = self.m_pOtherUserItem.lScore - fire.nBulletScore
+	self.m_pOtherUserItem.lScore = self.m_pOtherUserItem.lScore - (fire.nBulletScore * self._dataModel.room_score)
 	self:updateScore(self.m_pOtherUserItem.lScore)
 
 end
