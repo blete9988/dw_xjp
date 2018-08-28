@@ -54,6 +54,7 @@ function ShuiGuoLaBaScene:onCleanup()
 	self:removeAllEvent()
 	if not self.noNeedClearRes then
 		require("src.command.ReleaseResTool")(require(self.room.game.resourcecfg))
+		
 	end
 end
 

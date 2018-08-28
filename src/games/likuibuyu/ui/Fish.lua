@@ -591,4 +591,8 @@ function Fish:Stay(time)
 end
 
 
+function Fish:onCleanup()
+  -- self:removeAllEvent()
+end
+
 return Fish

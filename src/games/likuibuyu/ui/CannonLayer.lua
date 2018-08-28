@@ -479,6 +479,13 @@ function CannonLayer:onUserout(dwUserID)
     end 
 end
 
+
+function CannonLayer:onCleanup()
+	mlog(DEBUG_W,"onCleanup CannonLayer")
+  -- self:removeAllEvent()
+end
+
+
 --用户状态
 function CannonLayer:onEventUserStatus(useritem,newstatus,oldstatus)
 

@@ -310,6 +310,19 @@ function GameFrame:selectMaxFish( )
 	return fishIndex
 end
 
+
+function GameFrame:destory(noNeedClearRes)
+	ConnectMgr.connect("gamehall.QuitRoomConnect")
+	if not noNeedClearRes then
+		require("src.command.ReleaseResTool")(require(self.room.game.resourcecfg))
+	end
+	--移除推送端口
+	-- ConnectMgr.unRegistorJBackPort(ConnectMgr.getMainSocket(),Port.PORT_JBACK_QZNN)
+	
+	self.room = nil
+	instance = nil
+end
+
 function GameFrame:initTrigonomentirc( )
 	for i=1,360 do
 		local sin = math.sin(3.14 / 180 * i)

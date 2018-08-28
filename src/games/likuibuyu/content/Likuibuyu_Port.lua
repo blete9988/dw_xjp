@@ -13,6 +13,7 @@ function Likuibuyu_Port.extend(data)
 	local dataModel  = require("src.games.likuibuyu.content.GameFrame").getInstance()
 	local handler = function(data)
 		local tp = data:readUnsignedShort()
+		mlog(DEBUG_W,tp,"=====2222tp")
 		if tp == g_var(cmd).SUB_S_FISH_CATCH then
 			mlog(DEBUG_W,"李逵捕鱼catch捕获鱼收到数据返回！")
 		
@@ -21,11 +22,6 @@ function Likuibuyu_Port.extend(data)
 
 		elseif tp == g_var(cmd).SUB_S_FISH_CREATE then
 			mlog("李逵捕鱼创建鱼收到数据返回！")
-		  	-- if math.mod(data:getlen(),577) == 0 then --576 sizeof(CMD_S_FishCreate)
-		        --通知
-		      -- local event = cc.EventCustom:new(g_var(cmd).Event_FishCreate)
-		      -- cc.Director:getInstance():getEventDispatcher():dispatchEvent(event)
-		      
 		  		--鱼创建
 		  		dataModel.m_secene.curscene:onSubFishCreate(data)
 		  	-- end

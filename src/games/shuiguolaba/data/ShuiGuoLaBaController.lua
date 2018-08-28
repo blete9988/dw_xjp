@@ -105,4 +105,10 @@ function ShuiGuoLaBaController.getInstance()
 	return instance
 end
 
+
+function ShuiGuoLaBaController:destory()
+	instance = nil
+end
+
+
 return ShuiGuoLaBaController

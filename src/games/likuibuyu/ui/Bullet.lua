@@ -558,4 +558,8 @@ function Bullet:sendCathcFish( rect )
 
 end
 
+function Bullet:onCleanup()
+  -- self:removeAllEvent()
+end
+
 return Bullet

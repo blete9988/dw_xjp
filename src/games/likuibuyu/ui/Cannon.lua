@@ -888,4 +888,9 @@ function Cannon:removeTypeTag()
 end
 
 
+function Cannon:onCleanup()
+  -- self:removeAllEvent()
+end
+
+
 return Cannon
