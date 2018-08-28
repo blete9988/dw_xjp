@@ -215,13 +215,18 @@ function MainView:m_initGameunit()
 		Player.setGameTYpe(t.gametype)-- 玩家打开游戏类型
 	end)
 	
-	-- local btn3 = require("src.ui.item.GameHallButton").new(ST.TYPE_GAMEHALL_3,"res/images/spine/fishing.json", "res/images/spine/fishing_tex.atlas")
-	-- btn3:setLocalZOrder(1)
-	-- layout:addChild(Coord.outgap(btn2,btn3,"RL",55,"CC",0))
-	-- btn3:addTouchEventListener(function(t,e) 
-	-- 	if e ~= ccui.TouchEventType.ended then return end
-	-- 	self:showGameGroups(t.gametype)
-	-- end)
+	local btn3 = require("src.ui.item.GameHallButton").new(ST.TYPE_GAMEHALL_3,"res/images/spine/fishing.json", "res/images/spine/fishing_tex.atlas")
+	btn3:setLocalZOrder(1)
+	layout:addChild(Coord.outgap(btn2,btn3,"RL",55,"CC",0))
+	btn3:addTouchEventListener(function(t,e) 
+		if e ~= ccui.TouchEventType.ended then return end
+		if(Player.is_agent == 1)then
+			display.showMsg(display.trans("##2073"))
+			return
+		end
+		self:showGameGroups(t.gametype)
+		Player.setGameTYpe(t.gametype)-- 玩家打开游戏类型
+	end)
 
 	self.m_gameunitLayout = layout
 	

@@ -127,33 +127,19 @@ local _config = {
 			resourcecfg = "src.games.qiangzhuangniuniu.qznn_resource"
 		},
 
-	-- [110] = 
-	-- 	{
-	-- 		sid = 110,
-	-- 		name = "三公",
-	-- 		key = "sangong",
-	-- 		group = 1,
-	-- 		order = 0,
-	-- 		background = "p_ui_bg_pink.png",
-	-- 		namepanel = "p_ui_namebg_purple.png",
-	-- 		namepic = "p_ui_1133.png",
-	-- 		icon = "p_ui_1233.png",
-	-- 		path = "src.games.sangong.ui.SanGong_Scene",
-	-- 		resourcecfg = "src.games.sangong.sangong_resource"
-	-- 	},
 	[110] = 
 		{
 			sid = 110,
-			name = "李逵劈鱼",
-			key = "likuibuyu",
+			name = "三公",
+			key = "sangong",
 			group = 1,
 			order = 0,
-			background = "p_ui_bg_purple.png",
+			background = "p_ui_bg_pink.png",
 			namepanel = "p_ui_namebg_purple.png",
-			namepic = "p_ui_1120.png",
-			icon = "p_ui_1220.png",
-			path = "src.games.likuibuyu.Likui_Scene",
-			resourcecfg = "src.games.likuibuyu.data.likubuyu_resource"
+			namepic = "p_ui_1133.png",
+			icon = "p_ui_1233.png",
+			path = "src.games.sangong.ui.SanGong_Scene",
+			resourcecfg = "src.games.sangong.sangong_resource"
 		},
 	[201] = 
 		{
@@ -292,34 +278,35 @@ local _config = {
 			path = "src.games.jinshayinsha.JinShaYinShaScene",
 			resourcecfg = "src.games.jinshayinsha.data.JinShaYinSha_res"
 		},
-	[301] = 
-		{
-			sid = 301,
-			name = "疯狂捕鱼",
-			key = "ppby",
-			group = 3,
-			order = 0,
-			background = "p_ui_bg_blue.png",
-			namepanel = "p_ui_namebg_purple.png",
-			namepic = "p_ui_1117.png",
-			icon = "p_ui_1217.png",
-			path = "src.games.catchFish.ppby.PPBYScene",
-			resourcecfg = "src.games.catchFish.ppby.configs.ResConfigs"
-		},
-	[302] = 
-		{
-			sid = 302,
-			name = "海盗船长",
-			key = "hdby",
-			group = 3,
-			order = 0,
-			background = "p_ui_bg_yellow.png",
-			namepanel = "p_ui_namebg_purple.png",
-			namepic = "p_ui_1119.png",
-			icon = "p_ui_1219.png",
-			path = "src.games.catchFish.hdby.HDBYScene",
-			resourcecfg = "src.games.catchFish.hdby.configs.ResConfigs"
-		},
+	-- [301] = 
+	-- 	{
+	-- 		sid = 301,
+	-- 		name = "疯狂捕鱼",
+	-- 		key = "ppby",
+	-- 		group = 3,
+	-- 		order = 0,
+	-- 		background = "p_ui_bg_blue.png",
+	-- 		namepanel = "p_ui_namebg_purple.png",
+	-- 		namepic = "p_ui_1117.png",
+	-- 		icon = "p_ui_1217.png",
+	-- 		path = "src.games.catchFish.ppby.PPBYScene",
+	-- 		resourcecfg = "src.games.catchFish.ppby.configs.ResConfigs"
+	-- 	},
+	-- [302] = 
+	-- 	{
+	-- 		sid = 302,
+	-- 		name = "海盗船长",
+	-- 		key = "hdby",
+	-- 		group = 3,
+	-- 		order = 0,
+	-- 		background = "p_ui_bg_yellow.png",
+	-- 		namepanel = "p_ui_namebg_purple.png",
+	-- 		namepic = "p_ui_1119.png",
+	-- 		icon = "p_ui_1219.png",
+	-- 		path = "src.games.catchFish.hdby.HDBYScene",
+	-- 		resourcecfg = "src.games.catchFish.hdby.configs.ResConfigs"
+	-- 	},
+		
 	[303] = 
 		{
 			sid = 303,
@@ -332,21 +319,22 @@ local _config = {
 			namepic = "p_ui_1120.png",
 			icon = "p_ui_1220.png",
 			path = "src.games.likuibuyu.Likui_Scene",
-			resourcecfg = "src.games.likuibuyu.likubuyu_resource"
-		},
-	[304] = 
-		{
-			sid = 304,
-			name = "金蟾捕鱼",
-			key = "jcby",
-			group = 3,
-			order = 0,
-			background = "p_ui_bg_pink.png",
-			namepanel = "p_ui_namebg_purple.png",
-			namepic = "p_ui_1118.png",
-			icon = "p_ui_1218.png",
-			path = "src.games.catchFish.jcby.JCBYScene",
-			resourcecfg = "src.games.catchFish.jcby.configs.ResConfigs"
+			resourcecfg = "src.games.likuibuyu.data.likubuyu_resource"
+
 		}
+	-- [304] = 
+	-- 	{
+	-- 		sid = 304,
+	-- 		name = "金蟾捕鱼",
+	-- 		key = "jcby",
+	-- 		group = 3,
+	-- 		order = 0,
+	-- 		background = "p_ui_bg_pink.png",
+	-- 		namepanel = "p_ui_namebg_purple.png",
+	-- 		namepic = "p_ui_1118.png",
+	-- 		icon = "p_ui_1218.png",
+	-- 		path = "src.games.catchFish.jcby.JCBYScene",
+	-- 		resourcecfg = "src.games.catchFish.jcby.configs.ResConfigs"
+	-- 	}
 }
 return _config
