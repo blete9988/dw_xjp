@@ -44,6 +44,7 @@ function Lkby_Scene:ctor(room)
 
 
     self:addEvent(ST.COMMAND_MAINSOCKET_BREAK)
+    self:addEvent(ST.COMMAND_PLAYER_GOLD_UPDATE,CommandCenter.MAX_PRO)
 
 
    	-- self:initUi()
@@ -220,6 +221,19 @@ end
 
 function Lkby_Scene:handlerEvent(event,arg)
 	if event == ST.COMMAND_PLAYER_GOLD_UPDATE then
+		mlog("更新金币。。。。")
+		             --获取炮台视图位置
+         local cannonPos = self.m_nChairID
+         if self._dataModel.m_reversal then 
+            cannonPos = 5 - cannonPos
+         end
+		--金币更新
+		-- self.m_goldTxt:setString(Player.gold)
+
+		-- self._dataModel.userItem.lScore = self._dataModel.userItem.lScore + catchData.lScoreCount
+                  --更新用户分数
+        self.m_cannonLayer:updateUserScore( Player.gold,cannonPos+1 )
+
 	elseif event == ST.COMMAND_MAINSOCKET_BREAK then
 		--主socket断开连接
 		self.noNeedClearRes = true
@@ -455,6 +469,10 @@ function Lkby_Scene:onSubMultiple( databuffer )
     local mutiple = {}
     mutiple.wChairID = databuffer:readShort()
     mutiple.nMultipleIndex = databuffer:readInt()
+
+
+    mlog(DEBUG_W,mutiple.nMultipleIndex,"mutiple..")
+    
     -- mlog(DEBUG_W,"mutiple.wChairID",mutiple.wChairID)
     -- mlog(DEBUG_W,"mutiple.nMultipleIndex",mutiple.nMultipleIndex)
     local cannonPos = mutiple.wChairID
@@ -476,6 +494,7 @@ function Lkby_Scene:onSubMultiple( databuffer )
 
     if mutiple.wChairID == self.m_nChairID then 
       self._gameView:updateMultiple(self._dataModel.m_secene.nMultipleValue[1][mutiple.nMultipleIndex+1])
+      mlog(DEBUG_W,self._dataModel.m_secene.nMultipleValue[1][mutiple.nMultipleIndex+1],"self._dataModel.m_secene.nMultipleValue[1][mutiple.nMultipleIndex+1]..")
     end
 
 end
@@ -543,13 +562,13 @@ function Lkby_Scene:onUserInfo( databuffer ,isFire)
 	userItem.lScore = databuffer:readLong()
 	userItem.cbUserStatus = databuffer:readByte()
 
-	mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
-	mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
-	mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
-	mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
-	mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
-	mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
-	mlog(DEBUG_W,"Player.id:"..Player.id)
+	-- mlog(DEBUG_W,"userItem.wTableID:"..userItem.wTableID)
+	-- mlog(DEBUG_W,"userItem.wChairID:"..userItem.wChairID)
+	-- mlog(DEBUG_W,"userItem.szNickName:"..userItem.szNickName)
+	-- mlog(DEBUG_W,"userItem.dwUserID:"..userItem.dwUserID)
+	-- mlog(DEBUG_W,"userItem.lScore:"..userItem.lScore)
+	-- mlog(DEBUG_W,"userItem.cbUserStatus:"..userItem.cbUserStatus)
+	-- mlog(DEBUG_W,"Player.id:"..Player.id)
 
 	if(userItem.dwUserID == Player.id)then
 		self.m_pUserItem = userItem
@@ -668,7 +687,7 @@ function Lkby_Scene:onSubExchangeScene( dataBuffer )
     -- local exchangeScene = ExternalFun.read_netdata(g_var(cmd).CMD_S_ChangeSecene,dataBuffer)
     local exchangeScene = {}
     exchangeScene.cbBackIndex = dataBuffer:readByte()
-    mlog(DEBUG_W,exchangeScene.cbBackIndex,"场景ID")
+    -- mlog(DEBUG_W,exchangeScene.cbBackIndex,"场景ID")
     self._gameView:updteBackGround(exchangeScene.cbBackIndex)
 
     local callfunc = cc.CallFunc:create(function()
@@ -901,11 +920,9 @@ function Lkby_Scene:onSubFishCatch( databuffer )
 
              if catchData.wChairID == self.m_nChairID then   --自己
 
-                 -- GlobalUserItem.lUserScore = GlobalUserItem.lUserScore + catchData.lScoreCount
-                 -- Player.gold = Player.gold + catchData.lScoreCounts
          		 self._dataModel.userItem.lScore = self._dataModel.userItem.lScore + catchData.lScoreCount
-                  --更新用户分数
-                  self.m_cannonLayer:updateUserScore( self._dataModel.userItem.lScore,cannonPos+1 )
+            --       --更新用户分数
+            --       self.m_cannonLayer:updateUserScore( self._dataModel.userItem.lScore,cannonPos+1 )
 
                   --捕获鱼收获
                   self._dataModel.m_getFishScore = self._dataModel.m_getFishScore + catchData.lScoreCount
@@ -1082,7 +1099,7 @@ function Lkby_Scene:onCreateSchedule()
     local iscanadd = false
 
     local time = os.time()
-    mlog("isCanAddtoScene "..data.nProductTime.." "..time.." "..data.nFishKey.." "..tostring(data.nProductTime <= time and data.nProductTime ~= 0))
+    -- mlog("isCanAddtoScene "..data.nProductTime.." "..time.." "..data.nFishKey.." "..tostring(data.nProductTime <= time and data.nProductTime ~= 0))
     if data.nProductTime <= time and data.nProductTime ~= 0  then
 
         iscanadd = true

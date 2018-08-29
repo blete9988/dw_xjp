@@ -208,7 +208,7 @@ function LikuibuyuUiPanel:updteBackGround(param)
 
 
     local bg = self:getChildByTag(TAG.tag_bg)
-    mlog(DEBUG_W,bg,"bg")
+    -- mlog(DEBUG_W,bg,"bg")
     if bg  then
         local call = cc.CallFunc:create(function()
             bg:removeFromParent()

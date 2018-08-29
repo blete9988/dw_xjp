@@ -321,7 +321,7 @@ function Cannon:shootLaser()
 			if self.m_Type == g_var(cmd).CannonType.Special_Cannon then
 				time = time/2
 			end
-			mlog("开火。。！@@")
+			-- mlog("开火。。！@@")
 			self:autoUpdate(0)
 			self:autoSchedule(time)
 
@@ -434,7 +434,7 @@ function Cannon:productBullet( isSelf,fishIndex, netColor, bulletIndex)
 
 		-- if()
 
-		mlog("开火~~！！！！")
+		-- mlog("开火~~！！！！")
 		ConnectMgr.connect("src.games.likuibuyu.content.Likuibuyu_FireConnect" ,condata,function(result) 
 		if result ~= 0 then 
 			
@@ -755,7 +755,7 @@ function Cannon:autoUpdate(dt)
 
 	end
 
-	self:updateScore(self._dataModel.userItem.lScore)
+	-- self:updateScore(self._dataModel.userItem.lScore)
 
 	-- GlobalUserItem.lUserScore = score
 	-- mlog("self.m_nChairID",self.m_nChairID)
@@ -801,7 +801,7 @@ function Cannon:otherUpdate(dt)
 	-- print("the num is ............................."..table.nums(self._dataModel.m_InViewTag))
 	-- dump(self._dataModel.m_InViewTag, "the in view tag is ====================== >", 6)
 	if 0 == table.nums(self._dataModel.m_InViewTag) then 
-		mlog("the view is not fish")
+		-- mlog("the view is not fish")
 		return
 	end
 
