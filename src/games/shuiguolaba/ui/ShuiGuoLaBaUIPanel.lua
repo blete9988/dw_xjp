@@ -82,7 +82,7 @@ function ShuiGuoLaBaUIPanel:ctor(room)
 	self.self_gold_label = self_gold_label
 
 	--名字
-	local self_name_label = display.newText(Player.username,24)
+	local self_name_label = display.newText(Player.name,24)
 	self_name_label:setAnchorPoint(cc.p(0,0.5))
 	self_name_label:setPosition(cc.p(27,81))
 	self.main_layout:addChild(self_name_label)
@@ -460,6 +460,18 @@ function ShuiGuoLaBaUIPanel:initmultiple()
 end
 function ShuiGuoLaBaUIPanel:initBetMenus()
 	local config = {1000,10000,100000,1000000,5000000}
+
+	if(self.room.id == 20700)then
+		config = {10,50,100,500,1000}
+	elseif(self.room.id == 20701)then
+		config = {100,500,1000,5000,10000}
+	elseif(self.room.id == 20702)then
+		config = {1000,5000,10000,50000,100000}
+	elseif(self.room.id == 20703)then
+		config = {100000,500000,1000000,5000000,10000000}
+	end
+
+
 	local btnflow = display.newImage("sglb_ui_1021.png")
 	btnflow:setVisible(false)
 	btnflow:setScale(1.35)
@@ -484,7 +496,7 @@ function ShuiGuoLaBaUIPanel:initBetMenus()
 		btn = require("src.games.shuiguolaba.ui.BetButton").new(config[i])
 		buttonMgr:addButton(btn)
 		if not temp then
-			self.main_layout:addChild(Coord.ingap(self.main_layout,btn,"LL",280,"BB",2))
+			self.main_layout:addChild(Coord.ingap(self.main_layout,btn,"LL",280,"BB",15))
 		else
 			self.main_layout:addChild(Coord.outgap(temp,btn,"RL",10,"CC",0))
 		end
@@ -541,7 +553,7 @@ end
 function ShuiGuoLaBaUIPanel:addBet(value,index,startPoint)
 	SoundsManager.playSound("sglb_bet")
 	startPoint = startPoint or self:getStartPoint()
-	local betsp = display.newSprite(string.format("sglb_bet_%s.png",value))
+	local betsp = display.newSprite(string.format("sglb2_bet_%s.png",value))
 	betsp:setPosition(startPoint)
 	betsp:setScale(0.5)
 	betsp:setAnchorPoint(cc.p(0,0))

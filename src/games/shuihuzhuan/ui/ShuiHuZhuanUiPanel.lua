@@ -39,7 +39,7 @@ function ShuiHuZhuanUiPanel:ctor()
 
 	--底部
 	--name
-	local name_label = display.newText("blank",24,Color.WHITE)
+	local name_label = display.newText(Player.name,24,Color.WHITE)
 	name_label:setAnchorPoint(cc.p(0,0.5))
 	name_label:setPosition(cc.p(95,95))
 	self.main_layout:addChild(name_label,2)

@@ -19,14 +19,14 @@ function SettingWindows:ctor()
 	self:m_initSettingLayout(uilayout)
 	self:m_initAccountLayout(uilayout)
 	--分享按钮
-	local shareBtn = display.newButton("p_btn_1012.png","p_btn_1012.png")
-	shareBtn:setPressedActionEnabled(true)
-	uilayout:addChild(Coord.ingap(uilayout, shareBtn,"CC",0,"BB",35))
-	shareBtn:addChild(Coord.ingap(shareBtn,display.newImage("p_ui_1020.png"),"CC",0,"CC",5))
-	shareBtn:addTouchEventListener(function(t,e) 
-		if e ~= ccui.TouchEventType.ended then return end
+	-- local shareBtn = display.newButton("p_btn_1012.png","p_btn_1012.png")
+	-- shareBtn:setPressedActionEnabled(true)
+	-- uilayout:addChild(Coord.ingap(uilayout, shareBtn,"CC",0,"BB",35))
+	-- shareBtn:addChild(Coord.ingap(shareBtn,display.newImage("p_ui_1020.png"),"CC",0,"CC",5))
+	-- shareBtn:addTouchEventListener(function(t,e) 
+	-- 	if e ~= ccui.TouchEventType.ended then return end
 		
-	end)
+	-- end)
 end
 --初始化音乐设置层
 function SettingWindows:m_initSettingLayout(uilayout)

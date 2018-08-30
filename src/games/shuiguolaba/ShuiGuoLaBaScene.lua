@@ -9,6 +9,8 @@ function ShuiGuoLaBaScene:ctor(room)
 	self:addEvent(ST.COMMAND_PLAYER_GOLD_UPDATE)
 	self:addEvent(ST.COMMAND_MAINSOCKET_BREAK)
 	self.room = room
+	mlog(DEBUG_W,room.id,"+++++++")
+	
 	self.noNeedClearRes = false
 	self:initUi()
 	self:initData()
@@ -35,7 +37,7 @@ end
 
 --初始化UI
 function ShuiGuoLaBaScene:initUi()
-	local main_layout = require("src.games.shuiguolaba.ui.ShuiGuoLaBaUIPanel").new()
+	local main_layout = require("src.games.shuiguolaba.ui.ShuiGuoLaBaUIPanel").new(self.room)
 	self:addChild(main_layout)
 	self.main_layout = main_layout
 end

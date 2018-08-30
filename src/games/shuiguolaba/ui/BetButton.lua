@@ -11,12 +11,12 @@ end)
 function BetButton:ctor(betvalue)
 	self:super("ctor")
 	self.betvalue = betvalue
-	self:loadTextureNormal(string.format("sglb_bet_%s.png",betvalue),1)
-	self:loadTexturePressed(string.format("sglb_bet_%s.png",betvalue),1)
-	self:loadTextureDisabled(string.format("sglb_bet_%s_disable.png",betvalue),1)
+	self:loadTextureNormal(string.format("sglb2_bet_%s.png",betvalue),1)
+	self:loadTexturePressed(string.format("sglb2_bet_%s.png",betvalue),1)
+	self:loadTextureDisabled(string.format("sglb2_bet_%s_disable.png",betvalue),1)
 	-- self:setScale(1.4)
 	self.disable = false
-	
+	self:setScale(1.5)
 	self:setDisable(Player.gold < betvalue)
 	--添加金币变动监听
 	self.dataController = require("src.games.shuiguolaba.data.ShuiGuoLaBaController").getInstance()
