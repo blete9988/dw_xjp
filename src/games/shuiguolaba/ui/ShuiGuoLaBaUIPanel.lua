@@ -496,7 +496,7 @@ function ShuiGuoLaBaUIPanel:initBetMenus()
 		btn = require("src.games.shuiguolaba.ui.BetButton").new(config[i])
 		buttonMgr:addButton(btn)
 		if not temp then
-			self.main_layout:addChild(Coord.ingap(self.main_layout,btn,"LL",280,"BB",15))
+			self.main_layout:addChild(Coord.ingap(self.main_layout,btn,"LL",280,"BB",2))
 		else
 			self.main_layout:addChild(Coord.outgap(temp,btn,"RL",10,"CC",0))
 		end

@@ -451,7 +451,7 @@ function FeiQingZouShouUIPanel:initelement()
 	end
 end
 function FeiQingZouShouUIPanel:initBetMenus()
-	local config = {1000,10000,100000,1000000,5000000,10000000}
+	local config = {100,1000,10000,100000,1000000,5000000}
 	local btnflow = display.newImage("fqzs_ui_1021.png")
 	btnflow:setVisible(false)
 	btnflow:setScale(1.35)
@@ -665,7 +665,7 @@ end
 function FeiQingZouShouUIPanel:addBet(value,sid,startPoint,delay)
 	self.soundController:playScoreSound()
 	startPoint = startPoint or self:getStartPoint()
-	local betsp = display.newSprite(string.format("fqzs_bet_%s.png",value))
+	local betsp = display.newSprite(string.format("cm_bet_%s.png",value))
 	betsp:setScale(0.5)
 	betsp:setPosition(startPoint)
 	betsp:setAnchorPoint(cc.p(0,0))
@@ -760,7 +760,7 @@ function FeiQingZouShouUIPanel:updateSQRS(value)
 	self.szsqrs_label:setString(value)
 end
 function FeiQingZouShouUIPanel:getBetPointByValue(value)
-	local config = {1000,10000,100000,1000000,5000000,10000000}
+	local config = {100,1000,10000,100000,1000000,5000000}
 	for i=1,#config do
 		if config[i] == value then
 			return self.betPoint_array[i]

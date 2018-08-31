@@ -11,9 +11,9 @@ end)
 function BetButton:ctor(betvalue)
 	self:super("ctor")
 	self.betvalue = betvalue
-	self:loadTextureNormal(string.format("fqzs_bet_%s.png",betvalue),1)
-	self:loadTexturePressed(string.format("fqzs_bet_%s_select.png",betvalue),1)
-	self:loadTextureDisabled(string.format("fqzs_bet_%s_disable.png",betvalue),1)
+	self:loadTextureNormal(string.format("cm_bet_%s.png",betvalue),1)
+	self:loadTexturePressed(string.format("cm_bet_%s.png",betvalue),1)
+	self:loadTextureDisabled(string.format("cm_bet_%s_disable.png",betvalue),1)
 	self:setScale(1.4)
 	self.disable = false
 	self:setDisable(Player.gold < betvalue)

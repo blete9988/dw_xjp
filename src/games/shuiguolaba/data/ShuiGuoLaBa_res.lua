@@ -9,7 +9,7 @@ resource.plists={
 	{url="game/shuiguolaba/sglb_action_1.plist",imgurl = "game/shuiguolaba/sglb_action_1.png",size = 1935*976},
 	{url="game/shuiguolaba/sglb_action_2.plist",imgurl = "game/shuiguolaba/sglb_action_2.png",size = 1908*1837},
 	{url="game/shuiguolaba/bibei.plist",imgurl = "game/shuiguolaba/bibei.png",size = 295*64},
-	{url="game/shuiguolaba/sglb_ui2.plist",imgurl = "game/shuiguolaba/sglb_ui2.png",size = 512*512},
+	{url="game/shuiguolaba/sglb_ui2.plist",imgurl = "game/shuiguolaba/sglb_ui2.png",size = 512*1024},
 	{imgurl = "game/shuiguolaba/sglb_bg.png",size = 1360*765},
 	{imgurl = "game/shuiguolaba/sglb_rule_bg.png",size = 962*644},
 	{imgurl = "game/shuiguolaba/sglb_rule_content.png",size = 790*1256},

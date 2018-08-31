@@ -30,7 +30,7 @@ function BetLayout:addBet(value,type,startPoint,delay,isself,realvalue)
 	startPoint = startPoint or self:getStartPoint()
 	delay = delay or 0
 	
-	local betsp = display.newSprite(string.format("bet_%s.png",value))
+	local betsp = display.newSprite(string.format("cm_bet_%s.png",value))
 	betsp:setScale(0.5)
 	betsp:setPosition(startPoint)
 --	betsp:setOpacity(200)

@@ -19,6 +19,8 @@ resource.plists={
 	{url="game/feiqingzoushou/clock_ring.plist",imgurl = "game/feiqingzoushou/clock_ring.png",size = 478*1063},
 	{url="game/feiqingzoushou/fqzs_goldshark.plist",imgurl = "game/feiqingzoushou/fqzs_goldshark.png",size = 1000*555},
 	{url="game/feiqingzoushou/fqzs_shark_gui.plist",imgurl = "game/feiqingzoushou/fqzs_shark_gui.png",size = 952*720},
+	{url="game/feiqingzoushou/cm_ui.plist",imgurl = "game/feiqingzoushou/cm_ui.png",size = 512*512},
+
 	{imgurl = "game/feiqingzoushou/fqzs-fly-main-backdrop.png",size = 1143*656},
 	{imgurl = "game/feiqingzoushou/fqzs-fly-main-background.png",size = 1360*765},
 	{imgurl = "game/feiqingzoushou/fqzs-rule-bg.png",size = 1125*514},

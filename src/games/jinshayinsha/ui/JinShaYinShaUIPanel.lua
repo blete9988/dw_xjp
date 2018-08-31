@@ -549,7 +549,7 @@ function JinShaYinShaUIPanel:initDropItem()
 end
 
 function JinShaYinShaUIPanel:initBetMenus()
-	local config = {1000,10000,100000,1000000,5000000,10000000}
+	local config = {100,1000,10000,100000,1000000,5000000}
 	local btnflow = display.newImage("jsys_ui_1021.png")
 	btnflow:setVisible(false)
 	btnflow:setScale(1.35)
@@ -610,7 +610,7 @@ end
 function JinShaYinShaUIPanel:addBet(value,sid,startPoint,delay)
 	SoundsManager.playSound("jsys_chouma")
 	startPoint = startPoint or self:getStartPoint()
-	local betsp = display.newSprite(string.format("jsys_bet_%s.png",value))
+	local betsp = display.newSprite(string.format("cm_bet_%s.png",value))
 	betsp:setScale(0.5)
 	betsp:setPosition(startPoint)
 	betsp:setAnchorPoint(cc.p(0,0))

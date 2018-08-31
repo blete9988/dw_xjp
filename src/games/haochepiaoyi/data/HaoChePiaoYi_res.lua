@@ -8,6 +8,8 @@ resource.plists={
 	{url="game/haochepiaoyi/fcpy_main.plist",imgurl = "game/haochepiaoyi/fcpy_main.png",size = 1971*783},
 	{url="game/haochepiaoyi/clock_ring.plist",imgurl = "game/haochepiaoyi/clock_ring.png",size = 478*1063},
 	{url="game/haochepiaoyi/fcpy_result.plist",imgurl = "game/haochepiaoyi/fcpy_result.png",size = 494*1449},
+	{url="game/haochepiaoyi/sglb_ui2.plist",imgurl = "game/haochepiaoyi/sglb_ui2.png",size = 512*1024},
+	
 	{imgurl = "game/haochepiaoyi/fcpy_vip_142_21.png",size = 142*21},
 	{imgurl = "game/haochepiaoyi/fcpy_number-240x32.png",size = 240*32},
 	{imgurl = "game/haochepiaoyi/fcpy_number_1.png",size = 230*33},

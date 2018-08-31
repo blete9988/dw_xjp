@@ -20,8 +20,9 @@ local server_config = {
 		
 	},
 	--47.106.250.105
-	server = "tcp://47.106.250.105:6001",
+	--220.128.128.40
+	server = "tcp://220.128.128.40:6001",
 	--接口地址
-	apihost = "http://47.106.250.105:8360/game/"
+	apihost = "http://220.128.128.40:8360/game/"
 }
 return server_config

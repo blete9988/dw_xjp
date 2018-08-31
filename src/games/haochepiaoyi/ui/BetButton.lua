@@ -13,9 +13,9 @@ function BetButton:ctor(betvalue)
 	--添加金币变动监听
 	-- self:addEvent(ST.COMMAND_PLAYER_GOLD_UPDATE,CommandCenter.MAX_PRO)
 	self.betvalue = betvalue
-	self:loadTextureNormal(string.format("fcpy_bet_%s.png",betvalue),1)
-	self:loadTexturePressed(string.format("fcpy_bet_%s.png",betvalue),1)
-	self:loadTextureDisabled(string.format("fcpy_bet_%s_disable.png",betvalue),1)
+	self:loadTextureNormal(string.format("sglb2_bet_%s.png",betvalue),1)
+	self:loadTexturePressed(string.format("sglb2_bet_%s.png",betvalue),1)
+	self:loadTextureDisabled(string.format("sglb2_bet_%s_disable.png",betvalue),1)
 	self.disable = false
 	self:setDisable(Player.gold < betvalue)
 end

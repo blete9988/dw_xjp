@@ -7,6 +7,8 @@ local resource={}
 resource.plists={
 	{url="game/jinshayinsha/jsys_ui.plist",imgurl = "game/jinshayinsha/jsys_ui.png",size = 1838*389},
 	{url="game/jinshayinsha/jsys_action.plist",imgurl = "game/jinshayinsha/jsys_action.png",size = 990*1382},
+	{url="game/jinshayinsha/cm_ui.plist",imgurl = "game/jinshayinsha/cm_ui.png",size = 512*512},
+
 	{imgurl = "game/jinshayinsha/jsys_main_bg.jpg",size = 1360*765},
 	{imgurl = "game/jinshayinsha/jsys_number_1.png",size = 299*30},
 	{imgurl = "game/jinshayinsha/jsys_number_2.png",size = 110*20},

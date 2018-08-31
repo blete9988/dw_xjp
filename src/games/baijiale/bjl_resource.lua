@@ -8,6 +8,7 @@ resource.plists={
 	{imgurl = "game/baijiale/bjl_number_4.png",size = 455*46},
 	{url="game/baijiale/bjl_poker.plist",imgurl = "game/baijiale/bjl_poker.png",size = 2006*1008},
 	{url="game/baijiale/bjl_public.plist",imgurl = "game/baijiale/bjl_public.png",size = 1003*1800},
+	{url="game/baijiale/cm_ui.plist",imgurl = "game/baijiale/cm_ui.png",size = 512*512},
 }
 
 resource.sounds={

@@ -16,7 +16,11 @@ end
 function EntryRoomConnect:readData(data)
 	local result = data:readUnsignedByte()
 	if result ~= 0 then
-		self:showTips(result)
+		if(result == 175)then
+			display.showMsg(display.trans("##2074"))
+		else
+			self:showTips(result)
+		end
 	end
 	mlog(string.format("进入游戏房间，游戏名：%s,房间号：%s",self.room.game.name,self.room.id))
 	self.params = result

@@ -82,6 +82,7 @@ local language_sc = {
 	[2071] = "兑换失败",
 	[2072] = "兑换成功",
 	[2073] = "禁止进游戏",
+	[2074] = "代理禁止进入游戏",
 	--百家乐
 	[3001] = "第#1局",
 	[3003] = "<img src='bjl_ui_1025.png' imgtype='1'><span name='bjl_number_2.png' width='14' height='21' startchar='0' path='game/baijiale/'>#1</span>",

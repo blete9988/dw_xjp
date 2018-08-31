@@ -79,7 +79,7 @@ function FeiQingZouShouDataController:addDrop(sid)
 	if #self.dropDatas > 9 then
 		table.remove(self.dropDatas,1)
 	end
-	CommandCenter:sendEfent(ST.COMMAND_GAMEFQZS_UPDATEDROP)
+	CommandCenter:sendEvent(ST.COMMAND_GAMEFQZS_UPDATEDROP)
 end
 
 function FeiQingZouShouDataController:betBegin(gameTime)

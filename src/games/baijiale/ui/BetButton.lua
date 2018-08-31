@@ -14,9 +14,9 @@ function BetButton:ctor(betvalue)
 	self:addEvent(ST.COMMAND_PLAYER_GOLD_UPDATE,CommandCenter.MAX_PRO)
 	
 	self.betvalue = betvalue
-	self:loadTextureNormal(string.format("bet_%s.png",betvalue),1)
-	self:loadTexturePressed(string.format("bet_%s_select.png",betvalue),1)
-	self:loadTextureDisabled(string.format("bet_%s_disable.png",betvalue),1)
+	self:loadTextureNormal(string.format("cm_bet_%s.png",betvalue),1)
+	self:loadTexturePressed(string.format("cm_bet_%s.png",betvalue),1)
+	self:loadTextureDisabled(string.format("cm_bet_%s_disable.png",betvalue),1)
 	self:setScale(1.4)
 	self.disable = false
 	self.showStatus = true
