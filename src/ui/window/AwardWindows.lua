@@ -24,7 +24,7 @@ function AwardWindows:ctor()
 	-- awardTxt:setString(0)
 	-- awardbg:addChild(Coord.ingap(awardbg,awardTxt,"LL",20,"CC",0))
 	--密码输入
-	local awardTxt = display.newInputText(cc.size(600,65),nil,28,nil,nil,"请输入卡号")
+	local awardTxt = display.newInputText(cc.size(600,65),nil,28,nil,nil,display.trans("##2077"))
 	awardTxt:setInputFlag(cc.EDITBOX_INPUT_FLAG_SENSITIVE)
 	awardTxt:setMaxLength(16)
 	uilayout:addChild(Coord.ingap(uilayout,awardTxt,"CC",0,"TT",-70))

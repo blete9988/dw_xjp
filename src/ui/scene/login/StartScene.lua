@@ -7,7 +7,9 @@ local StartScene = class("StartScene",require("src.base.extend.CCSceneExtend"))
 function StartScene:ctor()
 	self:super("ctor")
 	--加载基础语言包
-	display.loadLanguage(nil,"src.command.language.base_language")
+	local beforeLanguage = require("src.base.tools.storage").getXML("language") or "sc"
+
+	display.loadLanguage(beforeLanguage,"src.command.language.base_language")
 	
 	local background = display.newImage("#" .. display.getResolutionPath("loading_background.jpg"))
 	self:addChild(Coord.scgap(background,"CC",0,"CC",0))

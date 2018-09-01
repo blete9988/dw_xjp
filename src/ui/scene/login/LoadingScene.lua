@@ -111,8 +111,8 @@ function LoadingScene:loadSounds()
 		if e == self.loadingbar.EVT_END and t:getPercent() == 1 then
 			--所有资源加载完成
 			self.loadingbar:removeEventByName(self.loadingbar.EVT_END)
-			-- self:initComplete()
-			self:showLoginNotice()
+			self:initComplete()
+			-- self:showLoginNotice()
 		end
 	end)
 	

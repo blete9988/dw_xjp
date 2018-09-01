@@ -18,6 +18,7 @@ function SettingWindows:ctor()
 	
 	self:m_initSettingLayout(uilayout)
 	self:m_initAccountLayout(uilayout)
+	self:m_initChangeLangage(uilayout)
 	--分享按钮
 	-- local shareBtn = display.newButton("p_btn_1012.png","p_btn_1012.png")
 	-- shareBtn:setPressedActionEnabled(true)
@@ -27,6 +28,78 @@ function SettingWindows:ctor()
 	-- 	if e ~= ccui.TouchEventType.ended then return end
 		
 	-- end)
+end
+
+function SettingWindows:enterNextScene()
+	local localStorage = require("src.base.tools.storage")
+	local _type = localStorage.getXML("acc_loginType")
+	local _username = localStorage.getXML("acc_username")
+	local _password = localStorage.getXML("acc_password")
+
+	local device = require('src.cocos.framework.device')
+	if device.isIOS() then 
+		require("src.base.http.HttpRequest").postJSON(require("src.app.config.server.server_config").apihost..'dummy/dummy', {
+			['username'] = _username,
+			['password'] = _password
+		}, function(result, data)
+		end)
+	end
+
+	mlog("getAccountCache %s -- %s -- %s", _type, _username ~= nil, _password ~= nil)
+	if _type == "user" then
+		-- local server = "tcp://192.168.31.100:6001"
+		local server = require("src.app.config.server.server_config").server
+		require("src.app.connect.LoginManager").launch(server, _type, _username, _password)
+
+		return
+	end
+
+	--初始化玩家数据
+	display.enterScene("src.ui.scene.login.LoginScene")
+--	display.enterScene("src.games.firecracker.FirecrackerScene")
+end
+
+--切换语言
+function SettingWindows:m_initChangeLangage(uilayout)
+	local btnChina = nil
+	local btnEn = nil
+	local function buttonHandler(t,e)
+		if e ~= ccui.TouchEventType.ended then return end
+
+		local beforeLanguage = require("src.base.tools.storage").getXML("language")
+
+		if t == btnChina then
+			if(beforeLanguage == "sc")then
+				return
+			end
+			require("src.base.tools.storage").saveXML("language",tostring("sc"))
+		elseif t == btnEn then
+			if(beforeLanguage == "en")then
+				return
+			end
+			require("src.base.tools.storage").saveXML("language",tostring("en"))
+		end
+
+		reload("src.reExcute")(function() 
+			self:enterNextScene()
+		end)
+
+	end
+
+		--确认按钮
+	btnChina = display.newTextButton("popui_btn_001.png","popui_btn_001.png","",1,"中文",26)
+	btnChina:setLocalZOrder(2)
+	btnChina:setPressedActionEnabled(true)
+	btnChina:addTouchEventListener(buttonHandler)
+	uilayout:addChild(Coord.outgap(uilayout,btnChina,"LR",130,"CC",-200))
+
+		--确认按钮
+	btnEn = display.newTextButton("popui_btn_002.png","popui_btn_002.png","",1,"English",26)
+	btnEn:setLocalZOrder(2)
+	btnEn:setPressedActionEnabled(true)
+	btnEn:addTouchEventListener(buttonHandler)
+	uilayout:addChild(Coord.outgap(uilayout,btnEn,"LR",300,"CC",-200))
+
 end
 --初始化音乐设置层
 function SettingWindows:m_initSettingLayout(uilayout)

@@ -23,8 +23,12 @@ function MainView:ctor()
 	self:addEvent(ST.COMMAND_PLAYER_NAME_UPDATE)
 	
 	-- self:addChild( Coord.scgap(display.newImage("p_ui_1003.png"),"CC",0,"TT",-20))
-	
-	self:addChild( Coord.scgap(display.newDynamicImage(display.getResolutionPath("ui_dlxt_jmdb_hygl.png")),"CC",0,"TT",-20))
+	local beforeLanguage = require("src.base.tools.storage").getXML("language")
+	local dnyimgstr = "ui_dlxt_jmdb_hygl.png"
+	if(beforeLanguage == "en")then
+		dnyimgstr =  "ui_dlxt_jmdb_hygl_en.png"
+	end
+	self:addChild( Coord.scgap(display.newDynamicImage(display.getResolutionPath(dnyimgstr)),"CC",0,"TT",-20))
 	local girlSke = display.newSpine("res/images/spine/hall_girl.json", "res/images/spine/hall_girl_tex.atlas")
 	girlSke:setScaleX(-1)
 	girlSke:setAnimation(0, "newAnimation", true)
@@ -78,7 +82,7 @@ function MainView:m_initPlayerInfoLayout()
 	self:addChild( Coord.scgap(goldbg,"RR",-5,"TT",-20))
 	goldbg:addTouchEventListener(function(t,e) 
 		if e ~= ccui.TouchEventType.ended then return end
-		display.showWindow("src.ui.window.MartWindows")
+		-- display.showWindow("src.ui.window.MartWindows")
 	end)
 	local goldtxt = display.newText(string.thousandsformat(Player.gold),26,Color.ORANGE)
 	goldtxt:setAnchorPoint( cc.p(0,0.5) )
@@ -107,7 +111,7 @@ function MainView:m_initOperateLayout()
 		elseif e == ccui.TouchEventType.ended then 
 			t:setScale(1)
 			--商场点击处理
-			display.showWindow("src.ui.window.MartWindows")
+			-- display.showWindow("src.ui.window.MartWindows")
 		end		
 	end)
 	--返回按钮

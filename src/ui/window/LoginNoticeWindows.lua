@@ -26,7 +26,7 @@ function LoginNoticWindow:ctor(loadingscene)
 	end)
 
 	--二维码
-	local erweimalabel_label = cc.LabelTTF:create("扫描二维码下载游戏:",Cfg.FONT,25)
+	local erweimalabel_label = cc.LabelTTF:create(display.trans("##2076"),Cfg.FONT,25)
 	erweimalabel_label:enableStroke(cc.c3b(0xff,0xff,0xff),2)
 	erweimalabel_label:enableShadow(cc.size(5,-3),0.3,1,true)
 	erweimalabel_label:setAnchorPoint(cc.p(0,0.5))
@@ -47,7 +47,7 @@ function LoginNoticWindow:ctor(loadingscene)
 	uilayout:addChild(Coord.scgap(notice_label,"CC",-200,"CC",200))
 
 	--内容
-	local notice_con_label = cc.LabelTTF:create("欢迎光临环球娱乐城，我们将持续提供优质游戏。诚信经营，保持\n公正、公平游戏。",Cfg.FONT,30)
+	local notice_con_label = cc.LabelTTF:create(display.trans("##2075"),Cfg.FONT,30)
 	notice_con_label:enableStroke(cc.c3b(0xff,0xff,0xff),2)
 	notice_con_label:enableShadow(cc.size(5,-3),0.3,1,true)
 	notice_con_label:setAnchorPoint(cc.p(0,0.5))

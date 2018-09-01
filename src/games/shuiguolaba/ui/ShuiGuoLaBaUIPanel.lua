@@ -24,6 +24,7 @@ function ShuiGuoLaBaUIPanel:ctor(room)
 	self.slowIndex = 0 		 --减速的步数
 	self.isClimb = false     --是否龟速
 	self.state = 0           --状态
+	self.isBiDX = false      --是否在比大小
 	self.room = room
 	
 	self.dataController = require("src.games.shuiguolaba.data.ShuiGuoLaBaController").getInstance()
@@ -50,7 +51,7 @@ function ShuiGuoLaBaUIPanel:ctor(room)
 	local yafen_icon = display.newImage("sglb_icon_5.png")
 	Coord.ingap(yafen_layout,yafen_icon,"LL",10,"CC",0)
 	yafen_layout:addChild(yafen_icon)
-	local yafen_label = display.newText(95712,24)
+	local yafen_label = display.newText(0,24)
 	yafen_label:setAnchorPoint(cc.p(0,0.5))
 	Coord.outgap(yafen_icon,yafen_label,"RL",20,"CC",0)
 	yafen_layout:addChild(yafen_label)
@@ -138,6 +139,7 @@ function ShuiGuoLaBaUIPanel:ctor(room)
     self.bibei_bg = bibei_bg
     --0 :是大 1是小
     local function gambleRequest(type)
+    	self.isBiDX = true
 	    ConnectMgr.connect("src.games.shuiguolaba.content.ShuiGuoLaBaGambleConnect",type,function(result)
 			if result ~= false  then
 				self:overState()
@@ -229,12 +231,13 @@ function ShuiGuoLaBaUIPanel:bigSamll(result)
 				local ran_num = math.random(rand_min,rand_max)
 				mlog(ran_num,"ran_num")
 				self.bibei_num:setSpriteFrame(string.format("b_%d.png",ran_num))
-
+				self.isBiDX = false
 				self:updateGold()
 				self:updateDeFen(result.winMoney)
 				if result.winMoney > 0 then
 					SoundsManager.playSound("sglb_dx_win")
 					self:effectDefen()
+					
 				else
 					SoundsManager.playSound("sglb_dx_lose")
 				end
@@ -805,7 +808,9 @@ function ShuiGuoLaBaUIPanel:beiChiLe()
 end
 function ShuiGuoLaBaUIPanel:updateGold()
 	print("Player.gold-------------------------",Player.gold)
-	self.self_gold_label:setString(Player.gold)
+	if(not self.isBiDX)then
+		self.self_gold_label:setString(Player.gold)
+	end
 end
 function ShuiGuoLaBaUIPanel:getAreaSound()
 	local soundName = nil

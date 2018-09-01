@@ -37,7 +37,7 @@ function display.checkGold(value,txt)
 		end
 		display.showPop({info = txt,htype = "left",callback = function(flag) 
 			if flag == ST.TYPE_POP_OK then
-				display.showWindow("src.ui.window.MartWindows")
+				-- display.showWindow("src.ui.window.MartWindows")
 			end
 		end})
 		return false
@@ -279,8 +279,40 @@ end
 function display.newParticle(path)
 	return cc.ParticleSystemQuad:create(path)
 end
+
+function display.languageStrImg(path)
+	if(not path)then
+		return path
+	end
+
+	local beforeLanguage = require("src.base.tools.storage").getXML("language")
+	if(beforeLanguage == "en")then
+		local temppath = path:sub(1,#path-4)
+		local temppath_d = path:sub(#path-3,#path)
+		local language_path = temppath.."_en"..temppath_d
+
+		local img = nil
+		if language_path:sub(1,1) == "#" then
+			local exist = fileUtils:isFileExist(language_path:sub(2))
+			if(exist)then
+				path = language_path
+			end
+		else
+			local exist = display.getSpriteFrame(language_path)
+			if(exist)then
+				path = language_path
+				exist = nil
+			end
+		end
+	end
+	return path
+end
+
 function display.newSprite(pszFileName)
 	if pszFileName~=nil then
+
+		pszFileName = display.languageStrImg(pszFileName)
+
 		if type(pszFileName) == "string" then
 			if pszFileName:sub(1,1) == "#" then
 				return cc.Sprite:create(pszFileName:sub(2))
@@ -301,6 +333,9 @@ function display.newImage(path)
 	if not path then
 		return ccui.ImageView:create()
 	end
+	
+	path = display.languageStrImg(path)
+
 	if path:sub(1,1) == "#" then
 		return ccui.ImageView:create(path:sub(2),0)
 	else
@@ -484,6 +519,11 @@ function display.newButton(normalpath,selectpath,disablepath,type)
 		resType = 1
 	end
 
+
+	normalpath = display.languageStrImg(normalpath)
+	selectpath = display.languageStrImg(selectpath)
+	disablepath = display.languageStrImg(disablepath)
+
 	local btn=ccui.Button:create(normalpath,selectpath,disablepath,resType)
 --	btn:setPressedActionEnabled(true)
     btn:setTouchEnabled(true)
@@ -501,6 +541,11 @@ end
 *	@param：fontcolor 字体颜色（默认为全局文字颜色）
 ]]
 function display.newTextButton(normalpath,selectpath,disablepath,type,text,fontsize,fontcolor)
+
+	normalpath = display.languageStrImg(normalpath)
+	selectpath = display.languageStrImg(selectpath)
+	disablepath = display.languageStrImg(disablepath)
+
 	local btn = display.newButton(normalpath,selectpath,disablepath,type or 1)
 --	btn:setPressedActionEnabled(true)
 	btn:setTitleFontName(Cfg.FONT)
@@ -634,6 +679,7 @@ end
 --获取多分辨率图片路径
 function display.getResolutionPath(path)
 	if D_SIZE.is9_16 then
+
 		return "res/images/resolution/9_16/" .. path
 	else
 		return "res/images/resolution/3_4/" .. path

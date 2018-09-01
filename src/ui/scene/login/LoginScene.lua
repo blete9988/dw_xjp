@@ -402,8 +402,12 @@ local initLoginView = function(self)
 	regBtn:setPosition(cc.p(D_SIZE.hw + 40, D_SIZE.hh - loginBtn:getContentSize().width))
 	node:addChild(regBtn)
 
-
 	local weChatBtn = display.newButton('res/images/login/dl_wx.png','res/images/login/dl_wx.png','res/images/login/dl_wx.png', 0)
+	-- local beforeLanguage = require("src.base.tools.storage").getXML("language")
+	-- if(beforeLanguage == "en")then
+	-- 	weChatBtn = display.newButton('res/images/login/dl_wx_en.png','res/images/login/dl_wx_en.png','res/images/login/dl_wx_en.png', 0)
+	-- end
+	
 	weChatBtn:setTouchEnabled(true)
 	weChatBtn:addTouchEventListener(function(t, e)
 		if e ~= ccui.TouchEventType.ended then return end
