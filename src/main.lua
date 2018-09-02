@@ -30,7 +30,7 @@ if Cfg.CC_DISABLE_GLOBAL then
         end
     })
 end
-Gbv.CRef = CoordinateReference
+-- Gbv.CRef = CoordinateReference
 
 local function main()
 	local size = cc.Director:getInstance():getOpenGLView():getFrameSize()

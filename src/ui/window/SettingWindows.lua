@@ -94,7 +94,7 @@ function SettingWindows:m_initChangeLangage(uilayout)
 	uilayout:addChild(Coord.outgap(uilayout,btnChina,"LR",130,"CC",-200))
 
 		--确认按钮
-	btnEn = display.newTextButton("popui_btn_002.png","popui_btn_002.png","",1,"English",26)
+	btnEn = display.newTextButton("popui_btn_001.png","popui_btn_001.png","",1,"English",26)
 	btnEn:setLocalZOrder(2)
 	btnEn:setPressedActionEnabled(true)
 	btnEn:addTouchEventListener(buttonHandler)
