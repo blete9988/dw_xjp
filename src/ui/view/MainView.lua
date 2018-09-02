@@ -67,6 +67,27 @@ function MainView:m_initPlayerInfoLayout()
 		if e ~= ccui.TouchEventType.ended then return end
 		--native 接口待实现
 		--复制成功后提示
+		local device = require('src.cocos.framework.device')
+		if device.isAndroid() then 
+			local luaj = require "src.cocos.cocos2d.luaj" --引入luaj
+
+			local className = "org/cocos2dx/lua/AppActivity"
+			local args = { tostring(Player.id) }  
+		    local sigs = "(Ljava/lang/String;)V" --传入string参数，无返回值  
+		        --display.showMsg("调用友盟登录")  
+
+			    --luaj 调用 Java 方法时，可能会出现各种错误，因此 luaj 提供了一种机制让 Lua 调用代码可以确定 Java 方法是否成功调用。  
+		    --luaj.callStaticMethod() 会返回两个值  
+		    --当成功时，第一个值为 true，第二个值是 Java 方法的返回值（如果有）  
+		    --当失败时，第一个值为 false，第二个值是错误代码  
+		    local ok,ret= luaj.callStaticMethod(className,"copyToClipboard",args,sigs)  
+
+		    if not ok then  
+				-- display.showMsg("微信登陆")	
+		    else
+		    	-- display.showMsg("登录失败")	
+		    end  
+		end
 		display.showMsg(display.trans("##20008"))
 	end)
 	--头像点击

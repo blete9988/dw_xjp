@@ -220,7 +220,12 @@ end
 
 function HttpRequest.postJSON(url, params, callback, target)
 	local entity = inner.getEntity()
-	local _params = ""
+
+	local lang = require("src.base.tools.storage").getXML("language")
+	if(lang == "sc")then
+		lang = "th"
+	end
+	local _params = "lang="..lang.."&"
 
 	for key, value in pairs(params) do
 		_params = _params .. key.."="..encodeURI(value).."&"

@@ -7,7 +7,7 @@ local StartScene = class("StartScene",require("src.base.extend.CCSceneExtend"))
 function StartScene:ctor()
 	self:super("ctor")
 	--加载基础语言包
-	local beforeLanguage = require("src.base.tools.storage").getXML("language") or "sc"
+	local beforeLanguage = tostring(require("src.base.tools.storage").getXML("language"))
 
 	display.loadLanguage(beforeLanguage,"src.command.language.base_language")
 	
