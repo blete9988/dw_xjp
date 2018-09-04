@@ -26,3 +26,4 @@ local server_config = {
 	apihost = "http://220.128.128.40:8360/game/"
 }
 return server_config
+	
