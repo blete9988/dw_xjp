@@ -41,7 +41,9 @@ function MainScene:checkPlayerIsInGame()
 		--提示是否回到游戏
 		info = display.trans("##2042",room.game.name),
 		callback = function(result)
-			display.showWindow("src.ui.window.LoadingWindows",room)
+			if(result == ST.TYPE_POP_OK )then
+				display.showWindow("src.ui.window.LoadingWindows",room)
+			end
 		end,
 		flag = ST.TYPE_POP_FLAG_2
 	})
