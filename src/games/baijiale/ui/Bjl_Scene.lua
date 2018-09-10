@@ -118,7 +118,7 @@ function Bjl_Scene:m_initBottomView()
 	end)
 	self.m_buttonMgr = buttonMgr
 	--下注金额配置
-	local config = {100,1000,10000,100000,1000000,5000000}
+	local config = {10,1000,10000,100000,1000000,5000000}
 	self.m_betButtons = {}
 	--下注按钮
 	local btn,temp

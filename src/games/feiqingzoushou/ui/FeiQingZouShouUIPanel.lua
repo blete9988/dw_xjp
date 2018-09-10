@@ -451,7 +451,7 @@ function FeiQingZouShouUIPanel:initelement()
 	end
 end
 function FeiQingZouShouUIPanel:initBetMenus()
-	local config = {100,1000,10000,100000,1000000,5000000}
+	local config = {10,1000,10000,100000,1000000,5000000}
 	local btnflow = display.newImage("fqzs_ui_1021.png")
 	btnflow:setVisible(false)
 	btnflow:setScale(1.35)

@@ -639,7 +639,7 @@ function HaoChePiaoYiSceneUIPanel:gameOver()
 	    end)}))
 end
 function HaoChePiaoYiSceneUIPanel:initBetMenus()
-	local config = {100,1000,10000,100000,1000000,5000000}
+	local config = {10,1000,10000,100000,1000000,5000000}
 	local btnflow = display.newImage("fcpy_ui_1021.png")
 	btnflow:setVisible(false)
 	btnflow:setScale(1.35)
@@ -821,7 +821,7 @@ function HaoChePiaoYiSceneUIPanel:updateSQRS(value)
 	self.szsqrs_label:setString(value)
 end
 function HaoChePiaoYiSceneUIPanel:getBetPointByValue(value)
-	local config = {100,1000,10000,100000,1000000,5000000}
+	local config = {10,1000,10000,100000,1000000,5000000}
 	for i=1,#config do
 		if config[i] == value then
 			return self.betPoint_array[i]
