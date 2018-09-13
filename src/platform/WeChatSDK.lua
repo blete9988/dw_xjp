@@ -15,7 +15,7 @@ end
 function WeChatSDK.init(wechatSettings)
 	local device = require('src.cocos.framework.device')
 	if device.isIOS() then
-		require("src.cocos.cocos2d.luaoc").callStaticMethod("WechatSDK", "init", {appid='wx69363b336120f9e0'})
+		require("src.cocos.cocos2d.luaoc").callStaticMethod("WechatSDK", "init", {appid='wx1b663b06ad1da535'})
 	end
 end
 
