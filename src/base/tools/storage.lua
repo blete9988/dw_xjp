@@ -59,7 +59,7 @@ function utils.getXML(key)
 	if(key == "language")then
 		local lang = tostring(userDefault:getStringForKey(key))
 		if(lang == "")then
-			userDefault:setStringForKey(key,tostring("en"))
+			userDefault:setStringForKey(key,tostring("sc"))
 		end
 	end
 

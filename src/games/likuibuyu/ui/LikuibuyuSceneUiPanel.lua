@@ -79,7 +79,7 @@ function LikuibuyuUiPanel:ctor(scene)
 
     --自动射击
     local autoShootBtn = ccui.Button:create()
-    autoShootBtn:setContentSize(cc.size(42, 36))
+    autoShootBtn:setContentSize(cc.size(150, 50))
     autoShootBtn:setScale9Enabled(true)
     autoShootBtn:setPosition(675, 24)
     autoShootBtn:setTag(TAG.tag_autoshoot)
@@ -89,7 +89,7 @@ function LikuibuyuUiPanel:ctor(scene)
 
     --自动锁定
     local autoLockBtn = ccui.Button:create()
-    autoLockBtn:setContentSize(cc.size(42, 36))
+    autoLockBtn:setContentSize(cc.size(150, 50))
     autoLockBtn:setScale9Enabled(true)
     autoLockBtn:setPosition(894, 24)
     autoLockBtn:setTag(TAG.tag_autolock)
